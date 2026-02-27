@@ -303,3 +303,48 @@
 - 24/53 features passing (45.3%)
 - Dev server running on port 5173
 - All three expense features verified via browser automation with Playwright
+
+---
+
+## Session 10 - 2026-02-27T20:17
+
+### Completed Features
+- Feature #27: Photo screen displays existing photos as thumbnail grid - PASSING
+  - Verified on JOB-002 (2 photos) and JOB-007 (3 photos)
+  - 3-column CSS grid with aspect-ratio: 1 square thumbnails
+  - Placeholder images (light gray rectangles with camera emoji) used for thumbnails
+  - Photo count indicator ("2 photos", "3 photos") matches visible thumbnails
+  - Grid is responsive (repeat(3, 1fr) adapts to any width)
+  - No overlapping or broken image icons
+  - Zero console errors (only React DevTools info message)
+  - No mock data patterns in codebase
+
+- Feature #28: Add Photo button triggers simulated upload with loading animation - PASSING
+  - Clicking "Add Photo" shows: dashed blue border upload placeholder + spinning loading indicator in grid
+  - Button text changes to "Uploading..." and is disabled during upload
+  - Animation runs ~1.5 seconds (setTimeout 1500ms)
+  - After animation completes, new photo thumbnail appears in grid
+  - Photo count increases by 1 with each add (verified 2→3→4→5)
+  - Each added photo is distinct (unique auto-incrementing IDs)
+  - Grid adjusts properly (wraps to new rows)
+  - Add Photo button remains accessible after multiple adds
+  - Verified spinner visually with screenshot (blue dashed border + circular spinner)
+
+- Feature #29: Delete a photo with confirmation dialog - PASSING
+  - Tapping ✕ button on photo shows confirmation dialog overlay
+  - Dialog has dark backdrop, white card, "Delete this photo?" text
+  - Cancel button (gray) and Delete button (red) both large and touch-friendly
+  - Cancel: dialog dismissed, photo remains, count unchanged (4→4)
+  - Confirm Delete: photo removed, count decreased (4→3)
+  - Grid reflows to fill gap - no empty space after deletion
+  - Deleted photo does NOT reappear after navigating away and returning
+  - Zero application errors (only Vite HMR websocket reconnection log)
+
+### Code Changes
+- Reverted upload timeout from 3000ms back to 1500ms (within 1-3s spec)
+
+### Current Status
+- 27/53 features passing (50.9%)
+- Dev server running on port 5174
+- All Photos category features now verified and passing
+- No code changes needed for features - all were already correctly implemented
