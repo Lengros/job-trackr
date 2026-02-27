@@ -5,6 +5,7 @@ import styles from '../styles/SyncStatus.module.css'
 
 const STATUS_LABELS = {
   synced: 'Synced',
+  syncing: 'Syncing...',
   pending: 'Pending',
   error: 'Error',
   conflict: 'Conflict',

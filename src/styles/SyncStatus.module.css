@@ -44,10 +44,21 @@
   border-radius: var(--radius-card);
   box-shadow: var(--shadow-card);
   border-left: 4px solid transparent;
+  transition: border-left-color 0.4s ease, background-color 0.4s ease;
 }
 
 .status_synced {
   border-left-color: var(--color-success);
+}
+
+.status_syncing {
+  border-left-color: var(--color-primary);
+  animation: syncPulse 1.2s ease-in-out infinite;
+}
+
+@keyframes syncPulse {
+  0%, 100% { background-color: var(--color-card); }
+  50% { background-color: rgba(37, 99, 235, 0.05); }
 }
 
 .status_pending {
@@ -100,11 +111,23 @@
   font-weight: 700;
   text-transform: uppercase;
   letter-spacing: 0.5px;
+  transition: background-color 0.4s ease, color 0.4s ease;
 }
 
 .badge_synced {
   background: rgba(22, 163, 74, 0.1);
   color: var(--color-success);
+}
+
+.badge_syncing {
+  background: rgba(37, 99, 235, 0.1);
+  color: var(--color-primary);
+  animation: badgePulse 1s ease-in-out infinite;
+}
+
+@keyframes badgePulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.5; }
 }
 
 .badge_pending {

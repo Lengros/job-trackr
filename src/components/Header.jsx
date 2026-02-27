@@ -1,3 +1,4 @@
+import { useCallback } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { useApp } from '../context/AppContext'
 import styles from '../styles/Header.module.css'
@@ -6,6 +7,17 @@ export default function Header() {
   const { state, dispatch } = useApp()
   const navigate = useNavigate()
   const master = state.masters.find((m) => m.id === state.selectedMasterId)
+
+  const handleToggleNetwork = useCallback(() => {
+    const wasOffline = !state.isOnline
+    dispatch({ type: 'TOGGLE_NETWORK' })
+    if (wasOffline) {
+      // After animation delay, complete the sync
+      setTimeout(() => {
+        dispatch({ type: 'SYNC_COMPLETE' })
+      }, 1800)
+    }
+  }, [state.isOnline, dispatch])
 
   return (
     <header className={styles.header}>
@@ -22,7 +34,7 @@ export default function Header() {
         </button>
         <button
           className={`${styles.networkToggle} ${state.isOnline ? styles.online : styles.offline}`}
-          onClick={() => dispatch({ type: 'TOGGLE_NETWORK' })}
+          onClick={handleToggleNetwork}
           aria-label={`Network status: ${state.isOnline ? 'Online' : 'Offline'}. Click to toggle.`}
         >
           <span className={styles.indicator} />

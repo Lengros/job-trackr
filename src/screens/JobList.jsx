@@ -1,4 +1,4 @@
-import { useState, useRef, useCallback } from 'react'
+import { useState, useRef, useCallback, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { useApp } from '../context/AppContext'
 import PageTransition from '../components/PageTransition'
@@ -16,6 +16,7 @@ const STATUS_CLASS = {
 const SYNC_ICONS = {
   synced: '\u2713',
   pending: '\u25F7',
+  syncing: '\u21BB',
   error: '\u26A0',
   conflict: '\u26A1',
 }

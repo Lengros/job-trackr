@@ -466,3 +466,27 @@
 - 41/53 features passing (77.4%)
 - No code changes in this session - all features verified as already working
 - Dev server running on port 5173
+
+---
+
+## Session 12 - 2026-02-27T21:15
+
+### Completed Features
+- Feature #39: Grand total correctly calculates work cost plus total expenses - PASSING
+  - Verified on JOB-002 with fixture data:
+    - Work Cost: $320.00
+    - Total Expenses: $278.46 (Toilet $189.99 + Sink faucet $79.50 + Teflon tape $8.97)
+    - Grand Total: $598.46 ✅
+  - Added new expense (GRAND_TOTAL_TEST, 4 × $10.25 = $41.00) via in-app navigation
+  - Returned to summary: Grand Total updated to $639.46 ($320.00 + $319.46) ✅
+  - Verified zero expenses case on JOB-001: Grand Total = $150.00 (work cost only) ✅
+  - Grand total is visually prominent: 20px bold font, primary blue color ✅
+  - Consistent currency formatting ($ prefix, 2 decimal places, tabular-nums) ✅
+  - Decimal precision verified: 3 × $2.99 = $8.97, 4 × $10.25 = $41.00 (no rounding errors) ✅
+  - No mock data patterns in codebase (grep clean) ✅
+  - Zero application console errors ✅
+  - No code changes needed - feature already fully implemented
+
+### Current Status
+- 41/53 features passing (~77%)
+- Dev server running on port 5173

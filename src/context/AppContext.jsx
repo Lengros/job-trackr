@@ -89,18 +89,32 @@ function appReducer(state, action) {
     case 'TOGGLE_NETWORK': {
       const goingOnline = !state.isOnline
       if (goingOnline) {
-        // Transition pending items to synced
+        // First transition pending items to 'syncing' (intermediate animated state)
         return {
           ...state,
           isOnline: true,
+          isSyncing: true,
           jobs: state.jobs.map((job) =>
             job.syncStatus === 'pending'
-              ? { ...job, syncStatus: 'synced' }
+              ? { ...job, syncStatus: 'syncing' }
               : job
           ),
         }
       }
       return { ...state, isOnline: false }
+    }
+
+    case 'SYNC_COMPLETE': {
+      // Transition syncing items to synced after animation
+      return {
+        ...state,
+        isSyncing: false,
+        jobs: state.jobs.map((job) =>
+          job.syncStatus === 'syncing'
+            ? { ...job, syncStatus: 'synced' }
+            : job
+        ),
+      }
     }
 
     default:
