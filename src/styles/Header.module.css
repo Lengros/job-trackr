@@ -42,7 +42,8 @@
   color: white;
   font-size: 13px;
   font-weight: 600;
-  min-height: 44px;
+  min-height: 48px;
+  min-width: 44px;
   transition: all 0.2s ease;
 }
 
@@ -61,7 +62,8 @@
   color: white;
   font-size: 13px;
   font-weight: 600;
-  min-height: 44px;
+  min-height: 48px;
+  min-width: 44px;
   transition: all 0.2s ease;
 }
 
