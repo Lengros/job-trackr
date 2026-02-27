@@ -1,0 +1,325 @@
+<project_specification>
+  <project_name>JobTrackr</project_name>
+
+  <overview>
+    A mobile-first clickable web prototype for field service workers (plumbers, electricians, builders).
+    The prototype simulates a complete job management workflow — from receiving a job to completion with
+    photos, expenses, and auto-calculations. Built for field validation with real workers to test UX
+    hypotheses before building the full product. All data is stored in-memory using fixtures; offline/sync
+    behavior is simulated in the UI. Interface language: English.
+  </overview>
+
+  <technology_stack>
+    <frontend>
+      <framework>React</framework>
+      <styling>CSS Modules (mobile-first)</styling>
+      <language>JavaScript</language>
+    </frontend>
+    <backend>
+      <runtime>None — stateless frontend-only prototype</runtime>
+      <database>none - stateless application</database>
+    </backend>
+    <communication>
+      <api>None — all data from in-memory fixtures and React state</api>
+    </communication>
+  </technology_stack>
+
+  <prerequisites>
+    <environment_setup>
+      Node.js 18+, npm
+    </environment_setup>
+  </prerequisites>
+
+  <feature_count>53</feature_count>
+
+  <security_and_access_control>
+    <user_roles>
+      <role name="master">
+        <permissions>
+          - Can view assigned jobs
+          - Can change job status (New → In Progress → Completed)
+          - Can add photos to a job
+          - Can add, edit, and delete expenses
+          - Can view job summary with totals
+        </permissions>
+      </role>
+    </user_roles>
+    <authentication>
+      <method>Simulated — master selection from a pre-populated list (no real auth)</method>
+      <session_timeout>none</session_timeout>
+    </authentication>
+  </security_and_access_control>
+
+  <core_features>
+    <master_selection>
+      - Display a list of 3–4 masters with name and specialization (e.g., "Ivan — Plumber")
+      - Tap a master card to select and enter the app
+      - Show selected master name in the persistent app header
+    </master_selection>
+
+    <job_list>
+      - Display scrollable list of job cards with: job number, address, work type, date, status badge, sync icon
+      - Tab filtering: All / New / In Progress / Completed
+      - Color-coded status badges (New = blue, In Progress = amber, Completed = green)
+      - Sync status icon on each card (pending / synced / error)
+      - Tap a card to navigate to job detail
+      - Job count displayed per tab
+      - Empty state message when no jobs match the selected tab
+      - Pull-to-refresh visual indicator (simulated, no real fetch)
+    </job_list>
+
+    <job_detail>
+      - Display full job info: address, contact name, contact phone, work description, comments
+      - Prominent current status display at top
+      - Status transition button: New → In Progress
+      - Status transition button: In Progress → Completed
+      - Confirmation dialog before status change
+      - Display work cost (set by dispatcher, read-only)
+      - Navigation button to Photos screen
+      - Navigation button to Expenses screen
+      - Navigation button to Summary screen
+      - Back button to return to job list
+    </job_detail>
+
+    <photo_screen>
+      - Display existing photos as a thumbnail grid
+      - "Add Photo" button triggers a simulated upload with loading animation
+      - New placeholder photo appears in grid after simulated upload completes
+      - Delete a photo with confirmation dialog
+      - Photo count indicator (e.g., "3 photos")
+    </photo_screen>
+
+    <expenses_screen>
+      - Display list of current expenses with columns: name, qty, unit price, line total
+      - "Add Expense" form with fields: name, quantity, unit price
+      - Auto-calculate line total per expense (quantity × unit price)
+      - Auto-calculate total expenses at bottom (sum of all line totals)
+      - Edit an existing expense inline or via modal
+      - Delete an expense with confirmation
+      - Empty state when no expenses have been added yet
+    </expenses_screen>
+
+    <job_summary>
+      - Display work cost (from job data)
+      - Display itemized expense list (name, qty, unit price, line total)
+      - Display total expenses
+      - Display grand total: work cost + total expenses
+      - Clean, receipt-style visual layout suitable for showing to a client
+      - "Complete Job" button that transitions status to Completed
+    </job_summary>
+
+    <sync_simulation>
+      - Network toggle switch (online / offline) accessible from app header
+      - Actions performed while "offline" show a "pending" badge
+      - Toggling back to "online" transitions pending items to "synced" with brief animation
+      - At least one fixture job shows "error" sync state
+      - At least one fixture job shows "conflict" sync state
+      - Dedicated Sync Status screen listing all items with their sync state (pending / synced / error / conflict)
+    </sync_simulation>
+
+    <general_ux>
+      - Mobile-first responsive layout optimized for 375px viewport width
+      - Large touch-friendly buttons (minimum 48px height, 44px tap targets)
+      - Minimal text and clear English labels throughout
+      - Persistent header bar with selected master name and network status indicator
+      - Smooth animated transitions between screens
+    </general_ux>
+
+    <test_data_fixtures>
+      - 6–8 pre-loaded test jobs covering plumbing, electrical, and general construction work types
+      - Jobs distributed across statuses: at least 2 New, 2 In Progress, 2 Completed
+      - At least 2 jobs pre-configured with "pending" or "error" sync states to demonstrate offline scenarios
+    </test_data_fixtures>
+  </core_features>
+
+  <database_schema>
+    <note>No database — all data stored as in-memory fixtures and managed via React state.</note>
+    <data_models>
+      <masters>
+        - id (number)
+        - name (string)
+        - specialization (string, e.g. "Plumber", "Electrician", "General Builder")
+        - avatarColor (string, hex color for avatar circle)
+      </masters>
+      <jobs>
+        - id (number)
+        - number (string, e.g. "JOB-001")
+        - address (string)
+        - contactName (string)
+        - contactPhone (string)
+        - workType (string, e.g. "Plumbing", "Electrical", "Construction")
+        - workDescription (string)
+        - comments (string)
+        - workCost (number, set by dispatcher)
+        - status (enum: "new" | "in_progress" | "completed")
+        - syncStatus (enum: "pending" | "synced" | "error" | "conflict")
+        - assignedMasterId (number)
+        - createdDate (string, ISO date)
+      </jobs>
+      <photos>
+        - id (number)
+        - jobId (number)
+        - thumbnailUrl (string, placeholder image path)
+        - timestamp (string, ISO datetime)
+      </photos>
+      <expenses>
+        - id (number)
+        - jobId (number)
+        - name (string, e.g. "Faucet", "Teflon tape")
+        - quantity (number)
+        - unitPrice (number)
+      </expenses>
+    </data_models>
+  </database_schema>
+
+  <api_endpoints_summary>
+    <note>No real API — all interactions are handled via React state management (Context + useReducer). No backend server is needed.</note>
+  </api_endpoints_summary>
+
+  <ui_layout>
+    <main_structure>
+      Single-column mobile layout:
+      - Fixed top header bar (master name on left, network toggle on right)
+      - Scrollable content area below header
+      - Screen-to-screen navigation (push/pop style, not tab bar)
+      - Back arrow button on all nested screens
+    </main_structure>
+    <screens>
+      1. Master Selection — grid or list of master cards with name and specialization
+      2. Job List — status tabs at top, scrollable card list below
+      3. Job Detail — sections for info, status, and navigation buttons to sub-screens
+      4. Photos — thumbnail grid with floating "Add" button
+      5. Expenses — scrollable expense list, inline add form, running totals at bottom
+      6. Job Summary — clean receipt-style layout with work cost, expenses, and grand total
+      7. Sync Status — list of all items with their current sync state and timestamp
+    </screens>
+  </ui_layout>
+
+  <design_system>
+    <color_palette>
+      - Primary: #2563EB (blue — primary actions, links, "New" status)
+      - Success: #16A34A (green — "Completed" status, "synced")
+      - Warning: #F59E0B (amber — "In Progress" status, "pending")
+      - Error: #DC2626 (red — errors, conflicts, destructive actions)
+      - Background: #F8FAFC (light gray page background)
+      - Card: #FFFFFF (white card surfaces)
+      - Text Primary: #1E293B (dark slate)
+      - Text Secondary: #64748B (medium slate gray)
+      - Border: #E2E8F0 (light border/divider)
+    </color_palette>
+    <typography>
+      - Font family: system stack (-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif)
+      - Screen titles: 20–24px, semibold
+      - Body text: 16px minimum for readability
+      - Numbers and costs: tabular-nums font-variant for alignment
+      - Status labels: 12–14px, uppercase, semibold
+    </typography>
+    <design_principles>
+      - Large buttons: minimum 48px height with generous horizontal padding
+      - Generous spacing: 16px padding inside cards, 12px gaps between cards
+      - High contrast for outdoor readability (WCAG AA minimum)
+      - Status indicators always use both color AND icon/text (not color alone)
+      - Rounded corners (8px for cards, 12px for buttons)
+      - Subtle shadows on cards for depth (box-shadow: 0 1px 3px rgba(0,0,0,0.1))
+    </design_principles>
+  </design_system>
+
+  <implementation_steps>
+    <step number="1">
+      <title>Project Setup and Data Layer</title>
+      <tasks>
+        - Initialize React project (Create React App or Vite)
+        - Create fixture data files for masters, jobs, photos, and expenses
+        - Set up React Context + useReducer for global state management
+        - Define data models and constants
+      </tasks>
+    </step>
+    <step number="2">
+      <title>Master Selection and Routing</title>
+      <tasks>
+        - Build master selection screen with master cards
+        - Set up React Router for screen navigation
+        - Create shared Layout component with persistent header
+        - Implement master context (store selected master)
+      </tasks>
+    </step>
+    <step number="3">
+      <title>Job List Screen</title>
+      <tasks>
+        - Build JobCard component with status badge and sync icon
+        - Build JobList screen with tab filtering
+        - Implement job count per tab
+        - Handle empty states per tab
+        - Add pull-to-refresh visual indicator
+      </tasks>
+    </step>
+    <step number="4">
+      <title>Job Detail Screen</title>
+      <tasks>
+        - Build JobDetail screen layout with all info sections
+        - Implement status transition buttons with confirmation dialogs
+        - Add navigation buttons to Photos, Expenses, Summary sub-screens
+        - Implement back navigation
+      </tasks>
+    </step>
+    <step number="5">
+      <title>Photos and Expenses Screens</title>
+      <tasks>
+        - Build photo thumbnail grid component
+        - Implement simulated photo upload with loading animation
+        - Build expense list with add/edit/delete functionality
+        - Implement auto-calculation (line totals and grand total)
+        - Handle empty states
+      </tasks>
+    </step>
+    <step number="6">
+      <title>Job Summary and Sync Simulation</title>
+      <tasks>
+        - Build job summary screen with receipt-style layout
+        - Implement "Complete Job" action from summary
+        - Add network toggle to header
+        - Build sync status screen
+        - Implement pending → synced transition animation on network toggle
+        - Configure fixture jobs with error and conflict sync states
+      </tasks>
+    </step>
+    <step number="7">
+      <title>Polish and Final Test Data</title>
+      <tasks>
+        - Finalize all 6–8 test jobs with realistic English-language data
+        - Polish mobile UX: button sizes, tap targets, spacing, transitions
+        - Test complete flow end-to-end on mobile viewport
+        - Verify all offline simulation scenarios work correctly
+        - Cross-browser check (Chrome, Safari mobile)
+      </tasks>
+    </step>
+  </implementation_steps>
+
+  <success_criteria>
+    <functionality>
+      - All 7 screens are fully navigable and interactive
+      - Complete job flow works end-to-end: select master → open job → change status → add photos → add expenses → view summary → complete job
+      - Auto-calculation of expenses and grand total is mathematically correct
+      - Network toggle changes sync status display for all affected items
+      - Status transitions follow allowed flow: New → In Progress → Completed
+    </functionality>
+    <user_experience>
+      - A job can be "closed" (full flow from open to complete with expenses) within 1–2 minutes
+      - All buttons are large and easy to tap on a phone screen
+      - Clear status indicators visible at every step
+      - Minimal required input per screen — no unnecessary fields
+    </user_experience>
+    <technical_quality>
+      - Runs smoothly in mobile browsers (Chrome, Safari)
+      - No console errors during normal user flow
+      - Responsive layout renders correctly at 375px viewport width
+      - Smooth transitions with no visual glitches
+    </technical_quality>
+    <design_polish>
+      - Consistent color system and typography across all screens
+      - Clean, professional appearance suitable for showing to field test respondents
+      - Smooth, non-jarring transitions between screens
+      - Proper empty states and loading indicators where applicable
+    </design_polish>
+  </success_criteria>
+</project_specification>

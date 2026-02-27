@@ -1,0 +1,263 @@
+.container {
+  padding: 16px;
+}
+
+.backButton {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 8px 0;
+  border: none;
+  background: transparent;
+  color: var(--color-primary);
+  font-size: 16px;
+  font-weight: 600;
+  min-height: 44px;
+  margin-bottom: 8px;
+}
+
+.title {
+  font-size: 22px;
+  font-weight: 700;
+  margin-bottom: 16px;
+}
+
+.list {
+  background: var(--color-card);
+  border-radius: var(--radius-card);
+  box-shadow: var(--shadow-card);
+  overflow: hidden;
+  margin-bottom: 12px;
+}
+
+.listHeader {
+  display: grid;
+  grid-template-columns: 2fr 1fr 1fr 1fr 56px;
+  padding: 10px 12px;
+  background: var(--color-bg);
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--color-text-secondary);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.row {
+  display: grid;
+  grid-template-columns: 2fr 1fr 1fr 1fr 56px;
+  padding: 12px;
+  border-top: 1px solid var(--color-border);
+  align-items: center;
+  font-size: 14px;
+}
+
+.expName {
+  font-weight: 600;
+}
+
+.lineTotal {
+  font-weight: 700;
+  font-variant-numeric: tabular-nums;
+}
+
+.actions {
+  display: flex;
+  gap: 4px;
+}
+
+.editBtn,
+.deleteBtn {
+  width: 26px;
+  height: 26px;
+  border: none;
+  border-radius: 6px;
+  background: transparent;
+  font-size: 14px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  color: var(--color-text-secondary);
+}
+
+.editBtn:hover { color: var(--color-primary); }
+.deleteBtn:hover { color: var(--color-error); }
+
+.totalBar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 14px 16px;
+  background: var(--color-card);
+  border-radius: var(--radius-card);
+  box-shadow: var(--shadow-card);
+  margin-bottom: 20px;
+  font-size: 16px;
+  font-weight: 600;
+}
+
+.totalAmount {
+  font-size: 20px;
+  font-weight: 700;
+  color: var(--color-primary);
+  font-variant-numeric: tabular-nums;
+}
+
+.form {
+  background: var(--color-card);
+  border-radius: var(--radius-card);
+  box-shadow: var(--shadow-card);
+  padding: 16px;
+}
+
+.form h3 {
+  font-size: 16px;
+  font-weight: 700;
+  margin-bottom: 12px;
+}
+
+.formField {
+  margin-bottom: 12px;
+}
+
+.formField label {
+  display: block;
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--color-text-secondary);
+  margin-bottom: 4px;
+}
+
+.formField input {
+  width: 100%;
+  padding: 10px 12px;
+  border: 1px solid var(--color-border);
+  border-radius: 8px;
+  font-size: 16px;
+  outline: none;
+  transition: border-color 0.15s ease;
+}
+
+.formField input:focus {
+  border-color: var(--color-primary);
+}
+
+.inputError {
+  border-color: var(--color-error) !important;
+}
+
+.error {
+  display: block;
+  font-size: 12px;
+  color: var(--color-error);
+  margin-top: 4px;
+}
+
+.formRow {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+}
+
+.formActions {
+  display: flex;
+  gap: 12px;
+  margin-top: 4px;
+}
+
+.submitButton {
+  flex: 1;
+  padding: 12px;
+  border: none;
+  border-radius: var(--radius-button);
+  background: var(--color-primary);
+  color: white;
+  font-size: 16px;
+  font-weight: 700;
+  min-height: 48px;
+}
+
+.cancelButton {
+  flex: 1;
+  padding: 12px;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-button);
+  background: var(--color-card);
+  color: var(--color-text-secondary);
+  font-size: 16px;
+  font-weight: 600;
+  min-height: 48px;
+}
+
+.emptyState {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 32px 16px;
+  text-align: center;
+  color: var(--color-text-secondary);
+  margin-bottom: 16px;
+}
+
+.emptyIcon {
+  font-size: 48px;
+  margin-bottom: 12px;
+}
+
+.emptyHint {
+  font-size: 14px;
+  margin-top: 4px;
+}
+
+/* Confirmation Dialog */
+.overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 200;
+  padding: 16px;
+}
+
+.dialog {
+  background: var(--color-card);
+  border-radius: 16px;
+  padding: 24px;
+  max-width: 320px;
+  width: 100%;
+  text-align: center;
+}
+
+.dialog p {
+  font-size: 16px;
+  margin-bottom: 20px;
+}
+
+.dialogButtons {
+  display: flex;
+  gap: 12px;
+}
+
+.cancelBtn,
+.confirmBtn {
+  flex: 1;
+  padding: 12px;
+  border: none;
+  border-radius: var(--radius-button);
+  font-size: 16px;
+  font-weight: 600;
+  min-height: 48px;
+}
+
+.cancelBtn {
+  background: var(--color-bg);
+  color: var(--color-text-secondary);
+}
+
+.confirmBtn {
+  background: var(--color-error);
+  color: white;
+}

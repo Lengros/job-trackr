@@ -1,0 +1,55 @@
+import { useNavigate } from 'react-router-dom'
+import { useApp } from '../context/AppContext'
+import styles from '../styles/SyncStatus.module.css'
+
+const STATUS_LABELS = {
+  synced: 'Synced',
+  pending: 'Pending',
+  error: 'Error',
+  conflict: 'Conflict',
+}
+
+export default function SyncStatus() {
+  const navigate = useNavigate()
+  const { state } = useApp()
+
+  const masterJobs = state.jobs.filter(
+    (j) => j.assignedMasterId === state.selectedMasterId
+  )
+
+  return (
+    <div className={styles.container}>
+      <button className={styles.backButton} onClick={() => navigate('/jobs')}>
+        ← Back
+      </button>
+      <h2 className={styles.title}>Sync Status</h2>
+      <p className={styles.subtitle}>
+        {state.isOnline ? 'Online' : 'Offline'} — {masterJobs.length} items
+      </p>
+
+      <div className={styles.list}>
+        {masterJobs.map((job) => (
+          <div
+            key={job.id}
+            className={`${styles.item} ${styles[`status_${job.syncStatus}`]}`}
+          >
+            <div className={styles.itemInfo}>
+              <span className={styles.jobNumber}>{job.number}</span>
+              <span className={styles.address}>{job.address}</span>
+            </div>
+            <div className={styles.itemStatus}>
+              <span
+                className={`${styles.badge} ${styles[`badge_${job.syncStatus}`]}`}
+              >
+                {STATUS_LABELS[job.syncStatus]}
+              </span>
+              <span className={styles.timestamp}>
+                {new Date(job.createdDate).toLocaleDateString()}
+              </span>
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  )
+}
