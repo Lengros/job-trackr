@@ -19,6 +19,30 @@
   font-weight: 600;
 }
 
+.headerActions {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.syncButton {
+  display: flex;
+  align-items: center;
+  padding: 6px 12px;
+  border: 2px solid rgba(255, 255, 255, 0.4);
+  border-radius: 20px;
+  background: transparent;
+  color: white;
+  font-size: 13px;
+  font-weight: 600;
+  min-height: 44px;
+  transition: all 0.2s ease;
+}
+
+.syncButton:active {
+  background: rgba(255, 255, 255, 0.15);
+}
+
 .networkToggle {
   display: flex;
   align-items: center;
