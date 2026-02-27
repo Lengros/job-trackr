@@ -223,3 +223,47 @@
 - 10/53 features passing (18.9%) [from feature_get_stats earlier, now likely higher with parallel agent work]
 - Dev server running on port 5179
 - All navigation features verified with browser automation
+
+---
+
+## Session 9 - 2026-02-27T20:16
+
+### Completed Features
+- Feature #31: Expense list displays columns: name, quantity, unit price, line total - PASSING
+  - Restructured expense list from compact 2-row layout to proper table with columns
+  - Added table header row: NAME, QTY, UNIT PRICE, TOTAL (uppercase, gray bg)
+  - Each expense row shows 4 distinct columns with proper alignment
+  - Numbers formatted with 2 decimal places, font-variant-numeric: tabular-nums
+  - List is scrollable with max-height: 320px and overflow-y: auto
+  - Verified on jobs with 2, 3, and 4 expenses (jobs 2, 3, 7)
+  - All line total calculations correct
+  - Zero console errors
+
+- Feature #32: Add Expense form with name, quantity, and unit price fields - PASSING
+  - Form has text input for Item Name, numeric inputs for Quantity and Unit Price
+  - Tested: added "Copper Pipe", qty 3, price $25.00 → appeared in list with $75.00 total
+  - Form fields clear after successful submission
+  - Expense persists when navigating away and back (in-app navigation via React Router)
+  - Zero console errors
+
+- Feature #33: Line total auto-calculates as quantity × unit price - PASSING
+  - Added live "Line Total" preview in the form that updates automatically as user types
+  - Uses Math.round for proper decimal precision (no floating point errors)
+  - Tested all required cases:
+    - qty 5 × $12.50 = $62.50 ✅
+    - qty 1 × $99.99 = $99.99 ✅
+    - qty 10 × $0.50 = $5.00 ✅
+    - qty 100 × $1.00 = $100.00 ✅
+  - Calculation is automatic - no button needed, updates on each keystroke
+  - Live preview styled with dashed border, appears only when both values > 0
+  - Zero console errors
+
+### Code Changes
+- Modified: src/screens/Expenses.jsx - table column layout, live line total preview
+- Modified: src/styles/Expenses.module.css - table/column CSS, live total styling
+- Modified: vite.config.js - host config adjustment
+
+### Current Status
+- 24/53 features passing (45.3%)
+- Dev server running on port 5173
+- All three expense features verified via browser automation with Playwright
