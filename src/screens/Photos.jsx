@@ -18,7 +18,7 @@ export default function Photos() {
     setTimeout(() => {
       dispatch({ type: 'ADD_PHOTO', payload: { jobId: Number(jobId) } })
       setUploading(false)
-    }, 3000)
+    }, 1500)
   }
 
   const handleDelete = (photoId) => {
