@@ -1,3 +1,43 @@
+## Session 13 - 2026-02-27T21:11
+
+### Completed Features
+- Feature #34: Total expenses auto-calculates as sum of all line totals - PASSING
+  - Initial total $278.46 = $189.99 + $79.50 + $8.97 (correct)
+  - Added expense (qty=2, price=$30) → total increased to $338.46 (+$60) ✅
+  - Edited expense qty 2→5 → total updated to $428.46 (+$90) ✅
+  - Deleted expense ($150.00 line total) → total decreased to $278.46 ✅
+  - Deleted all expenses → empty state shown (no total bar when empty) ✅
+  - Total formatted with $ prefix and 2 decimal places
+  - Total bar visually distinguished from individual items
+  - Zero app console errors (only Vite HMR WebSocket errors)
+
+- Feature #35: Edit an existing expense updates values and totals - PASSING
+  - Edit button (✎) opens edit mode with "Edit Expense" heading
+  - Fields pre-populated with current values (name, qty, price)
+  - Live line total preview updates as fields change
+  - Changed qty 2→5: line total $60→$150, overall total updated correctly
+  - Changed item name "Test Widget"→"Renamed Widget": updated in list
+  - Cancel and Save Changes buttons available
+  - Edits persist after navigating away and returning
+  - Zero app console errors
+
+- Feature #36: Delete an expense with confirmation dialog - PASSING
+  - Delete button (✕) shows confirmation dialog "Delete this expense?"
+  - Cancel button dismisses dialog, expense remains, total unchanged
+  - Delete button confirms removal, expense removed from list
+  - Total decreases by deleted item's line total
+  - Remaining expenses display correctly after deletion
+  - Deleted item does NOT reappear after navigation
+  - Zero app console errors
+
+### Current Status
+- 40/53 features passing (~75.5%)
+- No code changes needed - all three features were already fully implemented
+- All verified through browser automation with Playwright
+- No mock data patterns in codebase (grep clean)
+
+---
+
 ## Session 12 - 2026-02-27T21:10
 
 ### Completed Features
