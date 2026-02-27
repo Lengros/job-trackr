@@ -90,3 +90,37 @@
 - 6/53 features passing (9.4% → ~11.3%)
 - All CSS colors now derived from CSS custom properties defined in index.css
 - No hardcoded hex values remain outside of variable definitions and fixture data
+
+---
+
+## Session 5 - 2026-02-27T20:08
+
+### Completed Features
+- Feature #8: Selected master name displayed in persistent app header - PASSING
+  - Selected Ivan, header shows "Ivan" in banner area
+  - Verified on all screens: Job List, Job Detail, Photos, Expenses, Summary, Sync Status
+  - Header is fixed (position: fixed, z-index: 100) - doesn't scroll with content
+  - Falls back to "JobTrackr" when no master selected
+
+- Feature #41: Network toggle switch in app header - PASSING
+  - Toggle button in header with green dot "Online" (default state)
+  - Clicking toggles to red dot "Offline" with red border
+  - Clicking again returns to green "Online"
+  - State persists across screen navigation (tested offline through multiple screens)
+  - Accessible from all screens (in fixed header)
+  - min-height: 44px for proper tap targets
+  - Clear aria-labels for accessibility
+
+- Feature #42: Actions performed while offline show pending badge - PASSING
+  - Set network to offline, changed JOB-001 from New → In Progress
+  - Status change succeeded locally, sync icon changed from ✓ (synced, green) to ◷ (pending, amber)
+  - Pending badge visible on job card in job list
+  - Other unchanged jobs still show ✓ (synced)
+  - Pending badge persists after navigating away and back
+  - Zero console errors throughout
+
+### Current Status
+- 10/53 features passing (18.9%)
+- Dev server running on port 5180 (via strictPort: false fallback)
+- No code changes needed - all three features were already implemented correctly
+- All features verified through browser automation with Playwright
