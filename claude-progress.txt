@@ -1,3 +1,15 @@
+## Session 16 - 2026-02-27T21:24
+
+### Completed Features
+- Feature #43: Toggling online transitions pending items to synced with animation - PASSING
+- Feature #44: Fixture jobs include error and conflict sync states - PASSING
+- Feature #45: Sync Status screen lists all items with their sync state - PASSING
+
+### Current Status
+- ~43/53 features passing (~81%)
+
+---
+
 ## Session 15 - 2026-02-27T21:22
 
 ### Completed Features
