@@ -158,3 +158,27 @@
 - Dev server running on port 5175
 - Updated vite.config.js to use port 5174 with host 0.0.0.0
 - No code changes needed - all features were already implemented correctly
+
+---
+
+## Session 7 - 2026-02-27T20:17
+
+### Completed Features
+- Feature #37: Summary displays work cost from job data - PASSING
+  - Verified "WORK COST" section heading (h3, uppercase, secondary color) clearly labeled
+  - "Service fee" label with currency-formatted amount ($X.XX)
+  - Tested three different jobs with different work costs:
+    - JOB-001: $150.00 on both detail and summary ✅
+    - JOB-002: $320.00 on both detail and summary ✅
+    - JOB-003: $200.00 on both detail and summary ✅
+  - Work cost matches job detail screen value in all cases
+  - Consistent currency formatting ($ prefix, 2 decimal places, tabular-nums)
+  - Read-only display (no edit capability on summary)
+  - Clean receipt-style layout
+  - Zero console errors on summary screens
+  - No mock data patterns in codebase (grep clean)
+  - No code changes needed - feature already fully implemented
+
+### Current Status
+- 18/53 features passing (~34%)
+- vite.config.js updated to port 5174 with host 0.0.0.0
