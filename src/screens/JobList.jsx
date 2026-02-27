@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { useApp } from '../context/AppContext'
+import PageTransition from '../components/PageTransition'
 import styles from '../styles/JobList.module.css'
 
 const TABS = ['all', 'new', 'in_progress', 'completed']
@@ -39,6 +40,7 @@ export default function JobList() {
       : masterJobs.filter((j) => j.status === tab).length
 
   return (
+    <PageTransition>
     <div className={styles.container}>
       <div className={styles.tabs}>
         {TABS.map((tab) => (
@@ -94,5 +96,6 @@ export default function JobList() {
         )}
       </div>
     </div>
+    </PageTransition>
   )
 }

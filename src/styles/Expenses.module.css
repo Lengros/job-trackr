@@ -23,7 +23,8 @@
   margin-bottom: 16px;
 }
 
-.list {
+/* Table wrapper */
+.tableWrapper {
   background: var(--color-card);
   border-radius: var(--radius-card);
   box-shadow: var(--shadow-card);
@@ -31,57 +32,81 @@
   margin-bottom: 12px;
 }
 
-.listHeader {
-  display: none;
+/* Table header row */
+.tableHeader {
+  display: grid;
+  grid-template-columns: minmax(80px, 1fr) 42px 72px 80px 80px;
+  align-items: center;
+  padding: 8px 8px 8px 12px;
+  background: var(--color-bg);
+  border-bottom: 2px solid var(--color-border);
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--color-text-secondary);
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
 }
 
+.list {
+  overflow-y: auto;
+  max-height: 320px;
+}
+
+/* Data row */
 .row {
   display: grid;
-  grid-template-columns: 1fr auto;
-  grid-template-rows: auto auto;
+  grid-template-columns: minmax(80px, 1fr) 42px 72px 80px 80px;
   align-items: center;
-  padding: 10px 12px;
+  padding: 10px 8px 10px 12px;
   border-top: 1px solid var(--color-border);
   font-size: 14px;
-  gap: 2px 8px;
 }
 
-.expName {
+.row:first-child {
+  border-top: none;
+}
+
+/* Column styles */
+.colName {
   font-weight: 600;
   min-width: 0;
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
-  grid-column: 1;
-  grid-row: 1;
 }
 
-.actions {
-  display: flex;
-  gap: 2px;
-  flex-shrink: 0;
-  grid-column: 2;
-  grid-row: 1 / 3;
-  align-self: center;
+.colQty {
+  text-align: center;
+  font-variant-numeric: tabular-nums;
 }
 
-.expDetail {
-  font-size: 13px;
-  color: var(--color-text-secondary);
-  grid-column: 1;
-  grid-row: 2;
+.colPrice {
+  text-align: right;
+  font-variant-numeric: tabular-nums;
 }
 
-.expDetail strong {
+.colTotal {
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+}
+
+.totalValue {
   font-weight: 700;
   color: var(--color-text);
-  font-variant-numeric: tabular-nums;
+}
+
+.colActions {
+  display: flex;
+  gap: 0;
+  justify-content: flex-end;
 }
 
 .editBtn,
 .deleteBtn {
   width: 44px;
   height: 44px;
+  min-width: 44px;
+  min-height: 44px;
   border: none;
   border-radius: 8px;
   background: transparent;
@@ -91,6 +116,7 @@
   justify-content: center;
   cursor: pointer;
   color: var(--color-text-secondary);
+  padding: 0;
 }
 
 .editBtn:active { color: var(--color-primary); background: rgba(37, 99, 235, 0.08); }
@@ -170,6 +196,31 @@
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 12px;
+}
+
+/* Live line total preview */
+.liveTotal {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 12px;
+  margin-bottom: 8px;
+  background: var(--color-bg);
+  border-radius: 8px;
+  border: 1px dashed var(--color-border);
+}
+
+.liveTotalLabel {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--color-text-secondary);
+}
+
+.liveTotalValue {
+  font-size: 18px;
+  font-weight: 700;
+  color: var(--color-primary);
+  font-variant-numeric: tabular-nums;
 }
 
 .formActions {

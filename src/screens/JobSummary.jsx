@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import { useParams, useNavigate } from 'react-router-dom'
 import { useApp } from '../context/AppContext'
+import PageTransition from '../components/PageTransition'
 import styles from '../styles/JobSummary.module.css'
 
 export default function JobSummary() {
@@ -30,6 +31,7 @@ export default function JobSummary() {
   }
 
   return (
+    <PageTransition>
     <div className={styles.container}>
       <button className={styles.backButton} onClick={() => navigate(`/jobs/${jobId}`)}>
         ← Back
@@ -104,5 +106,6 @@ export default function JobSummary() {
         </div>
       )}
     </div>
+    </PageTransition>
   )
 }

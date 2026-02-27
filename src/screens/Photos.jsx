@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import { useParams, useNavigate } from 'react-router-dom'
 import { useApp } from '../context/AppContext'
+import PageTransition from '../components/PageTransition'
 import styles from '../styles/Photos.module.css'
 
 export default function Photos() {
@@ -17,7 +18,7 @@ export default function Photos() {
     setTimeout(() => {
       dispatch({ type: 'ADD_PHOTO', payload: { jobId: Number(jobId) } })
       setUploading(false)
-    }, 1500)
+    }, 3000)
   }
 
   const handleDelete = (photoId) => {
@@ -30,6 +31,7 @@ export default function Photos() {
   }
 
   return (
+    <PageTransition>
     <div className={styles.container}>
       <button className={styles.backButton} onClick={() => navigate(`/jobs/${jobId}`)}>
         ← Back
@@ -91,5 +93,6 @@ export default function Photos() {
         </div>
       )}
     </div>
+    </PageTransition>
   )
 }

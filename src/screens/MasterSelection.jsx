@@ -1,5 +1,6 @@
 import { useNavigate } from 'react-router-dom'
 import { useApp } from '../context/AppContext'
+import PageTransition from '../components/PageTransition'
 import styles from '../styles/MasterSelection.module.css'
 
 export default function MasterSelection() {
@@ -12,6 +13,7 @@ export default function MasterSelection() {
   }
 
   return (
+    <PageTransition>
     <div className={styles.container}>
       <h1 className={styles.title}>JobTrackr</h1>
       <p className={styles.subtitle}>Select your profile to get started</p>
@@ -38,5 +40,6 @@ export default function MasterSelection() {
         ))}
       </div>
     </div>
+    </PageTransition>
   )
 }

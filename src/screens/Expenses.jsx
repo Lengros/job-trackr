@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import { useParams, useNavigate } from 'react-router-dom'
 import { useApp } from '../context/AppContext'
+import PageTransition from '../components/PageTransition'
 import styles from '../styles/Expenses.module.css'
 
 export default function Expenses() {
@@ -20,6 +21,11 @@ export default function Expenses() {
     (sum, e) => sum + e.quantity * e.unitPrice,
     0
   )
+
+  // Live preview of line total as user types
+  const qtyNum = Number(quantity) || 0
+  const priceNum = Number(unitPrice) || 0
+  const liveLineTotal = qtyNum > 0 && priceNum > 0 ? (Math.round(qtyNum * priceNum * 100) / 100) : 0
 
   const validate = () => {
     const newErrors = {}
@@ -89,6 +95,7 @@ export default function Expenses() {
   }
 
   return (
+    <PageTransition>
     <div className={styles.container}>
       <button className={styles.backButton} onClick={() => navigate(`/jobs/${jobId}`)}>
         ← Back
@@ -103,31 +110,40 @@ export default function Expenses() {
         </div>
       ) : (
         <>
-          <div className={styles.list}>
-            {jobExpenses.map((expense) => (
-              <div key={expense.id} className={styles.row}>
-                <span className={styles.expName}>{expense.name}</span>
-                <span className={styles.actions}>
-                  <button
-                    className={styles.editBtn}
-                    onClick={() => handleEdit(expense)}
-                    aria-label="Edit expense"
-                  >
-                    ✎
-                  </button>
-                  <button
-                    className={styles.deleteBtn}
-                    onClick={() => setDeleteTarget(expense.id)}
-                    aria-label="Delete expense"
-                  >
-                    ✕
-                  </button>
-                </span>
-                <span className={styles.expDetail}>
-                  {expense.quantity} x ${expense.unitPrice.toFixed(2)} = <strong>${(expense.quantity * expense.unitPrice).toFixed(2)}</strong>
-                </span>
-              </div>
-            ))}
+          <div className={styles.tableWrapper}>
+            <div className={styles.tableHeader} role="row">
+              <span className={styles.colName}>Name</span>
+              <span className={styles.colQty}>Qty</span>
+              <span className={styles.colPrice}>Unit Price</span>
+              <span className={styles.colTotal}>Total</span>
+              <span className={styles.colActions}></span>
+            </div>
+            <div className={styles.list}>
+              {jobExpenses.map((expense) => (
+                <div key={expense.id} className={styles.row} role="row">
+                  <span className={styles.colName} data-label="Name">{expense.name}</span>
+                  <span className={styles.colQty} data-label="Qty">{expense.quantity}</span>
+                  <span className={styles.colPrice} data-label="Unit Price">${expense.unitPrice.toFixed(2)}</span>
+                  <span className={`${styles.colTotal} ${styles.totalValue}`} data-label="Total">${(Math.round(expense.quantity * expense.unitPrice * 100) / 100).toFixed(2)}</span>
+                  <span className={styles.colActions}>
+                    <button
+                      className={styles.editBtn}
+                      onClick={() => handleEdit(expense)}
+                      aria-label="Edit expense"
+                    >
+                      ✎
+                    </button>
+                    <button
+                      className={styles.deleteBtn}
+                      onClick={() => setDeleteTarget(expense.id)}
+                      aria-label="Delete expense"
+                    >
+                      ✕
+                    </button>
+                  </span>
+                </div>
+              ))}
+            </div>
           </div>
           <div className={styles.totalBar}>
             <span>Total Expenses</span>
@@ -186,6 +202,12 @@ export default function Expenses() {
             )}
           </div>
         </div>
+        {liveLineTotal > 0 && (
+          <div className={styles.liveTotal}>
+            <span className={styles.liveTotalLabel}>Line Total:</span>
+            <span className={styles.liveTotalValue}>${liveLineTotal.toFixed(2)}</span>
+          </div>
+        )}
         <div className={styles.formActions}>
           {editingId && (
             <button
@@ -221,5 +243,6 @@ export default function Expenses() {
         </div>
       )}
     </div>
+    </PageTransition>
   )
 }
