@@ -8,22 +8,30 @@
   margin-bottom: 16px;
   overflow-x: auto;
   -webkit-overflow-scrolling: touch;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+
+.tabs::-webkit-scrollbar {
+  display: none;
 }
 
 .tab {
   display: flex;
   align-items: center;
-  gap: 6px;
-  padding: 10px 14px;
+  gap: 4px;
+  padding: 10px 10px;
   border: none;
   border-radius: 8px;
   background: var(--color-card);
   color: var(--color-text-secondary);
-  font-size: 14px;
+  font-size: 13px;
   font-weight: 600;
   min-height: 48px;
   white-space: nowrap;
   transition: all 0.15s ease;
+  flex: 1;
+  justify-content: center;
 }
 
 .activeTab {
@@ -97,6 +105,18 @@
   letter-spacing: 0.5px;
 }
 
+.statusNew {
+  background-color: var(--color-primary);
+}
+
+.statusInProgress {
+  background-color: var(--color-warning);
+}
+
+.statusCompleted {
+  background-color: var(--color-success);
+}
+
 .cardBody {
   display: flex;
   flex-direction: column;
@@ -141,7 +161,7 @@
 }
 
 .sync_conflict {
-  color: #8B5CF6;
+  color: var(--color-conflict);
 }
 
 .emptyState {

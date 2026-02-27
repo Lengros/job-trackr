@@ -58,7 +58,7 @@
 }
 
 .status_conflict {
-  border-left-color: #8B5CF6;
+  border-left-color: var(--color-conflict);
 }
 
 .itemInfo {
@@ -100,7 +100,7 @@
 
 .badge_pending {
   background: rgba(245, 158, 11, 0.1);
-  color: #B45309;
+  color: var(--color-warning-text);
 }
 
 .badge_error {
@@ -110,7 +110,7 @@
 
 .badge_conflict {
   background: rgba(139, 92, 246, 0.1);
-  color: #8B5CF6;
+  color: var(--color-conflict);
 }
 
 .timestamp {

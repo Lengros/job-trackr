@@ -9,6 +9,8 @@
   --color-text: #1E293B;
   --color-text-secondary: #64748B;
   --color-border: #E2E8F0;
+  --color-conflict: #8B5CF6;
+  --color-warning-text: #B45309;
   --font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
   --radius-card: 8px;
   --radius-button: 12px;
@@ -26,6 +28,7 @@
 html {
   font-size: 16px;
   -webkit-text-size-adjust: 100%;
+  overflow-x: hidden;
 }
 
 body {
@@ -35,10 +38,13 @@ body {
   line-height: 1.5;
   min-height: 100vh;
   -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+  max-width: 100vw;
 }
 
 #root {
   min-height: 100vh;
+  overflow-x: hidden;
 }
 
 button {

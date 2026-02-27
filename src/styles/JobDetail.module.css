@@ -30,7 +30,7 @@
 
 .statusBar[data-status="in_progress"] {
   background: rgba(245, 158, 11, 0.1);
-  color: #B45309;
+  color: var(--color-warning-text);
 }
 
 .statusBar[data-status="completed"] {

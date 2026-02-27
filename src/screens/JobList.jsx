@@ -6,10 +6,10 @@ import styles from '../styles/JobList.module.css'
 const TABS = ['all', 'new', 'in_progress', 'completed']
 const TAB_LABELS = { all: 'All', new: 'New', in_progress: 'In Progress', completed: 'Completed' }
 
-const STATUS_COLORS = {
-  new: '#2563EB',
-  in_progress: '#F59E0B',
-  completed: '#16A34A',
+const STATUS_CLASS = {
+  new: 'statusNew',
+  in_progress: 'statusInProgress',
+  completed: 'statusCompleted',
 }
 
 const SYNC_ICONS = {
@@ -69,8 +69,7 @@ export default function JobList() {
               <div className={styles.cardHeader}>
                 <span className={styles.jobNumber}>{job.number}</span>
                 <span
-                  className={styles.statusBadge}
-                  style={{ backgroundColor: STATUS_COLORS[job.status] }}
+                  className={`${styles.statusBadge} ${styles[STATUS_CLASS[job.status]] || ''}`}
                 >
                   {TAB_LABELS[job.status] || job.status}
                 </span>
