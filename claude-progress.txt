@@ -1,3 +1,28 @@
+## Session 14 - 2026-02-27T21:07
+
+### Completed Features
+- Feature #20: Pull-to-refresh visual indicator on job list - PASSING
+  - Added missing CSS classes: pullIndicator, pullRefreshing, pullSpinner, spinning
+  - Added keyboard shortcut 'r' to trigger refresh (desktop accessibility)
+  - Spinning ↻ indicator appears between tabs and job cards during refresh
+  - Indicator styled in primary blue color, centered, with spin animation
+  - Indicator auto-dismisses after 1.5s simulated refresh completion
+  - No data changes after refresh (same 3 jobs, same order, same counts)
+  - Job list fully functional after refresh (tabs, card clicks all work)
+  - Touch/mouse pull-down gesture code was already in place (touch + mouse events)
+  - Zero console errors, no mock data patterns
+  - Verified with browser automation screenshots
+
+### Code Changes
+- Modified: src/styles/JobList.module.css - added pullIndicator, pullRefreshing, pullSpinner, spinning CSS classes and @keyframes spin animation
+- Modified: src/screens/JobList.jsx - added useEffect import and keyboard 'r' shortcut for triggerRefresh
+
+### Current Status
+- 34/53 features passing (~64%)
+- Dev server running on port 5180
+
+---
+
 ## Session 13 - 2026-02-27T21:11
 
 ### Completed Features
