@@ -1,3 +1,39 @@
+## Session 8 - 2026-02-27T20:22
+
+### Completed Features
+- Feature #13: All tab shows all jobs for selected master - PASSING
+  - Verified "All" tab is selected/highlighted by default (blue background)
+  - Ivan: 3 job cards visible (JOB-001, JOB-002, JOB-003), count shows "3"
+  - James: 2 job cards visible (JOB-007, JOB-008), count shows "2"
+  - Jobs of all statuses visible on All tab
+  - Tab indicator clearly shows All is active
+  - Zero console errors
+
+- Feature #14: Tab filters show only jobs matching selected status - PASSING
+  - New tab → only JOB-001 (New badge), count "1"
+  - In Progress tab → only JOB-002 (In Progress badge), count "1"
+  - Completed tab → only JOB-003 (Completed badge), count "1"
+  - All tab → all 3 jobs reappear, count "3"
+  - Tab switching is instant with no loading spinner
+  - Active tab visually distinguished (blue bg + white text vs gray inactive)
+  - Zero console errors
+
+- Feature #17: Job count per tab is accurate and updates after status changes - PASSING
+  - All tab count (3) matches visible cards
+  - Changed JOB-001 from New → In Progress via Start Job button + confirmation
+  - After change: New=0 (down 1), In Progress=2 (up 1), Completed=1 (same), All=3 (same)
+  - Counts update immediately after returning to job list
+  - Counts displayed as pill badges next to tab labels
+  - Zero console errors
+
+### Current Status
+- 22/53 features passing (~41.5%)
+- Dev server running on port 5190 (127.0.0.1)
+- No code changes needed - all three features were already implemented correctly
+- All features verified through browser automation with Playwright
+
+---
+
 ## Session 2 - 2026-02-27
 
 ### Completed Features
