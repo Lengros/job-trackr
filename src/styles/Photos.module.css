@@ -6,13 +6,14 @@
   display: inline-flex;
   align-items: center;
   gap: 4px;
-  padding: 8px 0;
+  padding: 8px 16px 8px 0;
   border: none;
   background: transparent;
   color: var(--color-primary);
   font-size: 16px;
   font-weight: 600;
-  min-height: 44px;
+  min-height: 48px;
+  min-width: 44px;
   margin-bottom: 8px;
 }
 
@@ -53,19 +54,23 @@
 
 .deleteBtn {
   position: absolute;
-  top: 4px;
-  right: 4px;
-  width: 28px;
-  height: 28px;
+  top: 0;
+  right: 0;
+  width: 44px;
+  height: 44px;
   border: none;
-  border-radius: 50%;
-  background: rgba(0, 0, 0, 0.6);
+  border-radius: 0 var(--radius-card) 0 12px;
+  background: rgba(0, 0, 0, 0.55);
   color: white;
-  font-size: 14px;
+  font-size: 16px;
   display: flex;
   align-items: center;
   justify-content: center;
   cursor: pointer;
+}
+
+.deleteBtn:active {
+  background: rgba(220, 38, 38, 0.8);
 }
 
 .uploading {

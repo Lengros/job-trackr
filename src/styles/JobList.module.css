@@ -20,7 +20,7 @@
   display: flex;
   align-items: center;
   gap: 4px;
-  padding: 10px 10px;
+  padding: 10px 12px;
   border: none;
   border-radius: 8px;
   background: var(--color-card);
@@ -30,8 +30,7 @@
   min-height: 48px;
   white-space: nowrap;
   transition: all 0.15s ease;
-  flex: 1;
-  justify-content: center;
+  flex-shrink: 0;
 }
 
 .activeTab {
@@ -126,6 +125,9 @@
 .address {
   font-size: 14px;
   color: var(--color-text);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
 
 .workType {

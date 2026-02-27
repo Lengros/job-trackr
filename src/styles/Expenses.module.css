@@ -6,13 +6,14 @@
   display: inline-flex;
   align-items: center;
   gap: 4px;
-  padding: 8px 0;
+  padding: 8px 16px 8px 0;
   border: none;
   background: transparent;
   color: var(--color-primary);
   font-size: 16px;
   font-weight: 600;
-  min-height: 44px;
+  min-height: 48px;
+  min-width: 44px;
   margin-bottom: 8px;
 }
 
@@ -31,48 +32,60 @@
 }
 
 .listHeader {
-  display: grid;
-  grid-template-columns: 2fr 1fr 1fr 1fr 56px;
-  padding: 10px 12px;
-  background: var(--color-bg);
-  font-size: 12px;
-  font-weight: 600;
-  color: var(--color-text-secondary);
-  text-transform: uppercase;
-  letter-spacing: 0.5px;
+  display: none;
 }
 
 .row {
   display: grid;
-  grid-template-columns: 2fr 1fr 1fr 1fr 56px;
-  padding: 12px;
-  border-top: 1px solid var(--color-border);
+  grid-template-columns: 1fr auto;
+  grid-template-rows: auto auto;
   align-items: center;
+  padding: 10px 12px;
+  border-top: 1px solid var(--color-border);
   font-size: 14px;
+  gap: 2px 8px;
 }
 
 .expName {
   font-weight: 600;
-}
-
-.lineTotal {
-  font-weight: 700;
-  font-variant-numeric: tabular-nums;
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  grid-column: 1;
+  grid-row: 1;
 }
 
 .actions {
   display: flex;
-  gap: 4px;
+  gap: 2px;
+  flex-shrink: 0;
+  grid-column: 2;
+  grid-row: 1 / 3;
+  align-self: center;
+}
+
+.expDetail {
+  font-size: 13px;
+  color: var(--color-text-secondary);
+  grid-column: 1;
+  grid-row: 2;
+}
+
+.expDetail strong {
+  font-weight: 700;
+  color: var(--color-text);
+  font-variant-numeric: tabular-nums;
 }
 
 .editBtn,
 .deleteBtn {
-  width: 26px;
-  height: 26px;
+  width: 44px;
+  height: 44px;
   border: none;
-  border-radius: 6px;
+  border-radius: 8px;
   background: transparent;
-  font-size: 14px;
+  font-size: 18px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -80,8 +93,8 @@
   color: var(--color-text-secondary);
 }
 
-.editBtn:hover { color: var(--color-primary); }
-.deleteBtn:hover { color: var(--color-error); }
+.editBtn:active { color: var(--color-primary); background: rgba(37, 99, 235, 0.08); }
+.deleteBtn:active { color: var(--color-error); background: rgba(220, 38, 38, 0.08); }
 
 .totalBar {
   display: flex;

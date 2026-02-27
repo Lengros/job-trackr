@@ -17,12 +17,19 @@
 .masterName {
   font-size: 18px;
   font-weight: 600;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  min-width: 0;
+  flex-shrink: 1;
+  max-width: 140px;
 }
 
 .headerActions {
   display: flex;
   align-items: center;
   gap: 8px;
+  flex-shrink: 0;
 }
 
 .syncButton {

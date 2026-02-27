@@ -104,21 +104,9 @@ export default function Expenses() {
       ) : (
         <>
           <div className={styles.list}>
-            <div className={styles.listHeader}>
-              <span>Item</span>
-              <span>Qty</span>
-              <span>Price</span>
-              <span>Total</span>
-              <span></span>
-            </div>
             {jobExpenses.map((expense) => (
               <div key={expense.id} className={styles.row}>
                 <span className={styles.expName}>{expense.name}</span>
-                <span>{expense.quantity}</span>
-                <span>${expense.unitPrice.toFixed(2)}</span>
-                <span className={styles.lineTotal}>
-                  ${(expense.quantity * expense.unitPrice).toFixed(2)}
-                </span>
                 <span className={styles.actions}>
                   <button
                     className={styles.editBtn}
@@ -134,6 +122,9 @@ export default function Expenses() {
                   >
                     ✕
                   </button>
+                </span>
+                <span className={styles.expDetail}>
+                  {expense.quantity} x ${expense.unitPrice.toFixed(2)} = <strong>${(expense.quantity * expense.unitPrice).toFixed(2)}</strong>
                 </span>
               </div>
             ))}
