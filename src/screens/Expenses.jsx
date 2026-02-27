@@ -29,11 +29,23 @@ export default function Expenses() {
 
   const validate = () => {
     const newErrors = {}
-    if (!name.trim()) newErrors.name = 'Name is required'
-    if (!quantity || Number(quantity) <= 0)
+    if (!name.trim()) newErrors.name = 'Item name is required'
+    if (!quantity && quantity !== 0) {
+      newErrors.quantity = 'Quantity is required'
+    } else if (Number(quantity) <= 0) {
       newErrors.quantity = 'Quantity must be greater than 0'
-    if (!unitPrice || Number(unitPrice) <= 0)
+    } else if (!Number.isFinite(Number(quantity))) {
+      newErrors.quantity = 'Please enter a valid number'
+    }
+    if (!unitPrice && unitPrice !== 0) {
+      newErrors.unitPrice = 'Unit price is required'
+    } else if (Number(unitPrice) < 0) {
+      newErrors.unitPrice = 'Unit price cannot be negative'
+    } else if (Number(unitPrice) <= 0) {
       newErrors.unitPrice = 'Unit price must be greater than 0'
+    } else if (!Number.isFinite(Number(unitPrice))) {
+      newErrors.unitPrice = 'Please enter a valid price'
+    }
     setErrors(newErrors)
     return Object.keys(newErrors).length === 0
   }
@@ -187,7 +199,6 @@ export default function Expenses() {
                 }
               }}
               placeholder="0"
-              min="0"
               step="1"
               className={errors.quantity ? styles.inputError : ''}
             />
@@ -208,7 +219,6 @@ export default function Expenses() {
                 }
               }}
               placeholder="0.00"
-              min="0"
               step="0.01"
               className={errors.unitPrice ? styles.inputError : ''}
             />
