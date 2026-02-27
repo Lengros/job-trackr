@@ -423,3 +423,46 @@
 - 34/53 features passing (~64%)
 - Dev server running on port 5179
 - vite.config.js updated host to 'localhost'
+
+---
+
+## Session 11 - 2026-02-27T21:07
+
+### Completed Features
+- Feature #23: Status transition New → In Progress with confirmation dialog - PASSING
+  - Opened JOB-001 (New status), "Start Job" button visible
+  - Clicked Start Job → confirmation dialog "Change status to In Progress?"
+  - Clicked Cancel → status remained New, dialog dismissed
+  - Clicked Start Job again → Confirm → status changed to In Progress
+  - Status bar updated to amber/In Progress immediately
+  - "Start Job" button replaced by "Complete Job" button
+  - Back to job list: card shows In Progress, tab counts updated (New=0, In Progress=2)
+  - Zero console errors
+
+- Feature #24: Status transition In Progress → Completed with confirmation dialog - PASSING
+  - JOB-001 now In Progress, "Complete Job" button visible
+  - Clicked Complete Job → confirmation dialog "Change status to Completed?"
+  - Clicked Cancel → status remained In Progress
+  - Clicked Complete Job → Confirm → status changed to Completed
+  - Status bar updated to green/Completed
+  - No further status transition buttons visible (job is final)
+  - Back to job list: card shows Completed, tab counts updated (Completed=2)
+  - Re-entered job detail: still Completed, no action buttons
+  - Zero console errors
+
+- Feature #40: Complete Job button on summary transitions status to Completed - PASSING
+  - Navigated to JOB-002 summary (In Progress) → "Complete Job" button visible
+  - Clicked → confirmation dialog "Mark this job as Completed?"
+  - Cancel dismissed dialog, button still present
+  - Confirm → status transitioned to Completed, button disappeared
+  - Back to job detail: status shows Completed
+  - Verified Complete Job button NOT shown for New status jobs (JOB-004 summary)
+  - Only Vite HMR WebSocket reconnection in console (not app error)
+
+### Code Changes
+- None needed - all three features were already fully implemented
+
+### Current Status
+- 41/53 features passing (77.4%)
+- No code changes in this session - all features verified as already working
+- Dev server running on port 5173
