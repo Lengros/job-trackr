@@ -108,7 +108,7 @@
 .navButtons {
   display: flex;
   flex-direction: column;
-  gap: 10px;
+  gap: 12px;
 }
 
 .navButton {
@@ -116,10 +116,11 @@
   align-items: center;
   gap: 8px;
   width: 100%;
-  padding: 14px 16px;
+  padding: 16px;
   border: 1px solid var(--color-border);
   border-radius: var(--radius-card);
   background: var(--color-card);
+  box-shadow: var(--shadow-card);
   font-size: 16px;
   font-weight: 600;
   color: var(--color-text);

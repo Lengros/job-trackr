@@ -114,6 +114,17 @@ export default function JobList() {
     }
   }, [pullDistance, triggerRefresh])
 
+  // Keyboard shortcut: press 'r' to trigger refresh (desktop accessibility)
+  useEffect(() => {
+    const handleKeyDown = (e) => {
+      if (e.key === 'r' && !refreshing && e.target.tagName !== 'INPUT' && e.target.tagName !== 'TEXTAREA') {
+        triggerRefresh()
+      }
+    }
+    window.addEventListener('keydown', handleKeyDown)
+    return () => window.removeEventListener('keydown', handleKeyDown)
+  }, [refreshing, triggerRefresh])
+
   const showIndicator = refreshing || pullDistance > 0
 
   return (

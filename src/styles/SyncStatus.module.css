@@ -32,14 +32,14 @@
 .list {
   display: flex;
   flex-direction: column;
-  gap: 10px;
+  gap: 12px;
 }
 
 .item {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 14px 16px;
+  padding: 16px;
   background: var(--color-card);
   border-radius: var(--radius-card);
   box-shadow: var(--shadow-card);
