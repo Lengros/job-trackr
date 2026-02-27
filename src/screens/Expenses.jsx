@@ -162,7 +162,12 @@ export default function Expenses() {
             id="exp-name"
             type="text"
             value={name}
-            onChange={(e) => setName(e.target.value)}
+            onChange={(e) => {
+              setName(e.target.value)
+              if (errors.name && e.target.value.trim()) {
+                setErrors(prev => { const n = {...prev}; delete n.name; return n })
+              }
+            }}
             placeholder="e.g. Copper Pipe"
             className={errors.name ? styles.inputError : ''}
           />
@@ -175,7 +180,12 @@ export default function Expenses() {
               id="exp-qty"
               type="number"
               value={quantity}
-              onChange={(e) => setQuantity(e.target.value)}
+              onChange={(e) => {
+                setQuantity(e.target.value)
+                if (errors.quantity && Number(e.target.value) > 0) {
+                  setErrors(prev => { const n = {...prev}; delete n.quantity; return n })
+                }
+              }}
               placeholder="0"
               min="0"
               step="1"
@@ -191,7 +201,12 @@ export default function Expenses() {
               id="exp-price"
               type="number"
               value={unitPrice}
-              onChange={(e) => setUnitPrice(e.target.value)}
+              onChange={(e) => {
+                setUnitPrice(e.target.value)
+                if (errors.unitPrice && Number(e.target.value) > 0) {
+                  setErrors(prev => { const n = {...prev}; delete n.unitPrice; return n })
+                }
+              }}
               placeholder="0.00"
               min="0"
               step="0.01"
