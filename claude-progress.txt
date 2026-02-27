@@ -124,3 +124,37 @@
 - Dev server running on port 5180 (via strictPort: false fallback)
 - No code changes needed - all three features were already implemented correctly
 - All features verified through browser automation with Playwright
+
+---
+
+## Session 6 - 2026-02-27T20:11
+
+### Completed Features
+- Feature #18: Tapping a job card navigates to its detail screen - PASSING
+  - Clicked JOB-001 → navigated to /jobs/1, showed correct job number and address
+  - Clicked Back → returned to job list
+  - Clicked JOB-002 → navigated to /jobs/2, showed different (correct) job details
+  - Entire card area tappable (card is a button element)
+  - Zero console errors
+
+- Feature #21: Job detail displays all information fields - PASSING
+  - Verified on JOB-002: address, contact (David Chen), phone, work description, comments, work cost ($320.00)
+  - Verified on JOB-003: all fields populated with different data (Maria Garcia, $200.00, etc.)
+  - All fields have clear uppercase labels
+  - Proper spacing between sections, text readable
+  - Phone numbers displayed complete and formatted
+
+- Feature #26: Navigation buttons to Photos, Expenses, and Summary sub-screens - PASSING
+  - Photos button → /jobs/3/photos (correct job, showed 1 photo)
+  - Expenses button → /jobs/3/expenses (correct job, showed Drain snake + Pipe cleaner)
+  - Summary button → /jobs/3/summary (correct job, showed grand total $270.00)
+  - All three buttons have clear labels with icons
+  - Buttons are min-height: 48px, full-width, easy to tap
+  - Back navigation works from each sub-screen
+  - Zero console errors throughout
+
+### Current Status
+- 11/53 features passing (20.8%)
+- Dev server running on port 5175
+- Updated vite.config.js to use port 5174 with host 0.0.0.0
+- No code changes needed - all features were already implemented correctly
