@@ -166,6 +166,41 @@
   color: var(--color-conflict);
 }
 
+/* Pull-to-refresh indicator */
+.pullIndicator {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  transition: height 0.2s ease, opacity 0.2s ease;
+  color: var(--color-primary);
+  font-size: 14px;
+  font-weight: 600;
+  margin-bottom: 8px;
+}
+
+.pullRefreshing {
+  height: 48px !important;
+  opacity: 1 !important;
+}
+
+.pullSpinner {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+}
+
+.spinning {
+  font-size: 24px;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
 .emptyState {
   display: flex;
   flex-direction: column;

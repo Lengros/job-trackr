@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState, useRef, useCallback } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { useApp } from '../context/AppContext'
 import PageTransition from '../components/PageTransition'
@@ -20,10 +20,17 @@ const SYNC_ICONS = {
   conflict: '\u26A1',
 }
 
+const PULL_THRESHOLD = 60
+
 export default function JobList() {
   const { state } = useApp()
   const navigate = useNavigate()
   const [activeTab, setActiveTab] = useState('all')
+  const [pullDistance, setPullDistance] = useState(0)
+  const [refreshing, setRefreshing] = useState(false)
+  const startYRef = useRef(null)
+  const pullingRef = useRef(false)
+  const listRef = useRef(null)
 
   const masterJobs = state.jobs.filter(
     (job) => job.assignedMasterId === state.selectedMasterId
@@ -39,9 +46,88 @@ export default function JobList() {
       ? masterJobs.length
       : masterJobs.filter((j) => j.status === tab).length
 
+  const triggerRefresh = useCallback(() => {
+    setRefreshing(true)
+    setPullDistance(0)
+    setTimeout(() => {
+      setRefreshing(false)
+    }, 1500)
+  }, [])
+
+  const handleTouchStart = useCallback((e) => {
+    if (refreshing) return
+    const scrollTop = listRef.current ? listRef.current.scrollTop : 0
+    if (scrollTop <= 0) {
+      startYRef.current = e.touches[0].clientY
+      pullingRef.current = true
+    }
+  }, [refreshing])
+
+  const handleTouchMove = useCallback((e) => {
+    if (!pullingRef.current || refreshing || startYRef.current === null) return
+    const currentY = e.touches[0].clientY
+    const diff = currentY - startYRef.current
+    if (diff > 0) {
+      const dampened = Math.min(diff * 0.5, 120)
+      setPullDistance(dampened)
+    }
+  }, [refreshing])
+
+  const handleTouchEnd = useCallback(() => {
+    if (!pullingRef.current) return
+    pullingRef.current = false
+    startYRef.current = null
+    if (pullDistance >= PULL_THRESHOLD) {
+      triggerRefresh()
+    } else {
+      setPullDistance(0)
+    }
+  }, [pullDistance, triggerRefresh])
+
+  const handleMouseDown = useCallback((e) => {
+    if (refreshing) return
+    const scrollTop = listRef.current ? listRef.current.scrollTop : 0
+    if (scrollTop <= 0) {
+      startYRef.current = e.clientY
+      pullingRef.current = true
+    }
+  }, [refreshing])
+
+  const handleMouseMove = useCallback((e) => {
+    if (!pullingRef.current || refreshing || startYRef.current === null) return
+    const diff = e.clientY - startYRef.current
+    if (diff > 0) {
+      const dampened = Math.min(diff * 0.5, 120)
+      setPullDistance(dampened)
+    }
+  }, [refreshing])
+
+  const handleMouseUp = useCallback(() => {
+    if (!pullingRef.current) return
+    pullingRef.current = false
+    startYRef.current = null
+    if (pullDistance >= PULL_THRESHOLD) {
+      triggerRefresh()
+    } else {
+      setPullDistance(0)
+    }
+  }, [pullDistance, triggerRefresh])
+
+  const showIndicator = refreshing || pullDistance > 0
+
   return (
     <PageTransition>
-    <div className={styles.container}>
+    <div
+      className={styles.container}
+      ref={listRef}
+      onTouchStart={handleTouchStart}
+      onTouchMove={handleTouchMove}
+      onTouchEnd={handleTouchEnd}
+      onMouseDown={handleMouseDown}
+      onMouseMove={handleMouseMove}
+      onMouseUp={handleMouseUp}
+      onMouseLeave={handleMouseUp}
+    >
       <div className={styles.tabs}>
         {TABS.map((tab) => (
           <button
@@ -54,6 +140,18 @@ export default function JobList() {
           </button>
         ))}
       </div>
+
+      {showIndicator && (
+        <div
+          className={`${styles.pullIndicator} ${refreshing ? styles.pullRefreshing : ''}`}
+          style={refreshing ? {} : { height: `${pullDistance}px`, opacity: Math.min(pullDistance / PULL_THRESHOLD, 1) }}
+          aria-label="Pull to refresh indicator"
+        >
+          <div className={`${styles.pullSpinner} ${refreshing ? styles.spinning : ''}`}>
+            {refreshing ? '↻' : pullDistance >= PULL_THRESHOLD ? '↓ Release to refresh' : '↓ Pull to refresh'}
+          </div>
+        </div>
+      )}
 
       <div className={styles.list}>
         {filteredJobs.length === 0 ? (
