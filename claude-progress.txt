@@ -1137,3 +1137,66 @@
 - 65/86 features passing (~75.6%)
 - No code changes in this session - all features were verification-only
 - Production build (npm run build) is clean and working
+
+---
+
+## Session - 2026-03-01T21:19 (Features #75, #76, #77)
+
+### Completed Features
+
+- Feature #75: Implement Offline Banner - PASSING
+  - Created OfflineBanner component: brand-800 (#1E40AF) bg, white text, 8px Circle icon
+  - Fixed position below header (top: 56px), z-index: 99
+  - Text: 'Offline mode — data saved locally' (EN) / 'Tryb offline — dane zapisane' (PL)
+  - Shows/hides based on isOnline state from AppContext
+  - Content pushed down with contentWithBanner CSS class (+36px padding)
+  - Moved network toggle to Profile screen as demo control (tappable info card)
+  - role='alert' for accessibility
+  - Non-alarming dark blue design (NOT red)
+  - Added i18n strings: offlineBanner.message, profile.networkMode
+  - Zero console errors
+
+- Feature #76: Redesign Sync Indicator in App Bar - PASSING
+  - Online+Synced = hidden (no visual noise) ✅
+  - Online+Syncing = rotating blue spinner (brand-600) + 'Syncing...' text ✅
+  - Offline = empty circle in warning color ✅
+  - Sync Error = WarningCircle in error color ✅
+  - Subtle icon + text presentation in app bar right side
+  - Cleaned up Header: removed handleToggleNetwork and haptic import
+  - Offline indicator now navigates to /profile instead of toggling network
+  - Error indicator navigates to /sync screen
+  - CSS: syncText class for 12px Medium weight text labels
+
+- Feature #77: Implement Empty States - PASSING
+  - Created reusable EmptyState component per design guide §7
+  - Structure: 48px icon (centered, muted), h2 title, body subtitle, optional action button
+  - Applied to job list: ClipboardText icon, 'No jobs for today' / 'Check again later' + Refresh button
+  - Applied to expenses: CurrencyDollar icon, 'No material costs' / 'Add items to track expenses' + Add Item button
+  - Applied to photos: Camera icon, 'No photos' / 'Take photos to document this job' + Add Photo button
+  - Action buttons: secondary style (outline border, brand-600 color)
+  - Full i18n support (EN + PL) with specific Polish text from spec
+  - All action buttons functional (trigger appropriate handlers)
+  - Vertically and horizontally centered in available space
+  - Zero console errors
+
+### Code Changes
+- New: src/components/OfflineBanner.jsx - offline banner component
+- New: src/styles/OfflineBanner.module.css - banner styling (fixed position)
+- New: src/components/EmptyState.jsx - reusable empty state component
+- New: src/styles/EmptyState.module.css - centered layout with icon, title, subtitle, action
+- Modified: src/components/Layout.jsx - added OfflineBanner, conditional padding
+- Modified: src/styles/Layout.module.css - contentWithBanner class
+- Modified: src/components/Header.jsx - cleaned up sync indicator, removed network toggle
+- Modified: src/styles/Header.module.css - syncText class, updated indicator sizing
+- Modified: src/screens/Profile.jsx - added network toggle demo control
+- Modified: src/styles/Profile.module.css - networkToggle styles
+- Modified: src/screens/JobList.jsx - uses EmptyState component
+- Modified: src/screens/Photos.jsx - uses EmptyState component
+- Modified: src/screens/Expenses.jsx - uses EmptyState component
+- Modified: src/i18n/en.json - added offlineBanner, empty state, networkMode strings
+- Modified: src/i18n/pl.json - added Polish translations
+
+### Current Status
+- 83/86 features passing (96.5%)
+- Dev server running on port 5173 (localhost)
+- All 3 features verified through browser automation with Playwright
