@@ -48,7 +48,7 @@ export default function SyncStatus() {
       </p>
 
       <button
-        className={`${styles.networkToggle} ${state.isOnline ? styles.toggleOnline : styles.toggleOffline}`}
+        className={`${styles.networkToggle} ${state.isOnline ? styles.toggleOnline : styles.toggleOffline} interactive`}
         onClick={handleToggleNetwork}
         aria-label={strings.network.toggleLabel.replace('{status}', state.isOnline ? strings.network.online : strings.network.offline)}
       >

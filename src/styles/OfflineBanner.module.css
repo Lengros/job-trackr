@@ -1,0 +1,31 @@
+/* Offline Banner — design guide §5.4 / §8 */
+/* Full-width banner at top of content area (not inside app bar) */
+/* Brand-800 background, white text, non-alarming (NOT red) */
+
+.banner {
+  position: fixed;
+  top: calc(56px + env(safe-area-inset-top, 0px));
+  left: 0;
+  right: 0;
+  z-index: 99;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-2);
+  width: 100%;
+  padding: var(--space-2) var(--space-4);
+  background: var(--brand-800);
+  color: #FFFFFF;
+  font-size: var(--font-size-label);
+  font-weight: var(--font-weight-body-medium);
+  line-height: var(--line-height-label);
+}
+
+.icon {
+  flex-shrink: 0;
+  color: #FFFFFF;
+}
+
+.text {
+  white-space: nowrap;
+}

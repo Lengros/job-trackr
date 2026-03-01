@@ -259,7 +259,7 @@ export default function Expenses() {
               {strings.confirm.cancel}
             </button>
           )}
-          <button type="submit" className={styles.submitButton}>
+          <button type="submit" className={`${styles.submitButton} interactive`}>
             {editingId ? strings.expenses.saveChanges : strings.expenses.addExpense}
           </button>
         </div>

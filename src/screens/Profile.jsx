@@ -1,7 +1,7 @@
 import { useNavigate } from 'react-router-dom'
 import { useApp } from '../context/AppContext'
 import { useStrings, useTimeFormatter } from '../i18n/useStrings'
-import { SignOut, Phone, ArrowsClockwise, Info } from '@phosphor-icons/react'
+import { SignOut, Phone, ArrowsClockwise, Info, WifiHigh, WifiSlash } from '@phosphor-icons/react'
 import PageTransition from '../components/PageTransition'
 import styles from '../styles/Profile.module.css'
 
@@ -18,6 +18,16 @@ export default function Profile() {
 
   // Last synced time (simulated)
   const lastSyncTime = formatTime(new Date())
+
+  const handleToggleNetwork = () => {
+    const wasOffline = !state.isOnline
+    dispatch({ type: 'TOGGLE_NETWORK' })
+    if (wasOffline) {
+      setTimeout(() => {
+        dispatch({ type: 'SYNC_COMPLETE' })
+      }, 1800)
+    }
+  }
 
   const handleLogout = () => {
     dispatch({ type: 'SELECT_MASTER', payload: null })
@@ -85,10 +95,30 @@ export default function Profile() {
               </div>
             </div>
           </div>
+
+          {/* Network Toggle — demo control */}
+          <button
+            className={`${styles.infoCard} ${styles.networkToggle} interactive`}
+            onClick={handleToggleNetwork}
+            aria-label={strings.network.toggleLabel.replace('{status}', state.isOnline ? strings.network.online : strings.network.offline)}
+          >
+            <div className={styles.infoRow}>
+              {state.isOnline
+                ? <WifiHigh size={20} weight="regular" className={styles.infoIcon} />
+                : <WifiSlash size={20} weight="regular" className={styles.infoIcon} />
+              }
+              <div>
+                <span className={styles.infoLabel}>{strings.profile.networkMode}</span>
+                <span className={styles.infoValue}>
+                  {state.isOnline ? strings.network.online : strings.network.offline}
+                </span>
+              </div>
+            </div>
+          </button>
         </div>
 
         {/* Logout Button */}
-        <button className={styles.logoutButton} onClick={handleLogout}>
+        <button className={`${styles.logoutButton} interactive`} onClick={handleLogout}>
           <SignOut size={20} weight="bold" />
           <span>{strings.profile.logOut}</span>
         </button>

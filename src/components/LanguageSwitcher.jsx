@@ -9,7 +9,7 @@ export default function LanguageSwitcher() {
   return (
     <div className={styles.switcher} role="radiogroup" aria-label={strings.language.selection}>
       <button
-        className={`${styles.option} ${language === 'en' ? styles.active : ''}`}
+        className={`${styles.option} ${language === 'en' ? styles.active : ''} interactive`}
         onClick={() => setLanguage('en')}
         role="radio"
         aria-checked={language === 'en'}
@@ -18,7 +18,7 @@ export default function LanguageSwitcher() {
         EN
       </button>
       <button
-        className={`${styles.option} ${language === 'pl' ? styles.active : ''}`}
+        className={`${styles.option} ${language === 'pl' ? styles.active : ''} interactive`}
         onClick={() => setLanguage('pl')}
         role="radio"
         aria-checked={language === 'pl'}

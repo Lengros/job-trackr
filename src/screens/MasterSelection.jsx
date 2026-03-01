@@ -23,7 +23,7 @@ export default function MasterSelection() {
         {state.masters.map((master) => (
           <button
             key={master.id}
-            className={styles.card}
+            className={`${styles.card} interactive`}
             onClick={() => handleSelect(master.id)}
             role="listitem"
             aria-label={strings.aria.selectWorker.replace('{name}', master.name).replace('{specialization}', master.specialization)}

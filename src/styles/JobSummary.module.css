@@ -1,126 +1,198 @@
 .container {
-  padding: 16px;
+  padding: var(--space-4);
+  padding-bottom: var(--space-8);
 }
 
-.backButton {
-  display: inline-flex;
-  align-items: center;
-  gap: 4px;
-  padding: 8px 16px 8px 0;
-  border: none;
-  background: transparent;
-  color: var(--brand-700);
-  font-size: var(--font-size-button);
-  font-weight: var(--font-weight-button);
-  min-height: 48px;
-  min-width: 44px;
-  margin-bottom: 8px;
-}
-
-.title {
-  font-size: var(--font-size-h1);
-  font-weight: var(--font-weight-h1);
-  line-height: var(--line-height-h1);
-  margin-bottom: 4px;
-}
-
-.jobNumber {
-  font-size: var(--font-size-button-sm);
-  font-weight: var(--font-weight-caption);
-  color: var(--text-500);
-  margin-bottom: 16px;
-}
-
+/* ── Receipt Card ── */
 .receipt {
   background: var(--surface-0);
   border-radius: var(--radius-lg);
   box-shadow: var(--shadow-card);
-  padding: 16px;
-  margin-bottom: 12px;
+  padding: var(--space-5) var(--space-4);
+  overflow: hidden;
 }
 
-.section h3 {
+/* ── Receipt Header ── */
+.receiptHeader {
+  text-align: center;
+  padding-bottom: var(--space-4);
+}
+
+.receiptTitle {
+  font-size: var(--font-size-h2);
+  font-weight: var(--font-weight-h2);
+  line-height: var(--line-height-h2);
+  color: var(--text-900);
+  margin-bottom: var(--space-1);
+}
+
+.jobNumber {
+  font-size: var(--font-size-caption);
+  font-weight: var(--font-weight-caption);
+  color: var(--text-500);
+  letter-spacing: 0.5px;
+}
+
+/* ── Dividers ── */
+.dividerDashed {
+  border: none;
+  border-top: 1px dashed var(--border);
+  margin: 0;
+}
+
+.dividerSolid {
+  border: none;
+  border-top: 2px solid var(--text-900);
+  margin: 0;
+}
+
+/* ── Sections ── */
+.section {
+  padding: var(--space-4) 0;
+}
+
+.sectionLabel {
   font-size: var(--font-size-label);
   font-weight: var(--font-weight-label);
   color: var(--text-500);
   text-transform: uppercase;
   letter-spacing: 0.5px;
-  margin-bottom: 10px;
+  margin-bottom: var(--space-3);
 }
 
+/* ── Work Cost Line Item ── */
 .lineItem {
   display: flex;
   justify-content: space-between;
   align-items: baseline;
-  padding: 6px 0;
+  gap: var(--space-2);
+}
+
+.lineItemName {
   font-size: var(--font-size-body);
-  gap: 8px;
+  font-weight: var(--font-weight-body);
+  color: var(--text-900);
 }
 
-.lineItem span:first-child {
-  min-width: 0;
-  flex: 1;
-  word-break: break-word;
-}
-
-.lineItem span:last-child {
+.lineItemAmount {
+  font-size: var(--font-size-body);
+  font-weight: var(--font-weight-body-medium);
   font-variant-numeric: tabular-nums;
-  font-weight: var(--font-weight-display);
+  color: var(--text-900);
   flex-shrink: 0;
-  text-align: right;
 }
 
+/* ── No Expenses ── */
 .noExpenses {
   font-size: var(--font-size-body);
   color: var(--text-500);
-  font-style: normal;
+  font-style: italic;
+  padding: var(--space-2) 0;
+}
+
+/* ── Expense List ── */
+.expenseList {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+}
+
+.expenseItem {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.expenseRow {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: var(--space-2);
+}
+
+.expenseName {
+  font-size: var(--font-size-body);
+  font-weight: var(--font-weight-body-medium);
+  color: var(--text-900);
+  min-width: 0;
+  word-break: break-word;
+}
+
+.expenseLineTotal {
+  font-size: var(--font-size-body);
+  font-weight: var(--font-weight-body-medium);
+  font-variant-numeric: tabular-nums;
+  color: var(--text-900);
+  flex-shrink: 0;
+}
+
+.expenseDetail {
+  font-size: var(--font-size-caption);
+  font-weight: var(--font-weight-caption);
+  color: var(--text-500);
+  font-variant-numeric: tabular-nums;
+}
+
+/* ── Subtotal ── */
+.subtotalDivider {
+  border: none;
+  border-top: 1px solid var(--border);
+  margin-top: var(--space-3);
 }
 
 .subtotal {
   display: flex;
   justify-content: space-between;
   align-items: baseline;
-  padding: 10px 0 0;
-  margin-top: 8px;
-  border-top: 1px solid var(--border);
+  padding-top: var(--space-3);
+  gap: var(--space-2);
+}
+
+.subtotalLabel {
   font-size: var(--font-size-body-medium);
   font-weight: var(--font-weight-body-medium);
+  color: var(--text-900);
 }
 
-.subtotal span:last-child {
+.subtotalAmount {
+  font-size: var(--font-size-body-medium);
+  font-weight: var(--font-weight-h3);
   font-variant-numeric: tabular-nums;
-  font-weight: var(--font-weight-display);
+  color: var(--text-900);
+  flex-shrink: 0;
 }
 
-.divider {
-  height: 1px;
-  background: var(--border);
-  margin: 16px 0;
-}
-
+/* ── Grand Total ── */
 .grandTotal {
   display: flex;
   justify-content: space-between;
   align-items: baseline;
+  padding: var(--space-4) 0 var(--space-2);
+}
+
+.grandTotalLabel {
+  font-size: var(--font-size-h3);
+  font-weight: var(--font-weight-h3);
+  color: var(--text-900);
+}
+
+.grandTotalAmount {
   font-size: var(--font-size-display);
   font-weight: var(--font-weight-display);
   line-height: var(--line-height-display);
-}
-
-.grandTotal span:last-child {
-  color: var(--brand-700);
   font-variant-numeric: tabular-nums;
+  color: var(--brand-700);
 }
 
-/* Spacer to account for sticky CTA */
+/* ── Spacer for sticky CTA ── */
 .ctaSpacer {
-  height: 80px;
+  height: 88px;
 }
 
-/* Sticky CTA — sits above the tab bar */
+/* ── Sticky CTA — sits above the tab bar ── */
 .stickyCtaBar {
   position: fixed;
-  bottom: calc(56px + env(safe-area-inset-bottom, 0px)); /* above tab bar */
+  bottom: calc(56px + env(safe-area-inset-bottom, 0px));
   left: 0;
   right: 0;
   padding: var(--space-3) var(--space-4);
@@ -153,7 +225,7 @@
   pointer-events: none;
 }
 
-/* Confirmation Dialog */
+/* ── Confirmation Dialog ── */
 .overlay {
   position: fixed;
   inset: 0;
@@ -162,13 +234,13 @@
   align-items: center;
   justify-content: center;
   z-index: 200;
-  padding: 16px;
+  padding: var(--space-4);
 }
 
 .dialog {
   background: var(--surface-0);
   border-radius: 16px;
-  padding: 24px;
+  padding: var(--space-6);
   max-width: 320px;
   width: 100%;
   text-align: center;
@@ -176,19 +248,19 @@
 
 .dialog p {
   font-size: var(--font-size-body);
-  margin-bottom: 20px;
+  margin-bottom: var(--space-5);
   line-height: var(--line-height-body);
 }
 
 .dialogButtons {
   display: flex;
-  gap: 12px;
+  gap: var(--space-3);
 }
 
 .cancelButton,
 .confirmButton {
   flex: 1;
-  padding: 12px;
+  padding: var(--space-3);
   border: none;
   border-radius: var(--radius-lg);
   font-size: var(--font-size-button);

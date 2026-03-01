@@ -23,7 +23,7 @@ export default function BottomTabBar() {
         return (
           <button
             key={key}
-            className={`${styles.tab} ${isActive ? styles.tabActive : styles.tabInactive}`}
+            className={`${styles.tab} ${isActive ? styles.tabActive : styles.tabInactive} interactive`}
             onClick={() => navigate(path)}
             role="tab"
             aria-selected={isActive}

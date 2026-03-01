@@ -129,12 +129,14 @@
   box-sizing: border-box;
   margin: 0;
   padding: 0;
+  -webkit-tap-highlight-color: transparent;
 }
 
 html {
   font-size: 100%;
   -webkit-text-size-adjust: 100%;
   overflow-x: hidden;
+  touch-action: manipulation;
 }
 
 body {
@@ -159,6 +161,8 @@ body {
 button {
   font-family: inherit;
   cursor: pointer;
+  transition: background-color 150ms ease, border-color 150ms ease, transform 100ms ease-out;
+  -webkit-tap-highlight-color: transparent;
 }
 
 input {
@@ -193,6 +197,17 @@ input.input-error:focus {
   box-shadow: 0 0 0 2px rgba(220, 38, 38, 0.2);
 }
 
+/* ── Interactive Class — §11: unified press feedback ── */
+.interactive {
+  transition: background-color 150ms ease, border-color 150ms ease, transform 100ms ease-out;
+  -webkit-tap-highlight-color: transparent;
+  cursor: pointer;
+}
+
+.interactive:active {
+  transform: scale(0.98);
+}
+
 /* Utility: tabular numbers for costs/amounts */
 .tabular-nums {
   font-variant-numeric: tabular-nums;
@@ -209,4 +224,16 @@ input.input-error:focus {
   clip: rect(0, 0, 0, 0);
   white-space: nowrap;
   border: 0;
+}
+
+/* ── Reduced Motion — §9: respect prefers-reduced-motion ── */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
 }

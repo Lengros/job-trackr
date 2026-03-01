@@ -81,6 +81,19 @@
   color: var(--text-900);
 }
 
+/* Network toggle — demo control styled as a tappable info card */
+.networkToggle {
+  border: none;
+  width: 100%;
+  text-align: left;
+  cursor: pointer;
+  transition: background-color 0.15s ease;
+}
+
+.networkToggle:active {
+  background: var(--surface-50);
+}
+
 .logoutButton {
   display: flex;
   align-items: center;

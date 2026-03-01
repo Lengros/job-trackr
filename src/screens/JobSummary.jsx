@@ -53,45 +53,63 @@ export default function JobSummary() {
   return (
     <PageTransition>
     <div className={styles.container}>
-      <h2 className={styles.title}>{strings.summary.title}</h2>
-      <p className={styles.jobNumber}>{job.number}</p>
-
+      {/* Receipt card */}
       <div className={styles.receipt}>
+        {/* Receipt header */}
+        <div className={styles.receiptHeader}>
+          <h2 className={styles.receiptTitle}>{strings.summary.title}</h2>
+          <p className={styles.jobNumber}>{job.number}</p>
+        </div>
+
+        <div className={styles.dividerDashed} />
+
+        {/* Work cost (labor) section */}
         <div className={styles.section}>
-          <h3>{strings.summary.workCost}</h3>
+          <h3 className={styles.sectionLabel}>{strings.summary.workCost}</h3>
           <div className={styles.lineItem}>
-            <span>{strings.summary.serviceFee}</span>
-            <span>{formatCurrency(job.workCost)}</span>
+            <span className={styles.lineItemName}>{strings.summary.serviceFee}</span>
+            <span className={styles.lineItemAmount}>{formatCurrency(job.workCost)}</span>
           </div>
         </div>
 
-        <div className={styles.divider} />
+        <div className={styles.dividerDashed} />
 
+        {/* Expenses section */}
         <div className={styles.section}>
-          <h3>{strings.summary.expenses}</h3>
+          <h3 className={styles.sectionLabel}>{strings.summary.expenses}</h3>
           {jobExpenses.length === 0 ? (
             <p className={styles.noExpenses}>{strings.summary.noExpenses}</p>
           ) : (
-            jobExpenses.map((exp) => (
-              <div key={exp.id} className={styles.lineItem}>
-                <span>
-                  {exp.name} ({exp.quantity} × {formatCurrency(exp.unitPrice)})
-                </span>
-                <span>{formatCurrency(exp.quantity * exp.unitPrice)}</span>
-              </div>
-            ))
+            <div className={styles.expenseList}>
+              {jobExpenses.map((exp) => (
+                <div key={exp.id} className={styles.expenseItem}>
+                  <div className={styles.expenseRow}>
+                    <span className={styles.expenseName}>{exp.name}</span>
+                    <span className={styles.expenseLineTotal}>
+                      {formatCurrency(exp.quantity * exp.unitPrice)}
+                    </span>
+                  </div>
+                  <div className={styles.expenseDetail}>
+                    {exp.quantity} x {formatCurrency(exp.unitPrice)}
+                  </div>
+                </div>
+              ))}
+            </div>
           )}
+
+          <div className={styles.subtotalDivider} />
           <div className={styles.subtotal}>
-            <span>{strings.summary.totalExpenses}</span>
-            <span>{formatCurrency(totalExpenses)}</span>
+            <span className={styles.subtotalLabel}>{strings.summary.totalExpenses}</span>
+            <span className={styles.subtotalAmount}>{formatCurrency(totalExpenses)}</span>
           </div>
         </div>
 
-        <div className={styles.divider} />
+        <div className={styles.dividerSolid} />
 
+        {/* Grand total */}
         <div className={styles.grandTotal}>
-          <span>{strings.summary.grandTotal}</span>
-          <span>{formatCurrency(grandTotal)}</span>
+          <span className={styles.grandTotalLabel}>{strings.summary.grandTotal}</span>
+          <span className={styles.grandTotalAmount}>{formatCurrency(grandTotal)}</span>
         </div>
       </div>
 
@@ -102,7 +120,7 @@ export default function JobSummary() {
       {job.status === 'in_progress' && (
         <div className={styles.stickyCtaBar}>
           <button
-            className={styles.completeButton}
+            className={`${styles.completeButton} interactive`}
             onClick={() => setShowConfirm(true)}
           >
             {strings.jobDetail.completeJob}

@@ -158,12 +158,16 @@
     "allSynced": "All synced",
     "lastSyncedAt": "last synced at {time}",
     "appVersion": "App Version",
+    "networkMode": "Network Mode",
     "logOut": "Log Out"
   },
   "language": {
     "selection": "Language selection",
     "en": "English",
     "pl": "Polish"
+  },
+  "offlineBanner": {
+    "message": "Offline mode — data saved locally"
   },
   "aria": {
     "availableWorkers": "Available workers",

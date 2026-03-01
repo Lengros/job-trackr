@@ -138,7 +138,7 @@ export default function Header() {
       <div className={styles.headerLeft}>
         {hasBack && (
           <button
-            className={styles.backButton}
+            className={`${styles.backButton} interactive`}
             onClick={() => navigate(backTo)}
             aria-label={strings.nav.goBack}
           >

@@ -11,6 +11,11 @@
   overflow-y: auto;
 }
 
+/* Extra padding when offline banner is visible (banner height ~36px) */
+.contentWithBanner {
+  padding-top: calc(56px + 36px + env(safe-area-inset-top, 0px));
+}
+
 /* Fixed bottom action bar slot — sits above the tab bar */
 .bottomActionBar {
   position: fixed;

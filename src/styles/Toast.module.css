@@ -66,13 +66,13 @@
   opacity: 0.7;
 }
 
-/* Animations */
+/* Animations — §11: Toast 200ms appear, 150ms dismiss */
 .entering {
-  animation: slideUp 0.25s ease-out forwards;
+  animation: slideUp 200ms ease-out forwards;
 }
 
 .exiting {
-  animation: slideDown 0.25s ease-in forwards;
+  animation: slideDown 150ms ease-in forwards;
 }
 
 @keyframes slideUp {

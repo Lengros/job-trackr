@@ -1,73 +1,100 @@
+/* ── JobList: Redesigned per design guide §5.2 / §17 ── */
+
 .container {
-  padding: 16px;
+  padding: var(--space-4);
 }
 
-.tabs {
+/* ── Filter Chips ── */
+.chips {
   display: flex;
-  gap: 4px;
-  margin-bottom: 16px;
+  gap: var(--space-2);
+  margin-bottom: var(--space-4);
   overflow-x: auto;
   -webkit-overflow-scrolling: touch;
   scrollbar-width: none;
   -ms-overflow-style: none;
 }
 
-.tabs::-webkit-scrollbar {
+.chips::-webkit-scrollbar {
   display: none;
 }
 
-.tab {
-  display: flex;
+.chip {
+  display: inline-flex;
   align-items: center;
-  gap: 4px;
-  padding: 10px 12px;
-  border: none;
-  border-radius: 8px;
+  gap: 6px;
+  padding: var(--space-2) var(--space-3);
+  border: 1.5px solid var(--border);
+  border-radius: var(--radius-full);
   background: var(--surface-0);
   color: var(--text-500);
-  font-size: var(--font-size-label);
-  font-weight: var(--font-weight-label);
-  min-height: 48px;
+  font-size: var(--font-size-button-sm);
+  font-weight: var(--font-weight-button-sm);
+  min-height: 40px;
   white-space: nowrap;
   transition: all 0.15s ease;
   flex-shrink: 0;
+  -webkit-tap-highlight-color: transparent;
 }
 
-.activeTab {
+.chipActive {
   background: var(--brand-700);
+  border-color: var(--brand-700);
   color: white;
 }
 
-.count {
+.chipCount {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  min-width: 22px;
-  height: 22px;
-  padding: 0 6px;
-  border-radius: 11px;
-  background: rgba(0, 0, 0, 0.1);
+  min-width: 20px;
+  height: 20px;
+  padding: 0 5px;
+  border-radius: 10px;
+  background: rgba(0, 0, 0, 0.08);
   font-size: var(--font-size-caption);
-  font-weight: var(--font-weight-h1);
+  font-weight: 700;
 }
 
-.activeTab .count {
+.chipActive .chipCount {
   background: rgba(255, 255, 255, 0.25);
   color: white;
 }
 
+/* ── Job List ── */
 .list {
   display: flex;
   flex-direction: column;
-  gap: var(--space-4); /* 16px between cards per design guide §4 */
+  gap: var(--space-3);
 }
 
+/* ── Date Group ── */
+.dateGroup {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+}
+
+.dateHeader {
+  font-size: var(--font-size-label);
+  font-weight: var(--font-weight-label);
+  color: var(--text-500);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  padding: var(--space-2) 0;
+  margin-top: var(--space-2);
+}
+
+.dateGroup:first-child .dateHeader {
+  margin-top: 0;
+}
+
+/* ── Job Card ── */
 .card {
   display: flex;
   flex-direction: column;
-  gap: 8px;
   width: 100%;
-  padding: 16px;
+  padding: var(--space-4);
   background: var(--surface-0);
   border: 1px solid var(--border);
   border-radius: var(--radius-lg);
@@ -75,6 +102,7 @@
   cursor: pointer;
   transition: all 0.15s ease;
   text-align: left;
+  -webkit-tap-highlight-color: transparent;
 }
 
 .card:active {
@@ -82,11 +110,42 @@
   background: var(--brand-100);
 }
 
-/* Card top row: status dot + address */
+/* Completed cards: muted */
+.cardCompleted {
+  opacity: 0.6;
+}
+
+/* Card content: time prefix + body */
+.cardContent {
+  display: flex;
+  gap: var(--space-3);
+}
+
+/* Time prefix - left aligned */
+.timePrefix {
+  font-size: var(--font-size-caption);
+  font-weight: var(--font-weight-label);
+  color: var(--text-500);
+  flex-shrink: 0;
+  min-width: 42px;
+  padding-top: 2px;
+  font-variant-numeric: tabular-nums;
+}
+
+/* Card body */
+.cardBody {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+  min-width: 0;
+  flex: 1;
+}
+
+/* Card top row: status dot + address (h3 style) */
 .cardTop {
   display: flex;
   align-items: center;
-  gap: 8px;
+  gap: var(--space-2);
 }
 
 .statusDot {
@@ -110,19 +169,18 @@
 }
 
 .address {
-  font-size: var(--font-size-button);
-  font-weight: var(--font-weight-h2);
+  font-size: var(--font-size-h3);
+  font-weight: var(--font-weight-h3);
   color: var(--text-900);
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
 }
 
-/* Card middle row: contact · date */
+/* Card middle row: contact name (body, muted) */
 .cardMiddle {
   display: flex;
   align-items: center;
-  gap: 6px;
   color: var(--text-500);
   font-size: var(--font-size-body);
 }
@@ -133,18 +191,9 @@
   white-space: nowrap;
 }
 
-.separator {
-  flex-shrink: 0;
-  opacity: 0.6;
-}
-
-.time {
-  flex-shrink: 0;
-}
-
-/* Work type caption */
+/* Work type (caption) */
 .workType {
-  font-size: var(--font-size-label);
+  font-size: var(--font-size-caption);
   color: var(--text-500);
 }
 
@@ -153,9 +202,10 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-top: 4px;
+  margin-top: var(--space-1);
 }
 
+/* Status badge (pill) with dot */
 .statusBadge {
   display: inline-flex;
   align-items: center;
@@ -167,9 +217,23 @@
   white-space: nowrap;
 }
 
+.statusBadge::before {
+  content: '';
+  display: inline-block;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  margin-right: 5px;
+  flex-shrink: 0;
+}
+
 .statusNew {
   background-color: var(--brand-200);
   color: var(--brand-800);
+}
+
+.statusNew::before {
+  background-color: var(--brand-700);
 }
 
 .statusInProgress {
@@ -177,15 +241,23 @@
   color: var(--warning-text);
 }
 
+.statusInProgress::before {
+  background-color: var(--warning);
+}
+
 .statusCompleted {
   background-color: var(--success-bg);
   color: var(--success);
 }
 
+.statusCompleted::before {
+  background-color: var(--success);
+}
+
 .cardBottomRight {
   display: flex;
   align-items: center;
-  gap: 8px;
+  gap: var(--space-2);
 }
 
 .amount {
@@ -195,6 +267,7 @@
   font-variant-numeric: tabular-nums;
 }
 
+/* Sync icons */
 .syncIcon {
   display: inline-flex;
   align-items: center;
@@ -212,8 +285,12 @@
 }
 
 @keyframes syncSpin {
-  from { transform: rotate(0deg); }
-  to { transform: rotate(360deg); }
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
 }
 
 .sync_pending {
@@ -228,41 +305,7 @@
   color: var(--conflict);
 }
 
-/* Pull-to-refresh indicator */
-.pullIndicator {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  overflow: hidden;
-  transition: height 0.2s ease, opacity 0.2s ease;
-  color: var(--brand-700);
-  font-size: var(--font-size-button-sm);
-  font-weight: var(--font-weight-button-sm);
-  margin-bottom: 8px;
-}
-
-.pullRefreshing {
-  height: 48px !important;
-  opacity: 1 !important;
-}
-
-.pullSpinner {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 6px;
-}
-
-.spinning {
-  font-size: var(--font-size-h1);
-  animation: spin 1s linear infinite;
-}
-
-@keyframes spin {
-  from { transform: rotate(0deg); }
-  to { transform: rotate(360deg); }
-}
-
+/* ── Empty State ── */
 .emptyState {
   display: flex;
   flex-direction: column;
@@ -303,15 +346,15 @@
   background: var(--brand-700);
   color: white;
   border: none;
-  border-radius: var(--radius-sm);
+  border-radius: var(--radius-full);
   font-size: var(--font-size-body);
   font-weight: var(--font-weight-button);
   min-height: 48px;
   cursor: pointer;
   transition: background 0.15s ease;
+  -webkit-tap-highlight-color: transparent;
 }
 
-.retryButton:hover,
 .retryButton:active {
   background: var(--brand-800);
 }

@@ -5,7 +5,7 @@
 }
 
 .enter {
-  animation: slideIn 250ms cubic-bezier(0.25, 0.1, 0.25, 1) forwards;
+  animation: slideIn 200ms ease-in-out forwards;
 }
 
 @keyframes slideIn {

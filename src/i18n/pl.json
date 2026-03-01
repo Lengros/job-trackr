@@ -158,12 +158,16 @@
     "allSynced": "Wszystko zsynchronizowane",
     "lastSyncedAt": "ostatnia synchronizacja o {time}",
     "appVersion": "Wersja aplikacji",
+    "networkMode": "Tryb sieci",
     "logOut": "Wyloguj się"
   },
   "language": {
     "selection": "Wybór języka",
     "en": "Angielski",
     "pl": "Polski"
+  },
+  "offlineBanner": {
+    "message": "Tryb offline — dane zapisane"
   },
   "aria": {
     "availableWorkers": "Dostępni pracownicy",

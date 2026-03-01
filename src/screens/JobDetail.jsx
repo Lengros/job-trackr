@@ -346,7 +346,7 @@ export default function JobDetail() {
         {/* Sticky bottom CTA */}
         {ctaLabel && (
           <div className={styles.stickyCtaBar}>
-            <button className={styles.ctaButton} onClick={ctaAction}>
+            <button className={`${styles.ctaButton} interactive`} onClick={ctaAction}>
               {ctaLabel}
             </button>
           </div>
