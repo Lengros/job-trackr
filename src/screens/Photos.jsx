@@ -49,24 +49,24 @@ export default function Photos() {
           <p className={styles.emptyHint}>{strings.photos.addFirstPhoto}</p>
         </div>
       ) : (
-        <div className={styles.grid} role="list" aria-label="Photo gallery">
+        <div className={styles.grid} role="list" aria-label={strings.photos.gallery}>
           {jobPhotos.map((photo, index) => (
             <div key={photo.id} className={styles.thumbnail} role="listitem">
-              <div className={styles.placeholder} role="img" alt={`Job photo ${index + 1}`} aria-label={`Job photo ${index + 1}`}>
+              <div className={styles.placeholder} role="img" alt={strings.aria.jobPhoto.replace('{index}', index + 1)} aria-label={strings.aria.jobPhoto.replace('{index}', index + 1)}>
                 <Camera size={32} aria-hidden="true" />
               </div>
               <button
                 className={styles.deleteBtn}
                 onClick={() => handleDelete(photo.id)}
-                aria-label={`Delete photo ${index + 1}`}
+                aria-label={strings.aria.deletePhoto.replace('{index}', index + 1)}
               >
                 <Trash size={16} aria-hidden="true" />
               </button>
             </div>
           ))}
           {uploading && (
-            <div className={`${styles.thumbnail} ${styles.uploading}`} role="listitem" aria-label="Uploading photo">
-              <div className={styles.spinner} aria-label="Upload in progress" role="status" />
+            <div className={`${styles.thumbnail} ${styles.uploading}`} role="listitem" aria-label={strings.photos.uploadingLabel}>
+              <div className={styles.spinner} aria-label={strings.photos.uploadInProgress} role="status" />
             </div>
           )}
         </div>
@@ -76,13 +76,13 @@ export default function Photos() {
         className={styles.addButton}
         onClick={handleAddPhoto}
         disabled={uploading}
-        aria-label={uploading ? 'Uploading photo' : 'Add photo'}
+        aria-label={uploading ? strings.photos.uploadingLabel : strings.photos.addPhotoLabel}
       >
         {uploading ? strings.photos.uploading : <><Plus size={20} aria-hidden="true" /> {strings.photos.addPhoto}</>}
       </button>
 
       {deleteTarget !== null && (
-        <div className={styles.overlay} role="dialog" aria-modal="true" aria-label="Confirm photo deletion">
+        <div className={styles.overlay} role="dialog" aria-modal="true" aria-label={strings.confirm.photoDeletion}>
           <div className={styles.dialog}>
             <p>{strings.confirm.deletePhoto}</p>
             <div className={styles.dialogButtons}>

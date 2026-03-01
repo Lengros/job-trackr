@@ -125,7 +125,7 @@ export default function Expenses() {
         </div>
       ) : (
         <>
-          <div className={styles.tableWrapper} role="table" aria-label="Expenses list">
+          <div className={styles.tableWrapper} role="table" aria-label={strings.expenses.listLabel}>
             <div className={styles.tableHeader} role="row">
               <span className={styles.colName} role="columnheader">{strings.expenses.colName}</span>
               <span className={styles.colQty} role="columnheader">{strings.expenses.colQty}</span>
@@ -144,14 +144,14 @@ export default function Expenses() {
                     <button
                       className={styles.editBtn}
                       onClick={() => handleEdit(expense)}
-                      aria-label={`Edit expense: ${expense.name}`}
+                      aria-label={strings.aria.editExpense.replace('{name}', expense.name)}
                     >
                       <PencilSimple size={16} aria-hidden="true" />
                     </button>
                     <button
                       className={styles.deleteBtn}
                       onClick={() => setDeleteTarget(expense.id)}
-                      aria-label={`Delete expense: ${expense.name}`}
+                      aria-label={strings.aria.deleteExpense.replace('{name}', expense.name)}
                     >
                       <Trash size={16} aria-hidden="true" />
                     </button>
@@ -265,7 +265,7 @@ export default function Expenses() {
       </form>
 
       {deleteTarget !== null && (
-        <div className={styles.overlay} role="dialog" aria-modal="true" aria-label="Confirm expense deletion">
+        <div className={styles.overlay} role="dialog" aria-modal="true" aria-label={strings.confirm.expenseDeletion}>
           <div className={styles.dialog}>
             <p>{strings.confirm.deleteExpense}</p>
             <div className={styles.dialogButtons}>

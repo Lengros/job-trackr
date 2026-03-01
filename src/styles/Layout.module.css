@@ -7,5 +7,18 @@
 .content {
   flex: 1;
   padding-top: calc(56px + env(safe-area-inset-top, 0px)); /* header height + safe area */
+  padding-bottom: calc(56px + env(safe-area-inset-bottom, 0px)); /* tab bar height + safe area */
   overflow-y: auto;
+}
+
+/* Fixed bottom action bar slot — sits above the tab bar */
+.bottomActionBar {
+  position: fixed;
+  bottom: calc(56px + env(safe-area-inset-bottom, 0px)); /* above tab bar */
+  left: 0;
+  right: 0;
+  z-index: 90;
+  padding: var(--space-3) var(--space-4);
+  background: var(--surface-0);
+  border-top: 1px solid var(--border);
 }

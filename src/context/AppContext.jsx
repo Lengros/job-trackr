@@ -78,6 +78,16 @@ function appReducer(state, action) {
         ),
       }
 
+    case 'UPDATE_JOB_NOTES': {
+      const { jobId: noteJobId, notes } = action.payload
+      return {
+        ...state,
+        jobs: state.jobs.map((job) =>
+          job.id === noteJobId ? { ...job, notes } : job
+        ),
+      }
+    }
+
     case 'DELETE_EXPENSE':
       return {
         ...state,

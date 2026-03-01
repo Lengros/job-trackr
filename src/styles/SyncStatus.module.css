@@ -28,7 +28,40 @@
   font-size: var(--font-size-body);
   font-weight: var(--font-weight-caption);
   color: var(--text-500);
+  margin-bottom: 12px;
+}
+
+/* Network toggle button */
+.networkToggle {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  width: 100%;
+  padding: 12px 16px;
+  border: 1.5px solid var(--border);
+  border-radius: var(--radius-lg);
+  background: var(--surface-0);
+  font-size: 0.9375rem;
+  font-weight: 600;
+  min-height: 48px;
   margin-bottom: 16px;
+  transition: all 0.2s ease;
+}
+
+.toggleOnline {
+  color: var(--success);
+  border-color: var(--success);
+}
+
+.toggleOffline {
+  color: var(--error);
+  border-color: var(--error);
+  background: var(--error-bg);
+}
+
+.networkToggle:active {
+  transform: scale(0.98);
 }
 
 .list {

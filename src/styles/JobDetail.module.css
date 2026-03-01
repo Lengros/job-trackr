@@ -1,35 +1,23 @@
+/* ── JobDetail: Redesigned single scrollable view ── */
+
 .container {
-  padding: 16px;
+  padding: var(--space-4);
+  padding-bottom: var(--space-4);
 }
 
-.backButton {
-  display: inline-flex;
-  align-items: center;
-  gap: 4px;
-  padding: 8px 16px 8px 0;
-  border: none;
-  background: transparent;
-  color: var(--brand-700);
-  font-size: 1rem;
-  font-weight: 600;
-  min-height: 48px;
-  min-width: 44px;
-  margin-bottom: 8px;
-}
-
+/* ── Status Badge ── */
 .statusBar {
   display: flex;
   align-items: center;
-  justify-content: center;
-  margin-bottom: 16px;
+  margin-bottom: var(--space-3);
 }
 
 .statusLabel {
   display: inline-flex;
   align-items: center;
-  height: 32px;
-  padding: 4px 14px;
-  border-radius: 16px;
+  height: 28px;
+  padding: 4px 12px;
+  border-radius: 14px;
   font-size: var(--font-size-button-sm);
   font-weight: var(--font-weight-button-sm);
   white-space: nowrap;
@@ -49,83 +37,405 @@
   background: var(--brand-200);
   color: var(--brand-800);
 }
-
 .statusBar[data-status="new"] .statusLabel::before {
   background-color: var(--brand-700);
 }
-
 .statusBar[data-status="in_progress"] .statusLabel {
   background: var(--warning-bg);
   color: var(--warning-text);
 }
-
 .statusBar[data-status="in_progress"] .statusLabel::before {
   background-color: var(--warning);
 }
-
 .statusBar[data-status="completed"] .statusLabel {
   background: var(--success-bg);
   color: var(--success);
 }
-
 .statusBar[data-status="completed"] .statusLabel::before {
   background-color: var(--success);
 }
 
-.infoCard {
+/* ── Address (h1) with MapPin ── */
+.addressLink {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--space-2);
+  text-decoration: none;
+  color: var(--text-900);
+  margin-bottom: var(--space-1);
+  padding: var(--space-2) 0;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.addressLink:active {
+  opacity: 0.7;
+}
+
+.mapIcon {
+  color: var(--brand-700);
+  flex-shrink: 0;
+  margin-top: 3px;
+}
+
+.address {
+  font-size: var(--font-size-h1);
+  font-weight: var(--font-weight-h1);
+  line-height: var(--line-height-h1);
+  color: var(--text-900);
+}
+
+/* ── Client Name ── */
+.clientName {
+  font-size: var(--font-size-body);
+  font-weight: var(--font-weight-body-medium);
+  color: var(--text-500);
+  margin-bottom: var(--space-2);
+}
+
+/* ── Phone Row ── */
+.phoneRow {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  padding: var(--space-3) var(--space-4);
+  background: var(--brand-100);
+  border-radius: var(--radius-lg);
+  color: var(--brand-700);
+  text-decoration: none;
+  font-size: var(--font-size-body);
+  font-weight: var(--font-weight-body-medium);
+  margin-bottom: var(--space-5);
+  min-height: 48px;
+  -webkit-tap-highlight-color: transparent;
+  transition: background 0.15s ease;
+}
+
+.phoneRow:active {
+  background: var(--brand-200);
+}
+
+/* ── Section ── */
+.section {
+  margin-bottom: var(--space-5);
+}
+
+.sectionTitle {
+  font-size: var(--font-size-h3);
+  font-weight: var(--font-weight-h3);
+  color: var(--text-900);
+  margin-bottom: var(--space-2);
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+}
+
+.sectionBody {
+  font-size: var(--font-size-body);
+  line-height: var(--line-height-body);
+  color: var(--text-900);
+}
+
+.sectionHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: var(--space-3);
+}
+
+.sectionHeader .sectionTitle {
+  margin-bottom: 0;
+}
+
+/* ── Badge (count) ── */
+.badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 22px;
+  height: 22px;
+  padding: 0 6px;
+  background: var(--surface-50);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-full);
+  font-size: var(--font-size-caption);
+  font-weight: 600;
+  color: var(--text-500);
+}
+
+/* ── Inline Add Button ── */
+.inlineAddBtn {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: var(--space-2) var(--space-3);
+  background: transparent;
+  border: 1.5px solid var(--brand-700);
+  border-radius: var(--radius-full);
+  color: var(--brand-700);
+  font-size: var(--font-size-button-sm);
+  font-weight: var(--font-weight-button-sm);
+  min-height: 36px;
+  white-space: nowrap;
+  transition: background 0.15s ease;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.inlineAddBtn:active {
+  background: var(--brand-100);
+}
+
+.inlineAddBtn:disabled {
+  opacity: 0.5;
+  pointer-events: none;
+}
+
+/* ── Notes ── */
+.notesWrapper {
+  position: relative;
+}
+
+.notesTextarea {
+  width: 100%;
+  min-height: 80px;
+  padding: var(--space-3) var(--space-4);
+  border: 1.5px solid var(--border);
+  border-radius: var(--radius-md);
+  background: var(--surface-0);
+  color: var(--text-900);
+  font-family: var(--font-family);
+  font-size: var(--font-size-body);
+  line-height: var(--line-height-body);
+  resize: vertical;
+  outline: none;
+  transition: border-color 0.15s ease, box-shadow 0.15s ease;
+}
+
+.notesTextarea:focus {
+  border-color: var(--border-focus);
+  box-shadow: 0 0 0 2px rgba(59, 130, 246, 0.2);
+}
+
+.notesTextarea::placeholder {
+  color: var(--text-500);
+  opacity: 0.6;
+}
+
+.charCount {
+  display: block;
+  text-align: right;
+  font-size: var(--font-size-caption);
+  color: var(--text-500);
+  margin-top: var(--space-1);
+}
+
+/* ── Empty Hint ── */
+.emptyHint {
+  font-size: var(--font-size-body);
+  color: var(--text-500);
+  padding: var(--space-3) 0;
+}
+
+/* ── Photo Grid ── */
+.photoGrid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: var(--space-2);
+}
+
+.photoThumb {
+  position: relative;
+  aspect-ratio: 1;
+  border-radius: var(--radius-sm);
+  overflow: hidden;
+}
+
+.photoPlaceholder {
+  width: 100%;
+  height: 100%;
+  background: var(--surface-50);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--text-500);
+}
+
+.photoDeleteBtn {
+  position: absolute;
+  top: 4px;
+  right: 4px;
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  border: none;
+  background: rgba(0, 0, 0, 0.5);
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.photoUploading {
+  background: var(--brand-100);
+  border: 2px dashed var(--brand-400);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.spinner {
+  width: 24px;
+  height: 24px;
+  border: 3px solid var(--brand-200);
+  border-top-color: var(--brand-700);
+  border-radius: 50%;
+  animation: spin 0.8s linear infinite;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* ── Expense List (inline) ── */
+.expenseList {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+}
+
+.expenseRow {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: var(--space-3) var(--space-4);
   background: var(--surface-0);
   border: 1px solid var(--border);
-  border-radius: var(--radius-lg);
-  box-shadow: var(--shadow-card);
-  padding: 16px;
-  margin-bottom: 16px;
+  border-radius: var(--radius-md);
 }
 
-.jobNumber {
-  font-size: var(--font-size-h2);
-  font-weight: var(--font-weight-h2);
-  margin-bottom: 12px;
+.expenseInfo {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  flex: 1;
 }
 
-.field {
-  margin-bottom: 12px;
-}
-
-.field label {
-  display: block;
-  font-size: var(--font-size-label);
-  font-weight: var(--font-weight-label);
-  color: var(--text-500);
-  text-transform: uppercase;
-  letter-spacing: 0.5px;
-  margin-bottom: 2px;
-}
-
-.field p {
+.expenseName {
   font-size: var(--font-size-body);
+  font-weight: var(--font-weight-body-medium);
   color: var(--text-900);
-  line-height: var(--line-height-body);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
-.cost {
-  font-size: var(--font-size-h2) !important;
-  font-weight: var(--font-weight-display);
-  color: var(--brand-700) !important;
+.expenseDetail {
+  font-size: var(--font-size-caption);
+  color: var(--text-500);
+  margin-top: 2px;
+}
+
+.expenseRight {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  flex-shrink: 0;
+  margin-left: var(--space-3);
+}
+
+.expenseTotal {
+  font-size: var(--font-size-body);
+  font-weight: var(--font-weight-body-medium);
+  color: var(--text-900);
   font-variant-numeric: tabular-nums;
 }
 
-.phoneLink {
-  color: var(--brand-700);
-  text-decoration: none;
-  display: inline-flex;
+.expenseActions {
+  display: flex;
+  gap: var(--space-1);
+}
+
+.expenseActionBtn {
+  width: 32px;
+  height: 32px;
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--border);
+  background: var(--surface-0);
+  color: var(--text-500);
+  display: flex;
   align-items: center;
+  justify-content: center;
+  padding: 0;
+  -webkit-tap-highlight-color: transparent;
+  transition: background 0.15s ease;
 }
 
-.phoneLink:hover {
-  text-decoration: underline;
+.expenseActionBtn:active {
+  background: var(--surface-50);
 }
 
-.actionButton {
+/* ── Totals Section ── */
+.totalsSection {
+  padding: var(--space-4);
+  background: var(--surface-0);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  margin-bottom: var(--space-5);
+}
+
+.totalRow {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: var(--space-2) 0;
+  font-size: var(--font-size-body);
+  color: var(--text-500);
+}
+
+.divider {
+  height: 1px;
+  background: var(--border);
+  margin: var(--space-2) 0;
+}
+
+.grandTotalRow {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: var(--space-2) 0;
+  font-size: var(--font-size-h2);
+  font-weight: var(--font-weight-h2);
+  color: var(--text-900);
+}
+
+.grandTotalAmount {
+  font-weight: 900;
+  color: var(--text-900);
+  font-variant-numeric: tabular-nums;
+}
+
+/* ── Sticky CTA — sits above the tab bar ── */
+.ctaSpacer {
+  height: 80px;
+}
+
+.stickyCtaBar {
+  position: fixed;
+  bottom: calc(56px + env(safe-area-inset-bottom, 0px)); /* above tab bar */
+  left: 0;
+  right: 0;
+  padding: var(--space-3) var(--space-4);
+  background: var(--surface-0);
+  border-top: 1px solid var(--border);
+  z-index: 90;
+}
+
+.ctaButton {
   width: 100%;
   padding: 14px;
   border: none;
@@ -135,54 +445,24 @@
   font-size: var(--font-size-button);
   font-weight: var(--font-weight-button);
   min-height: 56px;
-  margin-bottom: 16px;
   box-shadow: var(--shadow-cta);
   transition: transform 0.1s ease, background-color 0.15s ease;
+  -webkit-tap-highlight-color: transparent;
 }
 
-.actionButton:active {
+.ctaButton:active {
   transform: scale(0.98);
   background: var(--cta-pressed);
 }
 
-.actionButton:disabled {
-  opacity: 0.5;
-  pointer-events: none;
-}
-
-.navButtons {
-  display: flex;
-  flex-direction: column;
-  gap: 12px;
-}
-
-.navButton {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  width: 100%;
-  padding: 16px;
-  border: 1.5px solid var(--border);
-  border-radius: var(--radius-lg);
-  background: var(--surface-0);
-  font-size: var(--font-size-button);
-  font-weight: var(--font-weight-button);
-  color: var(--text-900);
-  min-height: 56px;
-  transition: all 0.15s ease;
-}
-
-.navButton:active {
-  background: var(--surface-50);
-}
-
+/* ── Not Found ── */
 .notFound {
   padding: 48px 16px;
   text-align: center;
   color: var(--text-500);
 }
 
-/* Confirmation Dialog */
+/* ── Confirmation Dialogs ── */
 .overlay {
   position: fixed;
   inset: 0;
@@ -215,7 +495,8 @@
 }
 
 .cancelButton,
-.confirmButton {
+.confirmButton,
+.confirmDeleteButton {
   flex: 1;
   padding: 12px;
   border: none;
@@ -224,6 +505,7 @@
   font-weight: var(--font-weight-button);
   min-height: 56px;
   transition: transform 0.1s ease;
+  -webkit-tap-highlight-color: transparent;
 }
 
 .cancelButton {
@@ -241,4 +523,30 @@
 .confirmButton:active {
   transform: scale(0.98);
   background: var(--cta-pressed);
+}
+
+.confirmDeleteButton {
+  background: var(--error);
+  color: white;
+}
+
+.confirmDeleteButton:active {
+  transform: scale(0.98);
+  opacity: 0.9;
+}
+
+/* ── Legacy compat - keep backButton in case Layout references it ── */
+.backButton {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 8px 16px 8px 0;
+  border: none;
+  background: transparent;
+  color: var(--brand-700);
+  font-size: 1rem;
+  font-weight: 600;
+  min-height: 48px;
+  min-width: 44px;
+  margin-bottom: 8px;
 }

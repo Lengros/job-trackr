@@ -94,17 +94,23 @@ export default function JobSummary() {
         </div>
       </div>
 
+      {/* Spacer for sticky CTA */}
+      {job.status === 'in_progress' && <div className={styles.ctaSpacer} />}
+
+      {/* Sticky bottom CTA */}
       {job.status === 'in_progress' && (
-        <button
-          className={styles.completeButton}
-          onClick={() => setShowConfirm(true)}
-        >
-          {strings.jobDetail.completeJob}
-        </button>
+        <div className={styles.stickyCtaBar}>
+          <button
+            className={styles.completeButton}
+            onClick={() => setShowConfirm(true)}
+          >
+            {strings.jobDetail.completeJob}
+          </button>
+        </div>
       )}
 
       {showConfirm && (
-        <div className={styles.overlay} role="dialog" aria-modal="true" aria-label="Confirm job completion">
+        <div className={styles.overlay} role="dialog" aria-modal="true" aria-label={strings.confirm.jobCompletion}>
           <div className={styles.dialog}>
             <p>{strings.confirm.completeJob}</p>
             <div className={styles.dialogButtons}>

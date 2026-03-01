@@ -19,14 +19,14 @@ export default function MasterSelection() {
     <div className={styles.container}>
       <h1 className={styles.title}>{strings.app.name}</h1>
       <p className={styles.subtitle}>{strings.app.selectProfile}</p>
-      <div className={styles.grid} role="list" aria-label="Available workers">
+      <div className={styles.grid} role="list" aria-label={strings.aria.availableWorkers}>
         {state.masters.map((master) => (
           <button
             key={master.id}
             className={styles.card}
             onClick={() => handleSelect(master.id)}
             role="listitem"
-            aria-label={`Select ${master.name}, ${master.specialization}`}
+            aria-label={strings.aria.selectWorker.replace('{name}', master.name).replace('{specialization}', master.specialization)}
           >
             <div
               className={styles.avatar}

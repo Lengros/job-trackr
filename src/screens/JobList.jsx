@@ -1,7 +1,7 @@
 import { useState, useRef, useCallback, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { useApp } from '../context/AppContext'
-import { useStrings } from '../i18n/useStrings'
+import { useStrings, formatCurrency } from '../i18n/useStrings'
 import PageTransition from '../components/PageTransition'
 import SkeletonCard from '../components/SkeletonCard'
 import { CheckCircle, Clock, ArrowsClockwise, Warning, Lightning, ArrowDown, ClipboardText, WifiSlash } from '@phosphor-icons/react'
@@ -184,7 +184,7 @@ export default function JobList() {
         <div
           className={`${styles.pullIndicator} ${refreshing ? styles.pullRefreshing : ''}`}
           style={refreshing ? {} : { height: `${pullDistance}px`, opacity: Math.min(pullDistance / PULL_THRESHOLD, 1) }}
-          aria-label="Pull to refresh indicator"
+          aria-label={strings.pullToRefresh.indicator}
         >
           <div className={`${styles.pullSpinner} ${refreshing ? styles.spinning : ''}`}>
             {refreshing ? <ArrowsClockwise size={20} /> : pullDistance >= PULL_THRESHOLD ? <><ArrowDown size={20} /> {strings.pullToRefresh.release}</> : <><ArrowDown size={20} /> {strings.pullToRefresh.pull}</>}
@@ -192,7 +192,7 @@ export default function JobList() {
         </div>
       )}
 
-      <div className={styles.list} role="list" aria-label="Job list">
+      <div className={styles.list} role="list" aria-label={strings.aria.jobList}>
         {isLoading && !(!state.isOnline && masterJobs.length === 0) ? (
           /* Show 3 skeleton cards during initial data load */
           <>
@@ -251,7 +251,7 @@ export default function JobList() {
                   {statusLabels[job.status] || job.status}
                 </span>
                 <div className={styles.cardBottomRight}>
-                  <span className={styles.amount}>${job.workCost.toFixed(2)}</span>
+                  <span className={styles.amount}>{formatCurrency(job.workCost)}</span>
                   <span
                     className={`${styles.syncIcon} ${styles[`sync_${job.syncStatus}`]}`}
                     title={syncStatusLabels[job.syncStatus] || job.syncStatus}

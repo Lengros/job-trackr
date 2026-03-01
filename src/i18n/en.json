@@ -160,6 +160,11 @@
     "appVersion": "App Version",
     "logOut": "Log Out"
   },
+  "language": {
+    "selection": "Language selection",
+    "en": "English",
+    "pl": "Polish"
+  },
   "aria": {
     "availableWorkers": "Available workers",
     "jobList": "Job list",

@@ -112,6 +112,23 @@
   font-variant-numeric: tabular-nums;
 }
 
+/* Spacer to account for sticky CTA */
+.ctaSpacer {
+  height: 80px;
+}
+
+/* Sticky CTA — sits above the tab bar */
+.stickyCtaBar {
+  position: fixed;
+  bottom: calc(56px + env(safe-area-inset-bottom, 0px)); /* above tab bar */
+  left: 0;
+  right: 0;
+  padding: var(--space-3) var(--space-4);
+  background: var(--surface-0);
+  border-top: 1px solid var(--border);
+  z-index: 90;
+}
+
 .completeButton {
   width: 100%;
   padding: 14px;

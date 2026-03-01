@@ -1,5 +1,6 @@
 import { Outlet } from 'react-router-dom'
 import Header from './Header'
+import BottomTabBar from './BottomTabBar'
 import styles from '../styles/Layout.module.css'
 
 export default function Layout() {
@@ -9,6 +10,7 @@ export default function Layout() {
       <main className={styles.content}>
         <Outlet />
       </main>
+      <BottomTabBar />
     </div>
   )
 }

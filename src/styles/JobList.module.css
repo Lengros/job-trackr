@@ -59,7 +59,7 @@
 .list {
   display: flex;
   flex-direction: column;
-  gap: 12px;
+  gap: var(--space-4); /* 16px between cards per design guide §4 */
 }
 
 .card {

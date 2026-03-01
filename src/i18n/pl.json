@@ -9,6 +9,10 @@
     "inProgress": "W trakcie",
     "completed": "Zakończone"
   },
+  "bottomTabs": {
+    "jobs": "Zlecenia",
+    "profile": "Profil"
+  },
   "status": {
     "new": "Nowe",
     "inProgress": "W trakcie",
@@ -23,16 +27,19 @@
   },
   "network": {
     "online": "Online",
-    "offline": "Offline"
+    "offline": "Offline",
+    "toggleLabel": "Sieć: {status}. Kliknij, aby przełączyć."
   },
   "nav": {
     "back": "Wstecz",
+    "goBack": "Wstecz",
     "photos": "Zdjęcia",
     "expenses": "Koszty materiału",
     "summary": "Podsumowanie",
     "jobDetail": "Szczegóły zlecenia",
     "syncStatus": "Status synchronizacji",
-    "sync": "Sync"
+    "sync": "Sync",
+    "mainNav": "Nawigacja główna"
   },
   "jobDetail": {
     "address": "Adres",
@@ -41,9 +48,19 @@
     "workDescription": "Opis pracy",
     "comments": "Uwagi",
     "workCost": "Koszt pracy",
-    "startJob": "Rozpocznij zlecenie",
+    "startJob": "Rozpocznij",
     "completeJob": "Zakończ zlecenie",
-    "notFound": "Nie znaleziono zlecenia"
+    "notFound": "Nie znaleziono zlecenia",
+    "scopeOfWork": "Zakres prac",
+    "notes": "Notatki",
+    "notesPlaceholder": "Dodaj notatki do tego zlecenia...",
+    "charCount": "{count}/500",
+    "materialsTotal": "Materiały razem",
+    "laborCost": "Koszt pracy",
+    "grandTotal": "Do zapłaty",
+    "addExpense": "+ Dodaj pozycję",
+    "addPhoto": "+ Dodaj",
+    "openMap": "Otwórz mapę"
   },
   "photos": {
     "title": "Zdjęcia",
@@ -53,7 +70,11 @@
     "noPhotos": "Brak zdjęć",
     "addFirstPhoto": "Dodaj pierwsze zdjęcie, aby udokumentować to zlecenie",
     "addPhoto": "Dodaj zdjęcie",
-    "uploading": "Wysyłanie..."
+    "uploading": "Wysyłanie...",
+    "gallery": "Galeria zdjęć",
+    "uploadInProgress": "Wysyłanie w toku",
+    "addPhotoLabel": "Dodaj zdjęcie",
+    "uploadingLabel": "Wysyłanie zdjęcia"
   },
   "expenses": {
     "title": "Koszty materiału",
@@ -74,7 +95,8 @@
     "placeholderQty": "0",
     "placeholderPrice": "0,00",
     "lineTotal": "Suma pozycji:",
-    "saveChanges": "Zapisz zmiany"
+    "saveChanges": "Zapisz zmiany",
+    "listLabel": "Lista kosztów"
   },
   "summary": {
     "title": "Podsumowanie zlecenia",
@@ -87,11 +109,13 @@
   },
   "sync": {
     "title": "Status synchronizacji",
-    "items": "pozycji"
+    "items": "pozycji",
+    "listLabel": "Lista statusów synchronizacji"
   },
   "pullToRefresh": {
     "pull": "Pociągnij, aby odświeżyć",
-    "release": "Puść, aby odświeżyć"
+    "release": "Puść, aby odświeżyć",
+    "indicator": "Wskaźnik odświeżania"
   },
   "confirm": {
     "changeStatus": "Zmienić status na",
@@ -100,7 +124,11 @@
     "completeJob": "Oznaczyć zlecenie jako zakończone?",
     "cancel": "Anuluj",
     "confirm": "Potwierdź",
-    "delete": "Usuń"
+    "delete": "Usuń",
+    "statusChange": "Potwierdzenie zmiany statusu",
+    "photoDeletion": "Potwierdzenie usunięcia zdjęcia",
+    "expenseDeletion": "Potwierdzenie usunięcia pozycji",
+    "jobCompletion": "Potwierdzenie zakończenia zlecenia"
   },
   "toast": {
     "statusChanged": "Status zmieniony →",
@@ -121,5 +149,25 @@
     "offlineMessage": "Brak zapisanych zleceń. Połącz się z siecią i spróbuj ponownie.",
     "retry": "Ponów",
     "noJobs": "Brak zleceń"
+  },
+  "profile": {
+    "noProfile": "Nie wybrano profilu",
+    "phone": "Telefon",
+    "syncStatus": "Status synchronizacji",
+    "pendingCount": "{count} oczekujące",
+    "allSynced": "Wszystko zsynchronizowane",
+    "lastSyncedAt": "ostatnia synchronizacja o {time}",
+    "appVersion": "Wersja aplikacji",
+    "logOut": "Wyloguj się"
+  },
+  "aria": {
+    "availableWorkers": "Dostępni pracownicy",
+    "jobList": "Lista zleceń",
+    "selectWorker": "Wybierz {name}, {specialization}",
+    "callContact": "Zadzwoń do {name}, {phone}",
+    "deletePhoto": "Usuń zdjęcie {index}",
+    "editExpense": "Edytuj pozycję: {name}",
+    "deleteExpense": "Usuń pozycję: {name}",
+    "jobPhoto": "Zdjęcie zlecenia {index}"
   }
 }
