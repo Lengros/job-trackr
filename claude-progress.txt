@@ -790,3 +790,63 @@
 
 ### Current Status
 - 47/53 features passing (~88.7%)
+
+---
+
+## Session - 2026-03-01T17:28 (Features #61, #62, #63)
+
+### Completed Features
+
+- Feature #61: Redesign Input Components - PASSING
+  - Added global input styles in index.css: 52px height, 1.5px border, 10px radius, 14px 16px padding
+  - Focus state: --border-focus blue color with 2px rgba ring
+  - Error state: --border-error red color with red ring (via aria-invalid)
+  - Added inputmode='decimal' to quantity and price inputs in Expenses
+  - Added enterkeyhint='done' to all form inputs
+  - Added autocomplete='off' to expense item name field
+  - Design tokens added: --border-focus (#3B82F6), --border-error (#DC2626)
+  - Verified all inputs are 52px height, labels are 13px SemiBold
+  - Zero console errors
+
+- Feature #62: Redesign Status Badges - PASSING
+  - Updated badge from solid-color pill to dot+text pill shape
+  - New badge: #2563EB dot, #DBEAFE bg, #1E40AF text
+  - In Progress badge: #D97706 dot, #FEF3C7 bg, #92400E text
+  - Completed badge: #16A34A dot, #DCFCE7 bg, #166534 text
+  - Specs: 28px height, 4px 12px padding, 14px pill radius, 13px SemiBold font
+  - 8px circle dot with 6px right margin via ::before pseudo-element
+  - Applied to both JobList cards and JobDetail status display
+  - Verified all 3 variants on both screens via browser automation
+  - Zero console errors
+
+- Feature #63: Implement Toast Notification System - PASSING
+  - Created ToastContext (src/context/ToastContext.jsx) for global toast state
+  - Created Toast component (src/components/Toast.jsx) with success/error/info variants
+  - Toast CSS: fixed bottom 80px, max-width calc(100vw-32px), 12px radius
+  - Auto-dismiss: 2s for success, 4s for error
+  - Touch-to-dismiss gesture with drag threshold
+  - Single toast at a time (new replaces existing)
+  - Slide-up/down enter/exit animations
+  - Integrated undo toast for job status changes in JobDetail and JobSummary
+  - Shows "Status zmieniony → [status]" with tappable "Cofnij" undo button
+  - Wired to i18n strings from pl.json
+  - Fixed STATUS_LABELS reference error (another agent refactored to i18n)
+  - Zero console errors
+
+### Code Changes
+- New: src/context/ToastContext.jsx - toast state management
+- New: src/components/Toast.jsx - toast UI component
+- New: src/styles/Toast.module.css - toast styling and animations
+- Modified: src/styles/index.css - global input styles, --border-focus, --border-error tokens
+- Modified: src/styles/Expenses.module.css - updated input/error styles for new design
+- Modified: src/styles/JobList.module.css - redesigned status badge styles
+- Modified: src/styles/JobDetail.module.css - redesigned status bar to pill badge
+- Modified: src/screens/Expenses.jsx - inputmode, enterkeyhint, autocomplete attrs
+- Modified: src/screens/JobDetail.jsx - toast integration with undo
+- Modified: src/screens/JobSummary.jsx - toast integration with undo
+- Modified: src/App.jsx - added ToastProvider and Toast component
+
+### Current Status
+- 58/83 features passing (~69.9%)
+- Dev server running on port 5173 (127.0.0.1)
+- All 3 features verified through browser automation with Playwright
