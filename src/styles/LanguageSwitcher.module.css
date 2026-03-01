@@ -1,0 +1,39 @@
+.switcher {
+  display: flex;
+  align-items: center;
+  background: var(--surface-100, #F1F5F9);
+  border-radius: var(--radius-full, 9999px);
+  padding: 2px;
+  gap: 0;
+  flex-shrink: 0;
+}
+
+.option {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 44px;
+  min-height: 44px;
+  padding: 0 12px;
+  border: none;
+  background: transparent;
+  color: var(--text-500, #64748B);
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+  border-radius: var(--radius-full, 9999px);
+  cursor: pointer;
+  transition: all 0.2s ease;
+  -webkit-tap-highlight-color: transparent;
+  user-select: none;
+}
+
+.option:active {
+  transform: scale(0.95);
+}
+
+.option.active {
+  background: var(--surface-0, #FFFFFF);
+  color: var(--text-900, #0F172A);
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+}

@@ -1,0 +1,173 @@
+{
+  "app": {
+    "name": "JobTrackr",
+    "selectProfile": "Select your profile to get started"
+  },
+  "tabs": {
+    "all": "All",
+    "new": "New",
+    "inProgress": "In Progress",
+    "completed": "Completed"
+  },
+  "bottomTabs": {
+    "jobs": "Jobs",
+    "profile": "Profile"
+  },
+  "status": {
+    "new": "New",
+    "inProgress": "In Progress",
+    "completed": "Completed"
+  },
+  "syncStatus": {
+    "synced": "Synced",
+    "syncing": "Syncing...",
+    "pending": "Pending",
+    "error": "Error",
+    "conflict": "Conflict"
+  },
+  "network": {
+    "online": "Online",
+    "offline": "Offline",
+    "toggleLabel": "Network: {status}. Click to toggle."
+  },
+  "nav": {
+    "back": "Back",
+    "goBack": "Go back",
+    "photos": "Photos",
+    "expenses": "Expenses",
+    "summary": "Summary",
+    "jobDetail": "Job Detail",
+    "syncStatus": "Sync Status",
+    "sync": "Sync",
+    "mainNav": "Main navigation"
+  },
+  "jobDetail": {
+    "address": "Address",
+    "contact": "Contact",
+    "phone": "Phone",
+    "workDescription": "Work Description",
+    "comments": "Comments",
+    "workCost": "Work Cost",
+    "startJob": "Start Job",
+    "completeJob": "Complete Job",
+    "notFound": "Job not found",
+    "scopeOfWork": "Scope of Work",
+    "notes": "Notes",
+    "notesPlaceholder": "Add notes for this job...",
+    "charCount": "{count}/500",
+    "materialsTotal": "Materials Total",
+    "laborCost": "Labor Cost",
+    "grandTotal": "Grand Total",
+    "addExpense": "+ Add Item",
+    "addPhoto": "+ Add",
+    "openMap": "Open Map"
+  },
+  "photos": {
+    "title": "Photos",
+    "photoSingular": "photo",
+    "photoPlural": "photos",
+    "photoPluralMany": "photos",
+    "noPhotos": "No photos",
+    "addFirstPhoto": "Add the first photo to document this job",
+    "addPhoto": "Add Photo",
+    "uploading": "Uploading...",
+    "gallery": "Photo gallery",
+    "uploadInProgress": "Upload in progress",
+    "addPhotoLabel": "Add photo",
+    "uploadingLabel": "Uploading photo"
+  },
+  "expenses": {
+    "title": "Expenses",
+    "noExpenses": "No expenses",
+    "addFirstExpense": "Add the first item below",
+    "colName": "Name",
+    "colQty": "Qty",
+    "colUnitPrice": "Unit Price",
+    "colTotal": "Total",
+    "colActions": "Actions",
+    "totalExpenses": "Total Expenses",
+    "addExpense": "Add Expense",
+    "editExpense": "Edit Expense",
+    "itemName": "Item Name",
+    "quantity": "Quantity",
+    "unitPrice": "Unit Price ($)",
+    "placeholderName": "e.g. Copper Pipe",
+    "placeholderQty": "0",
+    "placeholderPrice": "0.00",
+    "lineTotal": "Line Total:",
+    "saveChanges": "Save Changes",
+    "listLabel": "Expenses list"
+  },
+  "summary": {
+    "title": "Job Summary",
+    "workCost": "Work Cost",
+    "serviceFee": "Service Fee",
+    "expenses": "Expenses",
+    "noExpenses": "No expenses",
+    "totalExpenses": "Total Expenses",
+    "grandTotal": "Grand Total"
+  },
+  "sync": {
+    "title": "Sync Status",
+    "items": "items",
+    "listLabel": "Sync status list"
+  },
+  "pullToRefresh": {
+    "pull": "Pull to refresh",
+    "release": "Release to refresh",
+    "indicator": "Pull to refresh indicator"
+  },
+  "confirm": {
+    "changeStatus": "Change status to",
+    "deletePhoto": "Delete this photo?",
+    "deleteExpense": "Delete this expense?",
+    "completeJob": "Mark this job as Completed?",
+    "cancel": "Cancel",
+    "confirm": "Confirm",
+    "delete": "Delete",
+    "statusChange": "Confirm status change",
+    "photoDeletion": "Confirm photo deletion",
+    "expenseDeletion": "Confirm expense deletion",
+    "jobCompletion": "Confirm job completion"
+  },
+  "toast": {
+    "statusChanged": "Status changed to",
+    "undo": "Undo"
+  },
+  "validation": {
+    "nameRequired": "Item name is required",
+    "quantityRequired": "Quantity is required",
+    "quantityPositive": "Quantity must be greater than 0",
+    "quantityInvalid": "Enter a valid number",
+    "priceRequired": "Unit price is required",
+    "priceNegative": "Unit price cannot be negative",
+    "pricePositive": "Unit price must be greater than 0",
+    "priceInvalid": "Enter a valid price"
+  },
+  "empty": {
+    "offline": "You are offline",
+    "offlineMessage": "No saved jobs. Connect to the network and try again.",
+    "retry": "Retry",
+    "noJobs": "No jobs"
+  },
+  "profile": {
+    "noProfile": "No profile selected",
+    "phone": "Phone",
+    "syncStatus": "Sync Status",
+    "pendingCount": "{count} pending",
+    "allSynced": "All synced",
+    "lastSyncedAt": "last synced at {time}",
+    "appVersion": "App Version",
+    "logOut": "Log Out"
+  },
+  "aria": {
+    "availableWorkers": "Available workers",
+    "jobList": "Job list",
+    "selectWorker": "Select {name}, {specialization}",
+    "callContact": "Call {name}, {phone}",
+    "deletePhoto": "Delete photo {index}",
+    "editExpense": "Edit expense: {name}",
+    "deleteExpense": "Delete expense: {name}",
+    "jobPhoto": "Job photo {index}"
+  }
+}

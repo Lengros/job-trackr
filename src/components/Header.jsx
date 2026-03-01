@@ -4,6 +4,7 @@ import { useApp } from '../context/AppContext'
 import { useStrings } from '../i18n/useStrings'
 import haptic from '../utils/haptic'
 import { ArrowLeft, ArrowsClockwise, Circle, WarningCircle } from '@phosphor-icons/react'
+import LanguageSwitcher from './LanguageSwitcher'
 import styles from '../styles/Header.module.css'
 
 // Map routes to their parent (back destination) and title key
@@ -139,7 +140,7 @@ export default function Header() {
           <button
             className={styles.backButton}
             onClick={() => navigate(backTo)}
-            aria-label="Go back"
+            aria-label={strings.nav.goBack}
           >
             <ArrowLeft size={24} weight="regular" />
           </button>
@@ -147,6 +148,7 @@ export default function Header() {
         <h1 className={styles.title}>{displayTitle}</h1>
       </div>
       <div className={styles.headerRight}>
+        <LanguageSwitcher />
         {renderSyncIndicator()}
       </div>
     </header>
