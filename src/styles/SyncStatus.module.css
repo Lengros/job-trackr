@@ -2,21 +2,6 @@
   padding: 16px;
 }
 
-.backButton {
-  display: inline-flex;
-  align-items: center;
-  gap: 4px;
-  padding: 8px 16px 8px 0;
-  border: none;
-  background: transparent;
-  color: var(--brand-700);
-  font-size: var(--font-size-button);
-  font-weight: var(--font-weight-button);
-  min-height: 48px;
-  min-width: 48px;
-  margin-bottom: 8px;
-}
-
 .title {
   font-size: var(--font-size-h1);
   font-weight: var(--font-weight-h1);
@@ -64,51 +49,81 @@
   transform: scale(0.98);
 }
 
+/* List */
 .list {
   display: flex;
   flex-direction: column;
-  gap: 12px;
+  gap: 8px;
 }
 
+/* Sync item card */
 .item {
   display: flex;
-  justify-content: space-between;
   align-items: center;
+  gap: 12px;
   padding: 16px;
   background: var(--surface-0);
   border: 1px solid var(--border);
-  border-radius: var(--radius-lg);
+  border-radius: 12px;
   box-shadow: var(--shadow-card);
-  border-left: 4px solid transparent;
-  transition: border-left-color 0.4s ease, background-color 0.4s ease;
+  transition: background-color 0.15s ease, border-color 0.2s ease, transform 0.1s ease;
 }
 
+.item.retryable {
+  cursor: pointer;
+}
+
+.item.retryable:active {
+  transform: scale(0.98);
+  background: var(--surface-50);
+}
+
+/* Colored left border per status */
 .status_synced {
-  border-left-color: var(--success);
+  border-left: 4px solid var(--success);
 }
 
 .status_syncing {
-  border-left-color: var(--brand-700);
-  animation: syncPulse 1.2s ease-in-out infinite;
-}
-
-@keyframes syncPulse {
-  0%, 100% { background-color: var(--surface-0); }
-  50% { background-color: rgba(37, 99, 235, 0.05); }
+  border-left: 4px solid var(--brand-700);
 }
 
 .status_pending {
-  border-left-color: var(--warning);
+  border-left: 4px solid var(--warning);
 }
 
 .status_error {
-  border-left-color: var(--error);
+  border-left: 4px solid var(--error);
 }
 
 .status_conflict {
-  border-left-color: var(--conflict);
+  border-left: 4px solid var(--error);
 }
 
+/* Icon container */
+.iconContainer {
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  border-radius: var(--radius-sm);
+}
+
+.syncIcon {
+  transition: color 0.3s ease;
+}
+
+.spinning {
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+/* Item info */
 .itemInfo {
   display: flex;
   flex-direction: column;
@@ -120,69 +135,108 @@
 
 .jobNumber {
   font-size: var(--font-size-body);
-  font-weight: var(--font-weight-body-medium);
+  font-weight: var(--font-weight-label);
+  color: var(--text-900);
 }
 
 .address {
-  font-size: var(--font-size-label);
+  font-size: var(--font-size-caption);
   color: var(--text-500);
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
 }
 
+.timestamp {
+  font-size: var(--font-size-caption);
+  font-weight: var(--font-weight-caption);
+  color: var(--text-500);
+  margin-top: 2px;
+}
+
+/* Item status badge area */
 .itemStatus {
   display: flex;
   flex-direction: column;
   align-items: flex-end;
   gap: 4px;
   flex-shrink: 0;
-  margin-left: 12px;
+  margin-left: 8px;
 }
 
+/* Badge — pill shape with dot indicator */
 .badge {
-  padding: 3px 10px;
-  border-radius: 10px;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 4px 10px;
+  border-radius: var(--radius-full);
   font-size: var(--font-size-caption);
-  font-weight: var(--font-weight-h1);
+  font-weight: var(--font-weight-label);
   text-transform: uppercase;
-  letter-spacing: 0.5px;
-  transition: background-color 0.4s ease, color 0.4s ease;
+  letter-spacing: 0.04em;
+  transition: background-color 0.3s ease, color 0.3s ease;
+  white-space: nowrap;
+}
+
+.badge::before {
+  content: '';
+  display: inline-block;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  flex-shrink: 0;
 }
 
 .badge_synced {
-  background: rgba(22, 163, 74, 0.1);
-  color: var(--success);
+  background: var(--success-bg);
+  color: #166534;
+}
+.badge_synced::before {
+  background: var(--success);
 }
 
 .badge_syncing {
-  background: rgba(37, 99, 235, 0.1);
-  color: var(--brand-700);
-  animation: badgePulse 1s ease-in-out infinite;
+  background: var(--brand-200);
+  color: var(--brand-800);
+}
+.badge_syncing::before {
+  background: var(--brand-700);
+  animation: dotPulse 1s ease-in-out infinite;
 }
 
-@keyframes badgePulse {
+@keyframes dotPulse {
   0%, 100% { opacity: 1; }
-  50% { opacity: 0.5; }
+  50% { opacity: 0.3; }
 }
 
 .badge_pending {
-  background: rgba(245, 158, 11, 0.1);
-  color: var(--warning-text);
+  background: var(--warning-bg);
+  color: #92400E;
+}
+.badge_pending::before {
+  background: var(--warning);
 }
 
 .badge_error {
-  background: rgba(220, 38, 38, 0.1);
+  background: var(--error-bg);
   color: var(--error);
+}
+.badge_error::before {
+  background: var(--error);
 }
 
 .badge_conflict {
   background: rgba(139, 92, 246, 0.1);
   color: var(--conflict);
 }
+.badge_conflict::before {
+  background: var(--conflict);
+}
 
-.timestamp {
-  font-size: var(--font-size-caption);
-  font-weight: var(--font-weight-caption);
-  color: var(--text-500);
+/* Retry hint */
+.retryHint {
+  font-size: 11px;
+  color: var(--brand-700);
+  font-weight: var(--font-weight-label);
 }

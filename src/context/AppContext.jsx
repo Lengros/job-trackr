@@ -127,6 +127,32 @@ function appReducer(state, action) {
       }
     }
 
+    case 'RETRY_SYNC': {
+      // Retry a failed/conflict sync item: transition to syncing, then synced after delay
+      const { jobId: retryJobId } = action.payload
+      return {
+        ...state,
+        jobs: state.jobs.map((job) =>
+          job.id === retryJobId
+            ? { ...job, syncStatus: 'syncing' }
+            : job
+        ),
+      }
+    }
+
+    case 'RETRY_SYNC_COMPLETE': {
+      // Complete the retry: mark as synced
+      const { jobId: retryCompleteJobId } = action.payload
+      return {
+        ...state,
+        jobs: state.jobs.map((job) =>
+          job.id === retryCompleteJobId && job.syncStatus === 'syncing'
+            ? { ...job, syncStatus: 'synced' }
+            : job
+        ),
+      }
+    }
+
     default:
       return state
   }
