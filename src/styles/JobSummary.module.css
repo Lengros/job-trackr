@@ -10,8 +10,8 @@
   border: none;
   background: transparent;
   color: var(--brand-700);
-  font-size: 1rem;
-  font-weight: 600;
+  font-size: var(--font-size-button);
+  font-weight: var(--font-weight-button);
   min-height: 48px;
   min-width: 44px;
   margin-bottom: 8px;

@@ -18,8 +18,8 @@
   border: none;
   background: transparent;
   color: var(--text-500, #64748B);
-  font-size: 13px;
-  font-weight: 600;
+  font-size: var(--font-size-label);
+  font-weight: var(--font-weight-label);
   letter-spacing: 0.5px;
   border-radius: var(--radius-full, 9999px);
   cursor: pointer;

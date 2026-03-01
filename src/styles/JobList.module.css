@@ -48,7 +48,7 @@
   border-radius: 11px;
   background: rgba(0, 0, 0, 0.1);
   font-size: var(--font-size-caption);
-  font-weight: 700;
+  font-weight: var(--font-weight-h1);
 }
 
 .activeTab .count {
@@ -254,7 +254,7 @@
 }
 
 .spinning {
-  font-size: 1.5rem;
+  font-size: var(--font-size-h1);
   animation: spin 1s linear infinite;
 }
 

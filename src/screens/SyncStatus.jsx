@@ -1,6 +1,6 @@
 import { useCallback } from 'react'
 import { useApp } from '../context/AppContext'
-import { useStrings } from '../i18n/useStrings'
+import { useStrings, useDateFormatter } from '../i18n/useStrings'
 import haptic from '../utils/haptic'
 import PageTransition from '../components/PageTransition'
 import { WifiHigh, WifiSlash } from '@phosphor-icons/react'
@@ -9,6 +9,7 @@ import styles from '../styles/SyncStatus.module.css'
 export default function SyncStatus() {
   const { state, dispatch } = useApp()
   const strings = useStrings()
+  const formatDate = useDateFormatter()
 
   const statusLabels = {
     synced: strings.syncStatus.synced,
@@ -84,7 +85,7 @@ export default function SyncStatus() {
                 {statusLabels[job.syncStatus]}
               </span>
               <span className={styles.timestamp}>
-                {new Date(job.createdDate).toLocaleDateString()}
+                {formatDate(job.createdDate)}
               </span>
             </div>
           </div>

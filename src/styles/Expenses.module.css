@@ -10,8 +10,8 @@
   border: none;
   background: transparent;
   color: var(--brand-700);
-  font-size: 1rem;
-  font-weight: 600;
+  font-size: var(--font-size-button);
+  font-weight: var(--font-weight-button);
   min-height: 48px;
   min-width: 44px;
   margin-bottom: 8px;
@@ -43,7 +43,7 @@
   background: var(--surface-50);
   border-bottom: 2px solid var(--border);
   font-size: var(--font-size-caption);
-  font-weight: 700;
+  font-weight: var(--font-weight-h1);
   color: var(--text-500);
   text-transform: uppercase;
   letter-spacing: 0.04em;
@@ -70,7 +70,7 @@
 
 /* Column styles */
 .colName {
-  font-weight: 600;
+  font-weight: var(--font-weight-label);
   min-width: 0;
   overflow: hidden;
   text-overflow: ellipsis;
@@ -93,7 +93,7 @@
 }
 
 .totalValue {
-  font-weight: 700;
+  font-weight: var(--font-weight-h1);
   color: var(--text-900);
 }
 
@@ -112,7 +112,7 @@
   border: none;
   border-radius: var(--radius-lg);
   background: transparent;
-  font-size: 1.125rem;
+  font-size: var(--font-size-h3);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -192,7 +192,7 @@
   font-size: var(--font-size-caption);
   color: var(--error);
   margin-top: 6px;
-  font-weight: 500;
+  font-weight: var(--font-weight-body-medium);
   line-height: 1.4;
 }
 

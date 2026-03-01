@@ -1,7 +1,7 @@
 import { useState, useRef, useCallback, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { useApp } from '../context/AppContext'
-import { useStrings, formatCurrency } from '../i18n/useStrings'
+import { useStrings, useCurrencyFormatter, useDateFormatter } from '../i18n/useStrings'
 import PageTransition from '../components/PageTransition'
 import SkeletonCard from '../components/SkeletonCard'
 import { CheckCircle, Clock, ArrowsClockwise, Warning, Lightning, ArrowDown, ClipboardText, WifiSlash } from '@phosphor-icons/react'
@@ -22,6 +22,8 @@ export default function JobList() {
   const { state } = useApp()
   const navigate = useNavigate()
   const strings = useStrings()
+  const formatCurrency = useCurrencyFormatter()
+  const formatDate = useDateFormatter()
 
   const tabLabels = {
     all: strings.tabs.all,
@@ -238,7 +240,7 @@ export default function JobList() {
                 <span className={styles.contact}>{job.contactName}</span>
                 <span className={styles.separator}>·</span>
                 <span className={styles.time}>
-                  {new Date(job.createdDate).toLocaleDateString()}
+                  {formatDate(job.createdDate)}
                 </span>
               </div>
               <span className={styles.workType}>{job.workType}</span>

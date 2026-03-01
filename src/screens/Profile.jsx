@@ -1,6 +1,6 @@
 import { useNavigate } from 'react-router-dom'
 import { useApp } from '../context/AppContext'
-import { useStrings } from '../i18n/useStrings'
+import { useStrings, useTimeFormatter } from '../i18n/useStrings'
 import { SignOut, Phone, ArrowsClockwise, Info } from '@phosphor-icons/react'
 import PageTransition from '../components/PageTransition'
 import styles from '../styles/Profile.module.css'
@@ -9,6 +9,7 @@ export default function Profile() {
   const { state, dispatch } = useApp()
   const navigate = useNavigate()
   const strings = useStrings()
+  const formatTime = useTimeFormatter()
   const master = state.masters.find((m) => m.id === state.selectedMasterId)
 
   // Count pending sync items
@@ -16,7 +17,7 @@ export default function Profile() {
   const pendingCount = masterJobs.filter((j) => j.syncStatus === 'pending' || j.syncStatus === 'syncing').length
 
   // Last synced time (simulated)
-  const lastSyncTime = new Date().toLocaleTimeString('pl-PL', { hour: '2-digit', minute: '2-digit' })
+  const lastSyncTime = formatTime(new Date())
 
   const handleLogout = () => {
     dispatch({ type: 'SELECT_MASTER', payload: null })

@@ -158,7 +158,7 @@
   border: 1px solid var(--border);
   border-radius: var(--radius-full);
   font-size: var(--font-size-caption);
-  font-weight: 600;
+  font-weight: var(--font-weight-label);
   color: var(--text-500);
 }
 
@@ -414,7 +414,7 @@
 }
 
 .grandTotalAmount {
-  font-weight: 900;
+  font-weight: var(--font-weight-display);
   color: var(--text-900);
   font-variant-numeric: tabular-nums;
 }
@@ -544,8 +544,8 @@
   border: none;
   background: transparent;
   color: var(--brand-700);
-  font-size: 1rem;
-  font-weight: 600;
+  font-size: var(--font-size-button);
+  font-weight: var(--font-weight-button);
   min-height: 48px;
   min-width: 44px;
   margin-bottom: 8px;

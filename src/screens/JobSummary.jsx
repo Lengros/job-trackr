@@ -2,7 +2,7 @@ import { useState } from 'react'
 import { useParams } from 'react-router-dom'
 import { useApp } from '../context/AppContext'
 import { useToast } from '../context/ToastContext'
-import { useStrings, formatCurrency } from '../i18n/useStrings'
+import { useStrings, useCurrencyFormatter } from '../i18n/useStrings'
 import haptic from '../utils/haptic'
 import PageTransition from '../components/PageTransition'
 import styles from '../styles/JobSummary.module.css'
@@ -13,6 +13,7 @@ export default function JobSummary() {
   const { showToast } = useToast()
   const [showConfirm, setShowConfirm] = useState(false)
   const strings = useStrings()
+  const formatCurrency = useCurrencyFormatter()
 
   const job = state.jobs.find((j) => j.id === Number(jobId))
   const jobExpenses = state.expenses.filter((e) => e.jobId === Number(jobId))

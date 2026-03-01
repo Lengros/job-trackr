@@ -160,6 +160,11 @@
     "appVersion": "Wersja aplikacji",
     "logOut": "Wyloguj się"
   },
+  "language": {
+    "selection": "Wybór języka",
+    "en": "Angielski",
+    "pl": "Polski"
+  },
   "aria": {
     "availableWorkers": "Dostępni pracownicy",
     "jobList": "Lista zleceń",

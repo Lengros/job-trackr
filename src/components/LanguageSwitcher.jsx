@@ -1,17 +1,19 @@
 import { useLanguage } from '../context/LanguageContext'
+import { useStrings } from '../i18n/useStrings'
 import styles from '../styles/LanguageSwitcher.module.css'
 
 export default function LanguageSwitcher() {
   const { language, setLanguage } = useLanguage()
+  const strings = useStrings()
 
   return (
-    <div className={styles.switcher} role="radiogroup" aria-label="Language selection">
+    <div className={styles.switcher} role="radiogroup" aria-label={strings.language.selection}>
       <button
         className={`${styles.option} ${language === 'en' ? styles.active : ''}`}
         onClick={() => setLanguage('en')}
         role="radio"
         aria-checked={language === 'en'}
-        aria-label="English"
+        aria-label={strings.language.en}
       >
         EN
       </button>
@@ -20,7 +22,7 @@ export default function LanguageSwitcher() {
         onClick={() => setLanguage('pl')}
         role="radio"
         aria-checked={language === 'pl'}
-        aria-label="Polish"
+        aria-label={strings.language.pl}
       >
         PL
       </button>

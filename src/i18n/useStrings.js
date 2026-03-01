@@ -62,4 +62,27 @@ export function formatNumber(value, decimals = 2) {
   }).format(value)
 }
 
+/**
+ * Hook that returns a locale-aware date formatter.
+ * Uses the current language to format dates.
+ */
+export function useDateFormatter() {
+  const { language } = useLanguage()
+  const locale = language === 'pl' ? 'pl-PL' : 'en-US'
+  return (date) => {
+    return new Date(date).toLocaleDateString(locale)
+  }
+}
+
+/**
+ * Hook that returns a locale-aware time formatter.
+ */
+export function useTimeFormatter() {
+  const { language } = useLanguage()
+  const locale = language === 'pl' ? 'pl-PL' : 'en-US'
+  return (date) => {
+    return new Date(date).toLocaleTimeString(locale, { hour: '2-digit', minute: '2-digit' })
+  }
+}
+
 export default null

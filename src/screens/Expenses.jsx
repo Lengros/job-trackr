@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import { useParams } from 'react-router-dom'
 import { useApp } from '../context/AppContext'
-import { useStrings, formatCurrency } from '../i18n/useStrings'
+import { useStrings, useCurrencyFormatter } from '../i18n/useStrings'
 import haptic from '../utils/haptic'
 import PageTransition from '../components/PageTransition'
 import { CurrencyDollar, PencilSimple, Trash } from '@phosphor-icons/react'
@@ -11,6 +11,7 @@ export default function Expenses() {
   const { jobId } = useParams()
   const { state, dispatch } = useApp()
   const strings = useStrings()
+  const formatCurrency = useCurrencyFormatter()
 
   const [name, setName] = useState('')
   const [quantity, setQuantity] = useState('')

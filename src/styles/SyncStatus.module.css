@@ -10,8 +10,8 @@
   border: none;
   background: transparent;
   color: var(--brand-700);
-  font-size: 1rem;
-  font-weight: 600;
+  font-size: var(--font-size-button);
+  font-weight: var(--font-weight-button);
   min-height: 48px;
   min-width: 44px;
   margin-bottom: 8px;
@@ -42,8 +42,8 @@
   border: 1.5px solid var(--border);
   border-radius: var(--radius-lg);
   background: var(--surface-0);
-  font-size: 0.9375rem;
-  font-weight: 600;
+  font-size: var(--font-size-body);
+  font-weight: var(--font-weight-button);
   min-height: 48px;
   margin-bottom: 16px;
   transition: all 0.2s ease;
@@ -144,7 +144,7 @@
   padding: 3px 10px;
   border-radius: 10px;
   font-size: var(--font-size-caption);
-  font-weight: 700;
+  font-weight: var(--font-weight-h1);
   text-transform: uppercase;
   letter-spacing: 0.5px;
   transition: background-color 0.4s ease, color 0.4s ease;

@@ -50,7 +50,7 @@
   border: none;
   color: inherit;
   font-size: var(--font-size-button-sm);
-  font-weight: 700;
+  font-weight: var(--font-weight-h1);
   text-decoration: underline;
   padding: 4px 8px;
   border-radius: 6px;

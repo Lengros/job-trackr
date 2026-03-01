@@ -2,7 +2,7 @@ import { useState } from 'react'
 import { useParams, useNavigate } from 'react-router-dom'
 import { useApp } from '../context/AppContext'
 import { useToast } from '../context/ToastContext'
-import { useStrings, formatCurrency } from '../i18n/useStrings'
+import { useStrings, useCurrencyFormatter } from '../i18n/useStrings'
 import haptic from '../utils/haptic'
 import PageTransition from '../components/PageTransition'
 import {
@@ -22,6 +22,7 @@ export default function JobDetail() {
   const { state, dispatch } = useApp()
   const { showToast } = useToast()
   const strings = useStrings()
+  const formatCurrency = useCurrencyFormatter()
   const [showConfirm, setShowConfirm] = useState(false)
   const [pendingStatus, setPendingStatus] = useState(null)
   const [uploading, setUploading] = useState(false)
@@ -36,13 +37,14 @@ export default function JobDetail() {
   }
 
   const job = state.jobs.find((j) => j.id === Number(jobId))
+  const jobIdNum = Number(jobId)
 
   if (!job) {
     return <div className={styles.notFound}>{strings.jobDetail.notFound}</div>
   }
 
-  const jobPhotos = state.photos.filter((p) => p.jobId === Number(jobId))
-  const jobExpenses = state.expenses.filter((e) => e.jobId === Number(jobId))
+  const jobPhotos = state.photos.filter((p) => p.jobId === jobIdNum)
+  const jobExpenses = state.expenses.filter((e) => e.jobId === jobIdNum)
   const totalExpenses = jobExpenses.reduce(
     (sum, e) => sum + Math.round(e.quantity * e.unitPrice * 100) / 100,
     0
@@ -84,20 +86,14 @@ export default function JobDetail() {
     })
   }
 
-  // Notes handlers
+  // Notes handler - save immediately (in-memory state, no perf concern)
   const handleNotesChange = (e) => {
     const value = e.target.value.slice(0, 500)
     setNotesText(value)
-  }
-
-  const handleNotesBlur = () => {
-    const value = currentNotes
-    if (value !== (job.notes || '')) {
-      dispatch({
-        type: 'UPDATE_JOB_NOTES',
-        payload: { jobId: job.id, notes: value },
-      })
-    }
+    dispatch({
+      type: 'UPDATE_JOB_NOTES',
+      payload: { jobId: job.id, notes: value },
+    })
   }
 
   // Photos
@@ -197,7 +193,6 @@ export default function JobDetail() {
               placeholder={strings.jobDetail.notesPlaceholder}
               maxLength={500}
               onChange={handleNotesChange}
-              onBlur={handleNotesBlur}
               rows={3}
             />
             <span className={styles.charCount}>
