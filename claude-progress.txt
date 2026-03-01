@@ -1,3 +1,34 @@
+## Session 17 - 2026-03-01T17:23
+
+### Completed Features
+- Feature #83: Implement Haptic Feedback - PASSING
+  - Created haptic utility module at src/utils/haptic.js
+  - haptic.success() = navigator.vibrate(10) — 10ms single vibration
+  - haptic.error() = navigator.vibrate([10, 50, 10, 50, 10]) — 3x 10ms error pattern
+  - Checks navigator.vibrate API support before calling (safe for desktop/unsupported)
+  - Added haptic.success() on job status change to completed (JobDetail + JobSummary)
+  - Added haptic.success() on photo capture (Photos, after upload animation)
+  - Added haptic.error() on expense validation failure (Expenses)
+  - Added haptic.error() on sync complete with error/conflict items (Header)
+  - No haptic on normal taps, button presses, or scrolling (verified via grep)
+  - Zero console errors across all tested flows
+  - No mock data patterns in codebase (grep clean)
+
+### Code Changes
+- New: src/utils/haptic.js - haptic feedback utility with success/error functions
+- Modified: src/screens/JobDetail.jsx - import haptic, call on completed status change
+- Modified: src/screens/JobSummary.jsx - import haptic, call on handleComplete
+- Modified: src/screens/Photos.jsx - import haptic, call on photo upload complete
+- Modified: src/screens/Expenses.jsx - import haptic, call on validation error
+- Modified: src/components/Header.jsx - import haptic, call on sync with errors
+- Modified: vite.config.js - host set to 127.0.0.1
+
+### Current Status
+- 54/83 features passing (~65%)
+- Dev server running on port 5173
+
+---
+
 ## Session 16 - 2026-02-27T21:24
 
 ### Completed Features
