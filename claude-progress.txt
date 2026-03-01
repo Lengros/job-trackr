@@ -1,3 +1,36 @@
+## Session - 2026-03-01T20:20 (Feature #73 - Redesign Job Summary Screen)
+
+### Completed Features
+
+- Feature #73: Redesign Job Summary Screen - PASSING
+  - Redesigned JobSummary.jsx with receipt-style layout:
+    - Centered receipt header with title + job number
+    - Work cost (labor) section with clear "WORK COST" label and amount
+    - Itemized expense list with structured rows: name + line total on top row, qty × unit price detail below in smaller gray text
+    - Total expenses subtotal with solid divider
+    - Grand total in display typography (28px/900, blue) with bold solid divider
+  - Receipt dividers: dashed lines between sections, solid 2px line before grand total
+  - All CSS uses design system tokens (--space-*, --font-size-*, --radius-*, etc.)
+  - CTA: "Zakończ zlecenie" (Polish) / "Complete Job" (English), orange (#F97316), 56px min-height, sticky above tab bar
+  - pl-PL locale formatting verified: "320,00 zł", "189,99 zł" (comma decimals, "zł" suffix)
+  - Empty state: "No expenses" / "Brak kosztów" italic text
+  - Confirmation dialog with dark overlay, Cancel/Confirm buttons
+  - × (multiplication sign) used for qty detail lines
+  - Verified on 3 jobs: JOB-001 (no expenses), JOB-002 (3 expenses, in-progress), JOB-003 (2 expenses, completed)
+  - Both English and Polish locales verified via language toggle
+  - Zero console errors
+  - No mock data patterns in codebase (grep clean)
+
+### Code Changes
+- Modified: src/screens/JobSummary.jsx - receipt-style layout with structured expense items
+- Modified: src/styles/JobSummary.module.css - complete redesign with design tokens, dashed dividers, display typography
+
+### Current Status
+- 75/86 features passing (~87%)
+- Dev server running on port 5205 (via strictPort: false fallback)
+
+---
+
 ## Session 21 - 2026-03-01T20:13 (Features #58, #56 - i18n Audit & Typography)
 
 ### Completed Features
