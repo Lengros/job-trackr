@@ -113,16 +113,23 @@
   padding: 14px;
   border: none;
   border-radius: var(--radius-lg);
-  background: var(--success);
+  background: var(--cta);
   color: white;
-  font-size: 16px;
+  font-size: 18px;
   font-weight: 700;
-  min-height: 48px;
-  transition: opacity 0.15s ease;
+  min-height: 56px;
+  box-shadow: var(--shadow-cta);
+  transition: transform 0.1s ease, background-color 0.15s ease;
 }
 
 .completeButton:active {
-  opacity: 0.85;
+  transform: scale(0.98);
+  background: var(--cta-pressed);
+}
+
+.completeButton:disabled {
+  opacity: 0.5;
+  pointer-events: none;
 }
 
 /* Confirmation Dialog */
@@ -165,15 +172,23 @@
   border-radius: var(--radius-lg);
   font-size: 16px;
   font-weight: 600;
-  min-height: 48px;
+  min-height: 56px;
+  transition: transform 0.1s ease;
 }
 
 .cancelButton {
-  background: var(--surface-50);
-  color: var(--text-500);
+  background: var(--surface-0);
+  color: var(--text-900);
+  border: 1.5px solid var(--border);
 }
 
 .confirmButton {
-  background: var(--success);
+  background: var(--cta);
   color: white;
+  box-shadow: var(--shadow-cta);
+}
+
+.confirmButton:active {
+  transform: scale(0.98);
+  background: var(--cta-pressed);
 }

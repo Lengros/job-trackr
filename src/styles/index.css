@@ -16,8 +16,8 @@
   --surface-0: #FFFFFF;
 
   /* ── CTA Colors ── */
-  --cta: #2563EB;
-  --cta-pressed: #1D4ED8;
+  --cta: #F97316;
+  --cta-pressed: #EA580C;
 
   /* ── Semantic Colors ── */
   --success: #16A34A;
@@ -36,6 +36,8 @@
 
   /* ── Border ── */
   --border: #E2E8F0;
+  --border-focus: #3B82F6;
+  --border-error: #DC2626;
 
   /* ── Status Semantic Tokens ── */
   --status-new: #2563EB;
@@ -67,7 +69,7 @@
   /* ── Shadows ── */
   --shadow-card: 0 1px 3px rgba(0, 0, 0, 0.1);
   --shadow-elevated: 0 4px 12px rgba(0, 0, 0, 0.15);
-  --shadow-cta: 0 2px 8px rgba(37, 99, 235, 0.3);
+  --shadow-cta: 0 4px 12px rgba(249, 115, 22, 0.25);
 
   /* ── Typography ── */
   --font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
@@ -110,7 +112,34 @@ button {
 
 input {
   font-family: inherit;
-  font-size: 16px; /* prevent iOS zoom on focus */
+  font-size: 15px;
+  height: 52px;
+  min-height: 52px;
+  padding: 14px 16px;
+  border: 1.5px solid var(--border);
+  border-radius: var(--radius-md);
+  background: var(--surface-0);
+  color: var(--text-900);
+  outline: none;
+  transition: border-color 0.15s ease, box-shadow 0.15s ease;
+  -webkit-appearance: none;
+  appearance: none;
+}
+
+input:focus {
+  border-color: var(--border-focus);
+  box-shadow: 0 0 0 2px rgba(59, 130, 246, 0.2);
+}
+
+input[aria-invalid="true"],
+input.input-error {
+  border-color: var(--border-error);
+}
+
+input[aria-invalid="true"]:focus,
+input.input-error:focus {
+  border-color: var(--border-error);
+  box-shadow: 0 0 0 2px rgba(220, 38, 38, 0.2);
 }
 
 /* Utility: tabular numbers for costs/amounts */
