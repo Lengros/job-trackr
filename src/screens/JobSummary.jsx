@@ -90,7 +90,7 @@ export default function JobSummary() {
                     </span>
                   </div>
                   <div className={styles.expenseDetail}>
-                    {exp.quantity} x {formatCurrency(exp.unitPrice)}
+                    {exp.quantity} &times; {formatCurrency(exp.unitPrice)}
                   </div>
                 </div>
               ))}

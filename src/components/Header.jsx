@@ -1,8 +1,7 @@
-import { useCallback, useMemo } from 'react'
+import { useMemo } from 'react'
 import { useNavigate, useLocation } from 'react-router-dom'
 import { useApp } from '../context/AppContext'
 import { useStrings } from '../i18n/useStrings'
-import haptic from '../utils/haptic'
 import { ArrowLeft, ArrowsClockwise, Circle, WarningCircle } from '@phosphor-icons/react'
 import LanguageSwitcher from './LanguageSwitcher'
 import styles from '../styles/Header.module.css'
@@ -51,7 +50,7 @@ function getSyncState(state) {
 }
 
 export default function Header() {
-  const { state, dispatch } = useApp()
+  const { state } = useApp()
   const strings = useStrings()
   const navigate = useNavigate()
   const location = useLocation()
@@ -68,22 +67,6 @@ export default function Header() {
     state.selectedMasterId,
   ])
 
-  const handleToggleNetwork = useCallback(() => {
-    const wasOffline = !state.isOnline
-    dispatch({ type: 'TOGGLE_NETWORK' })
-    if (wasOffline) {
-      setTimeout(() => {
-        dispatch({ type: 'SYNC_COMPLETE' })
-        const hasErrors = state.jobs.some(
-          (j) => j.syncStatus === 'error' || j.syncStatus === 'conflict'
-        )
-        if (hasErrors) {
-          haptic.error()
-        }
-      }, 1800)
-    }
-  }, [state.isOnline, state.jobs, dispatch])
-
   // Render the sync indicator based on state
   const renderSyncIndicator = () => {
     // Online + Synced = hidden (no visual noise)
@@ -91,7 +74,7 @@ export default function Header() {
       return null
     }
 
-    // Online + Syncing = rotating blue spinner
+    // Online + Syncing = rotating blue spinner + text
     if (syncState === 'syncing') {
       return (
         <button
@@ -99,33 +82,34 @@ export default function Header() {
           onClick={() => navigate('/sync')}
           aria-label={strings.syncStatus.syncing}
         >
-          <ArrowsClockwise size={20} weight="bold" className={styles.spinIcon} />
+          <ArrowsClockwise size={16} weight="bold" className={styles.spinIcon} />
+          <span className={styles.syncText}>{strings.syncStatus.syncing}</span>
         </button>
       )
     }
 
-    // Offline = empty circle in warning color
+    // Offline = empty circle
     if (syncState === 'offline') {
       return (
         <button
           className={`${styles.syncIndicator} ${styles.syncOffline}`}
-          onClick={handleToggleNetwork}
+          onClick={() => navigate('/profile')}
           aria-label={strings.network.offline}
         >
-          <Circle size={20} weight="regular" />
+          <Circle size={16} weight="regular" />
         </button>
       )
     }
 
-    // Sync Error = warning triangle in error color
+    // Sync Error = warning circle in error color + text
     if (syncState === 'error') {
       return (
         <button
           className={`${styles.syncIndicator} ${styles.syncError}`}
           onClick={() => navigate('/sync')}
-          aria-label={strings.syncStatus.error}
+          aria-label={strings.syncIndicator?.error || strings.syncStatus.error}
         >
-          <WarningCircle size={20} weight="fill" />
+          <WarningCircle size={16} weight="fill" />
         </button>
       )
     }
