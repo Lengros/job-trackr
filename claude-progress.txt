@@ -1,3 +1,33 @@
+## Session - 2026-03-01T20:33 (Feature #78 - Undo Toast for Status Changes)
+
+### Completed Features
+
+- Feature #78: Implement Undo Toast for Status Changes - PASSING
+  - Removed confirmation dialogs from forward status transitions (new→in_progress, in_progress→done)
+  - Forward transitions now instant: click CTA → status changes immediately → undo toast shows for 4 seconds
+  - Toast shows "Status changed to [status]" (EN) / "Status zmieniony → [status]" (PL) with tappable "Undo"/"Cofnij"
+  - Undo reverts job to previous status (verified: New→In Progress→Undo→New)
+  - Added overflow menu (three-dot) for completed jobs with "Reopen Job" option
+  - Reopen action (done→in_progress) shows "Are you sure?" / "Czy na pewno?" confirmation dialog
+  - Cancel dismisses dialog, Confirm reopens job with undo toast
+  - Haptic feedback (10ms vibration) fires on status change to completed
+  - Both EN and PL i18n strings added for reopen-related UI
+  - Zero console errors
+  - No mock data patterns in codebase
+
+### Code Changes
+- Modified: src/screens/JobDetail.jsx - replaced confirm dialog with instant dispatch + undo toast for forward transitions, added overflow menu + reopen with confirmation for completed jobs
+- Modified: src/screens/JobSummary.jsx - removed confirmation dialog, Complete Job button directly dispatches + shows undo toast
+- Modified: src/styles/JobDetail.module.css - added overflow menu, statusRow, and menu item styles
+- Modified: src/i18n/en.json - added reopenJob, reopenConfirmation strings
+- Modified: src/i18n/pl.json - added reopenJob ("Wznów zlecenie"), reopenConfirmation, reopenJob confirmation ("Czy na pewno?")
+
+### Current Status
+- 82/86 features passing (~95.3%)
+- Feature verified with full browser automation testing through Playwright
+
+---
+
 ## Session - 2026-03-01T20:30 (Features #81, #79 - Accessibility & Interaction)
 
 ### Completed Features
