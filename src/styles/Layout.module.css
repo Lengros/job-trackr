@@ -6,6 +6,6 @@
 
 .content {
   flex: 1;
-  padding-top: 56px; /* header height */
+  padding-top: calc(56px + env(safe-area-inset-top, 0px)); /* header height + safe area */
   overflow-y: auto;
 }

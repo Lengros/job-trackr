@@ -7,82 +7,75 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  height: 56px;
-  padding: 0 16px;
-  background: var(--brand-700);
-  color: white;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.15);
+  height: calc(56px + env(safe-area-inset-top, 0px));
+  padding-top: env(safe-area-inset-top, 0px);
+  padding-left: var(--space-2);
+  padding-right: var(--space-2);
+  background: var(--surface-0);
+  border-bottom: 1px solid var(--border);
 }
 
-.masterName {
-  font-size: 1.125rem;
-  font-weight: 600;
+.headerLeft {
+  display: flex;
+  align-items: center;
+  gap: var(--space-1);
+  min-width: 0;
+  flex: 1;
+}
+
+.headerRight {
+  display: flex;
+  align-items: center;
+  gap: var(--space-1);
+  flex-shrink: 0;
+}
+
+.backButton {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 48px;
+  height: 48px;
+  min-width: 48px;
+  min-height: 48px;
+  border: none;
+  background: transparent;
+  color: var(--text-900);
+  border-radius: var(--radius-full);
+  transition: background-color 0.15s ease;
+  flex-shrink: 0;
+}
+
+.backButton:active {
+  background: var(--surface-50);
+}
+
+.title {
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: var(--text-900);
+  line-height: 1.2;
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
   min-width: 0;
-  flex-shrink: 1;
-  max-width: 140px;
 }
 
-.headerActions {
+.actionButton {
   display: flex;
   align-items: center;
-  gap: 8px;
-  flex-shrink: 0;
-}
-
-.syncButton {
-  display: flex;
-  align-items: center;
-  gap: 6px;
-  padding: 6px 12px;
-  border: 2px solid rgba(255, 255, 255, 0.4);
-  border-radius: 20px;
-  background: transparent;
-  color: white;
-  font-size: 0.8125rem;
-  font-weight: 600;
+  justify-content: center;
+  width: 48px;
+  height: 48px;
+  min-width: 48px;
   min-height: 48px;
-  min-width: 44px;
-  transition: all 0.2s ease;
-}
-
-.syncButton:active {
-  background: rgba(255, 255, 255, 0.15);
-}
-
-.networkToggle {
-  display: flex;
-  align-items: center;
-  gap: 6px;
-  padding: 6px 12px;
-  border: 2px solid rgba(255, 255, 255, 0.4);
-  border-radius: 20px;
+  border: none;
   background: transparent;
-  color: white;
-  font-size: 0.8125rem;
-  font-weight: 600;
-  min-height: 48px;
-  min-width: 44px;
-  transition: all 0.2s ease;
+  color: var(--text-500);
+  border-radius: var(--radius-full);
+  transition: background-color 0.15s ease;
 }
 
-.indicator {
-  width: 8px;
-  height: 8px;
-  border-radius: 50%;
-  transition: background-color 0.2s ease;
-}
-
-.online .indicator {
-  background: var(--success);
-}
-
-.offline .indicator {
-  background: var(--error);
-}
-
-.offline {
-  border-color: var(--error);
+.actionButton:active {
+  background: var(--surface-50);
 }

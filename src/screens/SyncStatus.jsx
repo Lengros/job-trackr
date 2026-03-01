@@ -1,7 +1,5 @@
-import { useNavigate } from 'react-router-dom'
 import { useApp } from '../context/AppContext'
 import PageTransition from '../components/PageTransition'
-import { ArrowLeft } from '@phosphor-icons/react'
 import styles from '../styles/SyncStatus.module.css'
 
 const STATUS_LABELS = {
@@ -23,9 +21,6 @@ export default function SyncStatus() {
   return (
     <PageTransition>
     <div className={styles.container}>
-      <button className={styles.backButton} onClick={() => navigate('/jobs')} aria-label="Back to job list">
-        <ArrowLeft size={20} aria-hidden="true" /> Back
-      </button>
       <h2 className={styles.title}>Sync Status</h2>
       <p className={styles.subtitle} role="status" aria-live="polite">
         {state.isOnline ? 'Online' : 'Offline'} — {masterJobs.length} items

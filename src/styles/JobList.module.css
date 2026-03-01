@@ -25,7 +25,7 @@
   border-radius: 8px;
   background: var(--surface-0);
   color: var(--text-500);
-  font-size: 13px;
+  font-size: 0.8125rem;
   font-weight: 600;
   min-height: 48px;
   white-space: nowrap;
@@ -47,7 +47,7 @@
   padding: 0 6px;
   border-radius: 11px;
   background: rgba(0, 0, 0, 0.1);
-  font-size: 12px;
+  font-size: 0.75rem;
   font-weight: 700;
 }
 
@@ -89,7 +89,7 @@
 }
 
 .jobNumber {
-  font-size: 16px;
+  font-size: 1rem;
   font-weight: 700;
   color: var(--text-900);
 }
@@ -100,7 +100,7 @@
   height: 28px;
   padding: 4px 12px;
   border-radius: 14px;
-  font-size: 13px;
+  font-size: 0.8125rem;
   font-weight: 600;
   white-space: nowrap;
 }
@@ -116,30 +116,30 @@
 }
 
 .statusNew {
-  background-color: #DBEAFE;
-  color: #1E40AF;
+  background-color: var(--brand-200);
+  color: var(--brand-800);
 }
 
 .statusNew::before {
-  background-color: #2563EB;
+  background-color: var(--brand-700);
 }
 
 .statusInProgress {
-  background-color: #FEF3C7;
-  color: #92400E;
+  background-color: var(--warning-bg);
+  color: var(--warning-text);
 }
 
 .statusInProgress::before {
-  background-color: #D97706;
+  background-color: var(--warning);
 }
 
 .statusCompleted {
-  background-color: #DCFCE7;
-  color: #166534;
+  background-color: var(--success-bg);
+  color: var(--success);
 }
 
 .statusCompleted::before {
-  background-color: #16A34A;
+  background-color: var(--success);
 }
 
 .cardBody {
@@ -149,7 +149,7 @@
 }
 
 .address {
-  font-size: 14px;
+  font-size: 0.875rem;
   color: var(--text-900);
   overflow: hidden;
   text-overflow: ellipsis;
@@ -157,7 +157,7 @@
 }
 
 .workType {
-  font-size: 13px;
+  font-size: 0.8125rem;
   color: var(--text-500);
 }
 
@@ -168,7 +168,7 @@
 }
 
 .date {
-  font-size: 13px;
+  font-size: 0.8125rem;
   color: var(--text-500);
 }
 
@@ -213,7 +213,7 @@
   overflow: hidden;
   transition: height 0.2s ease, opacity 0.2s ease;
   color: var(--brand-700);
-  font-size: 14px;
+  font-size: 0.875rem;
   font-weight: 600;
   margin-bottom: 8px;
 }
@@ -231,7 +231,7 @@
 }
 
 .spinning {
-  font-size: 24px;
+  font-size: 1.5rem;
   animation: spin 1s linear infinite;
 }
 
@@ -259,14 +259,14 @@
 }
 
 .emptyTitle {
-  font-size: 18px;
+  font-size: 1.125rem;
   font-weight: 700;
   color: var(--text-900);
   margin-bottom: 4px;
 }
 
 .emptySubtext {
-  font-size: 14px;
+  font-size: 0.875rem;
   color: var(--text-500);
   margin-bottom: 16px;
   max-width: 280px;
@@ -281,7 +281,7 @@
   color: white;
   border: none;
   border-radius: var(--radius-sm);
-  font-size: 15px;
+  font-size: 0.9375rem;
   font-weight: 600;
   min-height: 48px;
   cursor: pointer;

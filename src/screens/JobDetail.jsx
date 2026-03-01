@@ -1,9 +1,10 @@
 import { useState } from 'react'
 import { useParams, useNavigate } from 'react-router-dom'
 import { useApp } from '../context/AppContext'
+import { useToast } from '../context/ToastContext'
 import haptic from '../utils/haptic'
 import PageTransition from '../components/PageTransition'
-import { ArrowLeft, Phone, Camera, CurrencyDollar, ClipboardText } from '@phosphor-icons/react'
+import { Phone, Camera, CurrencyDollar, ClipboardText } from '@phosphor-icons/react'
 import styles from '../styles/JobDetail.module.css'
 
 const STATUS_LABELS = {
@@ -16,6 +17,7 @@ export default function JobDetail() {
   const { jobId } = useParams()
   const navigate = useNavigate()
   const { state, dispatch } = useApp()
+  const { showToast } = useToast()
   const [showConfirm, setShowConfirm] = useState(false)
   const [pendingStatus, setPendingStatus] = useState(null)
 
@@ -31,24 +33,36 @@ export default function JobDetail() {
   }
 
   const confirmStatusChange = () => {
+    const previousStatus = job.status
+    const targetStatus = pendingStatus
     dispatch({
       type: 'UPDATE_JOB_STATUS',
-      payload: { jobId: job.id, newStatus: pendingStatus },
+      payload: { jobId: job.id, newStatus: targetStatus },
     })
-    if (pendingStatus === 'completed') {
+    if (targetStatus === 'completed') {
       haptic.success()
     }
     setShowConfirm(false)
     setPendingStatus(null)
+
+    // Show toast with undo action
+    showToast({
+      type: 'success',
+      message: `Status changed \u2192 ${STATUS_LABELS[targetStatus]}`,
+      actionLabel: 'Undo',
+      action: () => {
+        dispatch({
+          type: 'UPDATE_JOB_STATUS',
+          payload: { jobId: job.id, newStatus: previousStatus },
+        })
+      },
+      duration: 4000,
+    })
   }
 
   return (
     <PageTransition>
     <div className={styles.container}>
-      <button className={styles.backButton} onClick={() => navigate('/jobs')} aria-label="Back to job list">
-        <ArrowLeft size={20} aria-hidden="true" /> Back
-      </button>
-
       <div className={styles.statusBar} data-status={job.status} role="status" aria-live="polite">
         <span className={styles.statusLabel}>{STATUS_LABELS[job.status]}</span>
       </div>

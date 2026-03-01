@@ -3,7 +3,7 @@ import { useParams, useNavigate } from 'react-router-dom'
 import { useApp } from '../context/AppContext'
 import haptic from '../utils/haptic'
 import PageTransition from '../components/PageTransition'
-import { ArrowLeft, Camera, Trash, Plus } from '@phosphor-icons/react'
+import { Camera, Trash, Plus } from '@phosphor-icons/react'
 import styles from '../styles/Photos.module.css'
 
 export default function Photos() {
@@ -36,9 +36,6 @@ export default function Photos() {
   return (
     <PageTransition>
     <div className={styles.container}>
-      <button className={styles.backButton} onClick={() => navigate(`/jobs/${jobId}`)} aria-label="Back to job detail">
-        <ArrowLeft size={20} aria-hidden="true" /> Back
-      </button>
       <h2 className={styles.title}>Photos</h2>
       <p className={styles.count} aria-live="polite">
         {jobPhotos.length} {jobPhotos.length === 1 ? 'photo' : 'photos'}

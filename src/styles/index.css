@@ -24,9 +24,9 @@
 
   /* ── Semantic Colors ── */
   --success: #16A34A;
-  --success-bg: rgba(22, 163, 74, 0.1);
+  --success-bg: #DCFCE7;
   --warning: #F59E0B;
-  --warning-bg: rgba(245, 158, 11, 0.1);
+  --warning-bg: #FEF3C7;
   --warning-text: #B45309;
   --error: #DC2626;
   --error-bg: rgba(220, 38, 38, 0.1);

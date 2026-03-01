@@ -3,7 +3,7 @@ import { useParams, useNavigate } from 'react-router-dom'
 import { useApp } from '../context/AppContext'
 import haptic from '../utils/haptic'
 import PageTransition from '../components/PageTransition'
-import { ArrowLeft, CurrencyDollar, PencilSimple, Trash } from '@phosphor-icons/react'
+import { CurrencyDollar, PencilSimple, Trash } from '@phosphor-icons/react'
 import styles from '../styles/Expenses.module.css'
 
 export default function Expenses() {
@@ -114,9 +114,6 @@ export default function Expenses() {
   return (
     <PageTransition>
     <div className={styles.container}>
-      <button className={styles.backButton} onClick={() => navigate(`/jobs/${jobId}`)} aria-label="Back to job detail">
-        <ArrowLeft size={20} aria-hidden="true" /> Back
-      </button>
       <h2 className={styles.title}>Expenses</h2>
 
       {jobExpenses.length === 0 ? (

@@ -1,15 +1,16 @@
 import { useState } from 'react'
 import { useParams, useNavigate } from 'react-router-dom'
 import { useApp } from '../context/AppContext'
+import { useToast } from '../context/ToastContext'
 import haptic from '../utils/haptic'
 import PageTransition from '../components/PageTransition'
-import { ArrowLeft } from '@phosphor-icons/react'
 import styles from '../styles/JobSummary.module.css'
 
 export default function JobSummary() {
   const { jobId } = useParams()
   const navigate = useNavigate()
   const { state, dispatch } = useApp()
+  const { showToast } = useToast()
   const [showConfirm, setShowConfirm] = useState(false)
 
   const job = state.jobs.find((j) => j.id === Number(jobId))
@@ -36,9 +37,6 @@ export default function JobSummary() {
   return (
     <PageTransition>
     <div className={styles.container}>
-      <button className={styles.backButton} onClick={() => navigate(`/jobs/${jobId}`)} aria-label="Back to job detail">
-        <ArrowLeft size={20} aria-hidden="true" /> Back
-      </button>
       <h2 className={styles.title}>Job Summary</h2>
       <p className={styles.jobNumber}>{job.number}</p>
 
