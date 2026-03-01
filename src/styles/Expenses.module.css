@@ -9,7 +9,7 @@
   padding: 8px 16px 8px 0;
   border: none;
   background: transparent;
-  color: var(--color-primary);
+  color: var(--brand-700);
   font-size: 16px;
   font-weight: 600;
   min-height: 48px;
@@ -25,8 +25,8 @@
 
 /* Table wrapper */
 .tableWrapper {
-  background: var(--color-card);
-  border-radius: var(--radius-card);
+  background: var(--surface-0);
+  border-radius: var(--radius-sm);
   box-shadow: var(--shadow-card);
   overflow: hidden;
   margin-bottom: 12px;
@@ -38,11 +38,11 @@
   grid-template-columns: minmax(60px, 1fr) 36px 64px 72px 88px;
   align-items: center;
   padding: 8px 8px 8px 12px;
-  background: var(--color-bg);
-  border-bottom: 2px solid var(--color-border);
+  background: var(--surface-50);
+  border-bottom: 2px solid var(--border);
   font-size: 12px;
   font-weight: 700;
-  color: var(--color-text-secondary);
+  color: var(--text-500);
   text-transform: uppercase;
   letter-spacing: 0.04em;
 }
@@ -58,7 +58,7 @@
   grid-template-columns: minmax(60px, 1fr) 36px 64px 72px 88px;
   align-items: center;
   padding: 10px 8px 10px 12px;
-  border-top: 1px solid var(--color-border);
+  border-top: 1px solid var(--border);
   font-size: 14px;
 }
 
@@ -92,7 +92,7 @@
 
 .totalValue {
   font-weight: 700;
-  color: var(--color-text);
+  color: var(--text-900);
 }
 
 .colActions {
@@ -115,20 +115,20 @@
   align-items: center;
   justify-content: center;
   cursor: pointer;
-  color: var(--color-text-secondary);
+  color: var(--text-500);
   padding: 0;
 }
 
-.editBtn:active { color: var(--color-primary); background: rgba(37, 99, 235, 0.08); }
-.deleteBtn:active { color: var(--color-error); background: rgba(220, 38, 38, 0.08); }
+.editBtn:active { color: var(--brand-700); background: rgba(37, 99, 235, 0.08); }
+.deleteBtn:active { color: var(--error); background: rgba(220, 38, 38, 0.08); }
 
 .totalBar {
   display: flex;
   justify-content: space-between;
   align-items: center;
   padding: 16px;
-  background: var(--color-card);
-  border-radius: var(--radius-card);
+  background: var(--surface-0);
+  border-radius: var(--radius-sm);
   box-shadow: var(--shadow-card);
   margin-bottom: 12px;
   font-size: 16px;
@@ -138,13 +138,13 @@
 .totalAmount {
   font-size: 20px;
   font-weight: 700;
-  color: var(--color-primary);
+  color: var(--brand-700);
   font-variant-numeric: tabular-nums;
 }
 
 .form {
-  background: var(--color-card);
-  border-radius: var(--radius-card);
+  background: var(--surface-0);
+  border-radius: var(--radius-sm);
   box-shadow: var(--shadow-card);
   padding: 16px;
 }
@@ -163,14 +163,14 @@
   display: block;
   font-size: 13px;
   font-weight: 600;
-  color: var(--color-text-secondary);
+  color: var(--text-500);
   margin-bottom: 4px;
 }
 
 .formField input {
   width: 100%;
   padding: 10px 12px;
-  border: 1px solid var(--color-border);
+  border: 1px solid var(--border);
   border-radius: 8px;
   font-size: 16px;
   outline: none;
@@ -178,17 +178,17 @@
 }
 
 .formField input:focus {
-  border-color: var(--color-primary);
+  border-color: var(--brand-700);
 }
 
 .inputError {
-  border-color: var(--color-error) !important;
+  border-color: var(--error) !important;
 }
 
 .error {
   display: block;
   font-size: 12px;
-  color: var(--color-error);
+  color: var(--error);
   margin-top: 4px;
 }
 
@@ -205,21 +205,21 @@
   align-items: center;
   padding: 10px 12px;
   margin-bottom: 8px;
-  background: var(--color-bg);
+  background: var(--surface-50);
   border-radius: 8px;
-  border: 1px dashed var(--color-border);
+  border: 1px dashed var(--border);
 }
 
 .liveTotalLabel {
   font-size: 14px;
   font-weight: 600;
-  color: var(--color-text-secondary);
+  color: var(--text-500);
 }
 
 .liveTotalValue {
   font-size: 18px;
   font-weight: 700;
-  color: var(--color-primary);
+  color: var(--brand-700);
   font-variant-numeric: tabular-nums;
 }
 
@@ -233,8 +233,8 @@
   flex: 1;
   padding: 12px;
   border: none;
-  border-radius: var(--radius-button);
-  background: var(--color-primary);
+  border-radius: var(--radius-lg);
+  background: var(--brand-700);
   color: white;
   font-size: 16px;
   font-weight: 700;
@@ -244,10 +244,10 @@
 .cancelButton {
   flex: 1;
   padding: 12px;
-  border: 1px solid var(--color-border);
-  border-radius: var(--radius-button);
-  background: var(--color-card);
-  color: var(--color-text-secondary);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  background: var(--surface-0);
+  color: var(--text-500);
   font-size: 16px;
   font-weight: 600;
   min-height: 48px;
@@ -260,13 +260,16 @@
   justify-content: center;
   padding: 32px 16px;
   text-align: center;
-  color: var(--color-text-secondary);
+  color: var(--text-500);
   margin-bottom: 16px;
 }
 
 .emptyIcon {
-  font-size: 48px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   margin-bottom: 12px;
+  color: var(--text-500);
 }
 
 .emptyHint {
@@ -287,7 +290,7 @@
 }
 
 .dialog {
-  background: var(--color-card);
+  background: var(--surface-0);
   border-radius: 16px;
   padding: 24px;
   max-width: 320px;
@@ -310,18 +313,18 @@
   flex: 1;
   padding: 12px;
   border: none;
-  border-radius: var(--radius-button);
+  border-radius: var(--radius-lg);
   font-size: 16px;
   font-weight: 600;
   min-height: 48px;
 }
 
 .cancelBtn {
-  background: var(--color-bg);
-  color: var(--color-text-secondary);
+  background: var(--surface-50);
+  color: var(--text-500);
 }
 
 .confirmBtn {
-  background: var(--color-error);
+  background: var(--error);
   color: white;
 }

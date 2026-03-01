@@ -5,19 +5,19 @@
   justify-content: center;
   min-height: 100vh;
   padding: 24px 16px;
-  background: var(--color-bg);
+  background: var(--surface-50);
 }
 
 .title {
   font-size: 28px;
   font-weight: 700;
-  color: var(--color-primary);
+  color: var(--brand-700);
   margin-bottom: 4px;
 }
 
 .subtitle {
   font-size: 16px;
-  color: var(--color-text-secondary);
+  color: var(--text-500);
   margin-bottom: 32px;
 }
 
@@ -35,9 +35,9 @@
   gap: 16px;
   width: 100%;
   padding: 16px;
-  background: var(--color-card);
-  border: 1px solid var(--color-border);
-  border-radius: var(--radius-card);
+  background: var(--surface-0);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
   box-shadow: var(--shadow-card);
   cursor: pointer;
   transition: all 0.15s ease;
@@ -47,7 +47,7 @@
 
 .card:hover,
 .card:active {
-  border-color: var(--color-primary);
+  border-color: var(--brand-700);
   box-shadow: 0 2px 8px rgba(37, 99, 235, 0.2);
 }
 
@@ -72,10 +72,10 @@
 .name {
   font-size: 18px;
   font-weight: 600;
-  color: var(--color-text);
+  color: var(--text-900);
 }
 
 .specialization {
   font-size: 14px;
-  color: var(--color-text-secondary);
+  color: var(--text-500);
 }

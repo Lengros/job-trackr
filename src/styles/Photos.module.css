@@ -9,7 +9,7 @@
   padding: 8px 16px 8px 0;
   border: none;
   background: transparent;
-  color: var(--color-primary);
+  color: var(--brand-700);
   font-size: 16px;
   font-weight: 600;
   min-height: 48px;
@@ -25,7 +25,7 @@
 
 .count {
   font-size: 14px;
-  color: var(--color-text-secondary);
+  color: var(--text-500);
   margin-bottom: 16px;
 }
 
@@ -39,8 +39,8 @@
 .thumbnail {
   position: relative;
   aspect-ratio: 1;
-  background: var(--color-border);
-  border-radius: var(--radius-card);
+  background: var(--border);
+  border-radius: var(--radius-sm);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -48,8 +48,11 @@
 }
 
 .placeholder {
-  font-size: 28px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   opacity: 0.5;
+  color: var(--text-500);
 }
 
 .deleteBtn {
@@ -59,7 +62,7 @@
   width: 48px;
   height: 48px;
   border: none;
-  border-radius: 0 var(--radius-card) 0 12px;
+  border-radius: 0 var(--radius-sm) 0 12px;
   background: rgba(0, 0, 0, 0.55);
   color: white;
   font-size: 16px;
@@ -75,14 +78,14 @@
 
 .uploading {
   background: rgba(37, 99, 235, 0.1);
-  border: 2px dashed var(--color-primary);
+  border: 2px dashed var(--brand-700);
 }
 
 .spinner {
   width: 28px;
   height: 28px;
-  border: 3px solid var(--color-border);
-  border-top-color: var(--color-primary);
+  border: 3px solid var(--border);
+  border-top-color: var(--brand-700);
   border-radius: 50%;
   animation: spin 0.8s linear infinite;
 }
@@ -92,11 +95,15 @@
 }
 
 .addButton {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
   width: 100%;
   padding: 14px;
   border: none;
-  border-radius: var(--radius-button);
-  background: var(--color-primary);
+  border-radius: var(--radius-lg);
+  background: var(--brand-700);
   color: white;
   font-size: 16px;
   font-weight: 700;
@@ -115,13 +122,16 @@
   justify-content: center;
   padding: 48px 16px;
   text-align: center;
-  color: var(--color-text-secondary);
+  color: var(--text-500);
   margin-bottom: 20px;
 }
 
 .emptyIcon {
-  font-size: 48px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   margin-bottom: 12px;
+  color: var(--text-500);
 }
 
 .emptyHint {
@@ -142,7 +152,7 @@
 }
 
 .dialog {
-  background: var(--color-card);
+  background: var(--surface-0);
   border-radius: 16px;
   padding: 24px;
   max-width: 320px;
@@ -165,18 +175,18 @@
   flex: 1;
   padding: 12px;
   border: none;
-  border-radius: var(--radius-button);
+  border-radius: var(--radius-lg);
   font-size: 16px;
   font-weight: 600;
   min-height: 48px;
 }
 
 .cancelButton {
-  background: var(--color-bg);
-  color: var(--color-text-secondary);
+  background: var(--surface-50);
+  color: var(--text-500);
 }
 
 .confirmButton {
-  background: var(--color-error);
+  background: var(--error);
   color: white;
 }

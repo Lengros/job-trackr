@@ -23,8 +23,8 @@
   padding: 10px 12px;
   border: none;
   border-radius: 8px;
-  background: var(--color-card);
-  color: var(--color-text-secondary);
+  background: var(--surface-0);
+  color: var(--text-500);
   font-size: 13px;
   font-weight: 600;
   min-height: 48px;
@@ -34,7 +34,7 @@
 }
 
 .activeTab {
-  background: var(--color-primary);
+  background: var(--brand-700);
   color: white;
 }
 
@@ -68,9 +68,9 @@
   gap: 8px;
   width: 100%;
   padding: 16px;
-  background: var(--color-card);
-  border: 1px solid var(--color-border);
-  border-radius: var(--radius-card);
+  background: var(--surface-0);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
   box-shadow: var(--shadow-card);
   cursor: pointer;
   transition: all 0.15s ease;
@@ -91,7 +91,7 @@
 .jobNumber {
   font-size: 16px;
   font-weight: 700;
-  color: var(--color-text);
+  color: var(--text-900);
 }
 
 .statusBadge {
@@ -105,15 +105,15 @@
 }
 
 .statusNew {
-  background-color: var(--color-primary);
+  background-color: var(--brand-700);
 }
 
 .statusInProgress {
-  background-color: var(--color-warning);
+  background-color: var(--warning);
 }
 
 .statusCompleted {
-  background-color: var(--color-success);
+  background-color: var(--success);
 }
 
 .cardBody {
@@ -124,7 +124,7 @@
 
 .address {
   font-size: 14px;
-  color: var(--color-text);
+  color: var(--text-900);
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
@@ -132,7 +132,7 @@
 
 .workType {
   font-size: 13px;
-  color: var(--color-text-secondary);
+  color: var(--text-500);
 }
 
 .cardFooter {
@@ -143,20 +143,21 @@
 
 .date {
   font-size: 13px;
-  color: var(--color-text-secondary);
+  color: var(--text-500);
 }
 
 .syncIcon {
-  font-size: 16px;
+  display: inline-flex;
+  align-items: center;
   transition: color 0.4s ease;
 }
 
 .sync_synced {
-  color: var(--color-success);
+  color: var(--success);
 }
 
 .sync_syncing {
-  color: var(--color-primary);
+  color: var(--brand-700);
   display: inline-block;
   animation: syncSpin 1s linear infinite;
 }
@@ -167,15 +168,15 @@
 }
 
 .sync_pending {
-  color: var(--color-warning);
+  color: var(--warning);
 }
 
 .sync_error {
-  color: var(--color-error);
+  color: var(--error);
 }
 
 .sync_conflict {
-  color: var(--color-conflict);
+  color: var(--conflict);
 }
 
 /* Pull-to-refresh indicator */
@@ -185,7 +186,7 @@
   justify-content: center;
   overflow: hidden;
   transition: height 0.2s ease, opacity 0.2s ease;
-  color: var(--color-primary);
+  color: var(--brand-700);
   font-size: 14px;
   font-weight: 600;
   margin-bottom: 8px;
@@ -220,10 +221,13 @@
   justify-content: center;
   padding: 48px 16px;
   text-align: center;
-  color: var(--color-text-secondary);
+  color: var(--text-500);
 }
 
 .emptyIcon {
-  font-size: 48px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   margin-bottom: 12px;
+  color: var(--text-500);
 }

@@ -9,7 +9,7 @@
   padding: 8px 16px 8px 0;
   border: none;
   background: transparent;
-  color: var(--color-primary);
+  color: var(--brand-700);
   font-size: 16px;
   font-weight: 600;
   min-height: 48px;
@@ -25,13 +25,13 @@
 
 .jobNumber {
   font-size: 14px;
-  color: var(--color-text-secondary);
+  color: var(--text-500);
   margin-bottom: 16px;
 }
 
 .receipt {
-  background: var(--color-card);
-  border-radius: var(--radius-card);
+  background: var(--surface-0);
+  border-radius: var(--radius-sm);
   box-shadow: var(--shadow-card);
   padding: 16px;
   margin-bottom: 12px;
@@ -40,7 +40,7 @@
 .section h3 {
   font-size: 13px;
   font-weight: 600;
-  color: var(--color-text-secondary);
+  color: var(--text-500);
   text-transform: uppercase;
   letter-spacing: 0.5px;
   margin-bottom: 10px;
@@ -70,7 +70,7 @@
 
 .noExpenses {
   font-size: 14px;
-  color: var(--color-text-secondary);
+  color: var(--text-500);
   font-style: italic;
 }
 
@@ -80,7 +80,7 @@
   align-items: baseline;
   padding: 10px 0 0;
   margin-top: 8px;
-  border-top: 1px solid var(--color-border);
+  border-top: 1px solid var(--border);
   font-size: 15px;
   font-weight: 600;
 }
@@ -91,7 +91,7 @@
 
 .divider {
   height: 1px;
-  background: var(--color-border);
+  background: var(--border);
   margin: 16px 0;
 }
 
@@ -104,7 +104,7 @@
 }
 
 .grandTotal span:last-child {
-  color: var(--color-primary);
+  color: var(--brand-700);
   font-variant-numeric: tabular-nums;
 }
 
@@ -112,8 +112,8 @@
   width: 100%;
   padding: 14px;
   border: none;
-  border-radius: var(--radius-button);
-  background: var(--color-success);
+  border-radius: var(--radius-lg);
+  background: var(--success);
   color: white;
   font-size: 16px;
   font-weight: 700;
@@ -138,7 +138,7 @@
 }
 
 .dialog {
-  background: var(--color-card);
+  background: var(--surface-0);
   border-radius: 16px;
   padding: 24px;
   max-width: 320px;
@@ -162,18 +162,18 @@
   flex: 1;
   padding: 12px;
   border: none;
-  border-radius: var(--radius-button);
+  border-radius: var(--radius-lg);
   font-size: 16px;
   font-weight: 600;
   min-height: 48px;
 }
 
 .cancelButton {
-  background: var(--color-bg);
-  color: var(--color-text-secondary);
+  background: var(--surface-50);
+  color: var(--text-500);
 }
 
 .confirmButton {
-  background: var(--color-success);
+  background: var(--success);
   color: white;
 }

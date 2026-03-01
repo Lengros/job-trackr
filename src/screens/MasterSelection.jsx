@@ -17,16 +17,19 @@ export default function MasterSelection() {
     <div className={styles.container}>
       <h1 className={styles.title}>JobTrackr</h1>
       <p className={styles.subtitle}>Select your profile to get started</p>
-      <div className={styles.grid}>
+      <div className={styles.grid} role="list" aria-label="Available workers">
         {state.masters.map((master) => (
           <button
             key={master.id}
             className={styles.card}
             onClick={() => handleSelect(master.id)}
+            role="listitem"
+            aria-label={`Select ${master.name}, ${master.specialization}`}
           >
             <div
               className={styles.avatar}
               style={{ backgroundColor: master.avatarColor }}
+              aria-hidden="true"
             >
               {master.name.charAt(0)}
             </div>

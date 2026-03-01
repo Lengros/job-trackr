@@ -2,6 +2,7 @@ import { useState, useRef, useCallback, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { useApp } from '../context/AppContext'
 import PageTransition from '../components/PageTransition'
+import { CheckCircle, Clock, ArrowsClockwise, Warning, Lightning, ArrowDown, ClipboardText } from '@phosphor-icons/react'
 import styles from '../styles/JobList.module.css'
 
 const TABS = ['all', 'new', 'in_progress', 'completed']
@@ -11,14 +12,6 @@ const STATUS_CLASS = {
   new: 'statusNew',
   in_progress: 'statusInProgress',
   completed: 'statusCompleted',
-}
-
-const SYNC_ICONS = {
-  synced: '\u2713',
-  pending: '\u25F7',
-  syncing: '\u21BB',
-  error: '\u26A0',
-  conflict: '\u26A1',
 }
 
 const PULL_THRESHOLD = 60
@@ -160,15 +153,15 @@ export default function JobList() {
           aria-label="Pull to refresh indicator"
         >
           <div className={`${styles.pullSpinner} ${refreshing ? styles.spinning : ''}`}>
-            {refreshing ? '↻' : pullDistance >= PULL_THRESHOLD ? '↓ Release to refresh' : '↓ Pull to refresh'}
+            {refreshing ? <ArrowsClockwise size={20} /> : pullDistance >= PULL_THRESHOLD ? <><ArrowDown size={20} /> Release to refresh</> : <><ArrowDown size={20} /> Pull to refresh</>}
           </div>
         </div>
       )}
 
-      <div className={styles.list}>
+      <div className={styles.list} role="list" aria-label="Job list">
         {filteredJobs.length === 0 ? (
           <div className={styles.emptyState}>
-            <span className={styles.emptyIcon}>📋</span>
+            <span className={styles.emptyIcon} role="img" aria-hidden="true"><ClipboardText size={48} /></span>
             <p>No {activeTab === 'all' ? '' : TAB_LABELS[activeTab].toLowerCase()} jobs</p>
           </div>
         ) : (
@@ -177,11 +170,15 @@ export default function JobList() {
               key={job.id}
               className={styles.card}
               onClick={() => navigate(`/jobs/${job.id}`)}
+              role="listitem"
+              aria-label={`${job.number}, ${job.address}, ${TAB_LABELS[job.status] || job.status}`}
             >
               <div className={styles.cardHeader}>
                 <span className={styles.jobNumber}>{job.number}</span>
                 <span
                   className={`${styles.statusBadge} ${styles[STATUS_CLASS[job.status]] || ''}`}
+                  role="status"
+                  aria-live="polite"
                 >
                   {TAB_LABELS[job.status] || job.status}
                 </span>
@@ -197,8 +194,14 @@ export default function JobList() {
                 <span
                   className={`${styles.syncIcon} ${styles[`sync_${job.syncStatus}`]}`}
                   title={job.syncStatus}
+                  aria-label={`Sync status: ${job.syncStatus}`}
+                  role="img"
                 >
-                  {SYNC_ICONS[job.syncStatus] || '?'}
+                  {job.syncStatus === 'synced' && <CheckCircle size={20} />}
+                  {job.syncStatus === 'pending' && <Clock size={20} />}
+                  {job.syncStatus === 'syncing' && <ArrowsClockwise size={20} />}
+                  {job.syncStatus === 'error' && <Warning size={20} />}
+                  {job.syncStatus === 'conflict' && <Lightning size={20} />}
                 </span>
               </div>
             </button>
