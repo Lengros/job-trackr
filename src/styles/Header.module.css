@@ -15,7 +15,7 @@
 }
 
 .masterName {
-  font-size: 18px;
+  font-size: 1.125rem;
   font-weight: 600;
   overflow: hidden;
   text-overflow: ellipsis;
@@ -41,7 +41,7 @@
   border-radius: 20px;
   background: transparent;
   color: white;
-  font-size: 13px;
+  font-size: 0.8125rem;
   font-weight: 600;
   min-height: 48px;
   min-width: 44px;
@@ -61,7 +61,7 @@
   border-radius: 20px;
   background: transparent;
   color: white;
-  font-size: 13px;
+  font-size: 0.8125rem;
   font-weight: 600;
   min-height: 48px;
   min-width: 44px;

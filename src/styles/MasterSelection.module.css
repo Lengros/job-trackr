@@ -9,14 +9,14 @@
 }
 
 .title {
-  font-size: 28px;
+  font-size: 1.75rem;
   font-weight: 700;
   color: var(--brand-700);
   margin-bottom: 4px;
 }
 
 .subtitle {
-  font-size: 16px;
+  font-size: 1rem;
   color: var(--text-500);
   margin-bottom: 32px;
 }
@@ -60,7 +60,7 @@
   align-items: center;
   justify-content: center;
   color: white;
-  font-size: 20px;
+  font-size: 1.25rem;
   font-weight: 700;
 }
 
@@ -70,12 +70,12 @@
 }
 
 .name {
-  font-size: 18px;
+  font-size: 1.125rem;
   font-weight: 600;
   color: var(--text-900);
 }
 
 .specialization {
-  font-size: 14px;
+  font-size: 0.875rem;
   color: var(--text-500);
 }

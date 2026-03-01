@@ -10,7 +10,7 @@
   border: none;
   background: transparent;
   color: var(--brand-700);
-  font-size: 16px;
+  font-size: 1rem;
   font-weight: 600;
   min-height: 48px;
   min-width: 44px;
@@ -18,13 +18,13 @@
 }
 
 .title {
-  font-size: 22px;
+  font-size: 1.375rem;
   font-weight: 700;
   margin-bottom: 4px;
 }
 
 .subtitle {
-  font-size: 14px;
+  font-size: 0.875rem;
   color: var(--text-500);
   margin-bottom: 16px;
 }
@@ -83,12 +83,12 @@
 }
 
 .jobNumber {
-  font-size: 15px;
+  font-size: 0.9375rem;
   font-weight: 700;
 }
 
 .address {
-  font-size: 13px;
+  font-size: 0.8125rem;
   color: var(--text-500);
   overflow: hidden;
   text-overflow: ellipsis;
@@ -107,7 +107,7 @@
 .badge {
   padding: 3px 10px;
   border-radius: 10px;
-  font-size: 12px;
+  font-size: 0.75rem;
   font-weight: 700;
   text-transform: uppercase;
   letter-spacing: 0.5px;
@@ -146,6 +146,6 @@
 }
 
 .timestamp {
-  font-size: 12px;
+  font-size: 0.75rem;
   color: var(--text-500);
 }

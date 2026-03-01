@@ -18,32 +18,58 @@
 }
 
 .statusBar {
-  padding: 12px 16px;
-  border-radius: var(--radius-sm);
-  text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   margin-bottom: 16px;
 }
 
-.statusBar[data-status="new"] {
-  background: rgba(37, 99, 235, 0.1);
-  color: var(--brand-700);
+.statusLabel {
+  display: inline-flex;
+  align-items: center;
+  height: 32px;
+  padding: 4px 14px;
+  border-radius: 16px;
+  font-size: 14px;
+  font-weight: 600;
+  white-space: nowrap;
 }
 
-.statusBar[data-status="in_progress"] {
-  background: rgba(245, 158, 11, 0.1);
+.statusLabel::before {
+  content: '';
+  display: inline-block;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  margin-right: 6px;
+  flex-shrink: 0;
+}
+
+.statusBar[data-status="new"] .statusLabel {
+  background: var(--brand-200);
+  color: var(--brand-800);
+}
+
+.statusBar[data-status="new"] .statusLabel::before {
+  background-color: var(--brand-700);
+}
+
+.statusBar[data-status="in_progress"] .statusLabel {
+  background: var(--warning-bg);
   color: var(--warning-text);
 }
 
-.statusBar[data-status="completed"] {
-  background: rgba(22, 163, 74, 0.1);
+.statusBar[data-status="in_progress"] .statusLabel::before {
+  background-color: var(--warning);
+}
+
+.statusBar[data-status="completed"] .statusLabel {
+  background: var(--success-bg);
   color: var(--success);
 }
 
-.statusLabel {
-  font-size: 18px;
-  font-weight: 700;
-  text-transform: uppercase;
-  letter-spacing: 1px;
+.statusBar[data-status="completed"] .statusLabel::before {
+  background-color: var(--success);
 }
 
 .infoCard {

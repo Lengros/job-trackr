@@ -95,25 +95,51 @@
 }
 
 .statusBadge {
-  padding: 3px 10px;
-  border-radius: 12px;
-  color: white;
-  font-size: 12px;
-  font-weight: 700;
-  text-transform: uppercase;
-  letter-spacing: 0.5px;
+  display: inline-flex;
+  align-items: center;
+  height: 28px;
+  padding: 4px 12px;
+  border-radius: 14px;
+  font-size: 13px;
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+.statusBadge::before {
+  content: '';
+  display: inline-block;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  margin-right: 6px;
+  flex-shrink: 0;
 }
 
 .statusNew {
-  background-color: var(--brand-700);
+  background-color: #DBEAFE;
+  color: #1E40AF;
+}
+
+.statusNew::before {
+  background-color: #2563EB;
 }
 
 .statusInProgress {
-  background-color: var(--warning);
+  background-color: #FEF3C7;
+  color: #92400E;
+}
+
+.statusInProgress::before {
+  background-color: #D97706;
 }
 
 .statusCompleted {
-  background-color: var(--success);
+  background-color: #DCFCE7;
+  color: #166534;
+}
+
+.statusCompleted::before {
+  background-color: #16A34A;
 }
 
 .cardBody {
