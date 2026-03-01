@@ -1,4 +1,3 @@
-import { useState } from 'react'
 import { useParams } from 'react-router-dom'
 import { useApp } from '../context/AppContext'
 import { useToast } from '../context/ToastContext'
@@ -11,7 +10,6 @@ export default function JobSummary() {
   const { jobId } = useParams()
   const { state, dispatch } = useApp()
   const { showToast } = useToast()
-  const [showConfirm, setShowConfirm] = useState(false)
   const strings = useStrings()
   const formatCurrency = useCurrencyFormatter()
 
@@ -27,6 +25,7 @@ export default function JobSummary() {
     return <div>{strings.jobDetail.notFound}</div>
   }
 
+  // Forward status transition: instant dispatch + undo toast (no confirmation dialog)
   const handleComplete = () => {
     const previousStatus = job.status
     dispatch({
@@ -34,7 +33,6 @@ export default function JobSummary() {
       payload: { jobId: job.id, newStatus: 'completed' },
     })
     haptic.success()
-    setShowConfirm(false)
 
     showToast({
       type: 'success',
@@ -116,34 +114,15 @@ export default function JobSummary() {
       {/* Spacer for sticky CTA */}
       {job.status === 'in_progress' && <div className={styles.ctaSpacer} />}
 
-      {/* Sticky bottom CTA */}
+      {/* Sticky bottom CTA - instant action with undo toast */}
       {job.status === 'in_progress' && (
         <div className={styles.stickyCtaBar}>
           <button
             className={`${styles.completeButton} interactive`}
-            onClick={() => setShowConfirm(true)}
+            onClick={handleComplete}
           >
             {strings.jobDetail.completeJob}
           </button>
-        </div>
-      )}
-
-      {showConfirm && (
-        <div className={styles.overlay} role="dialog" aria-modal="true" aria-label={strings.confirm.jobCompletion}>
-          <div className={styles.dialog}>
-            <p>{strings.confirm.completeJob}</p>
-            <div className={styles.dialogButtons}>
-              <button
-                className={styles.cancelButton}
-                onClick={() => setShowConfirm(false)}
-              >
-                {strings.confirm.cancel}
-              </button>
-              <button className={styles.confirmButton} onClick={handleComplete}>
-                {strings.confirm.confirm}
-              </button>
-            </div>
-          </div>
         </div>
       )}
     </div>

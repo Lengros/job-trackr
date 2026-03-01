@@ -111,7 +111,9 @@
   "sync": {
     "title": "Sync Status",
     "items": "items",
-    "listLabel": "Sync status list"
+    "listLabel": "Sync status list",
+    "tapToRetry": "Tap to retry",
+    "retrying": "Retrying..."
   },
   "pullToRefresh": {
     "pull": "Pull to refresh",

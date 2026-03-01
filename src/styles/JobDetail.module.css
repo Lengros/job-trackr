@@ -549,6 +549,69 @@
   opacity: 0.9;
 }
 
+/* ── Overflow Menu (for completed jobs) ── */
+.statusRow {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: var(--space-3);
+}
+
+.overflowBtn {
+  width: 48px;
+  height: 48px;
+  min-width: 48px;
+  min-height: 48px;
+  border: none;
+  background: transparent;
+  color: var(--text-500);
+  font-size: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: var(--radius-sm);
+  -webkit-tap-highlight-color: transparent;
+  transition: background 0.15s ease;
+}
+
+.overflowBtn:active {
+  background: var(--surface-50);
+}
+
+.overflowMenu {
+  position: absolute;
+  right: var(--space-4);
+  top: 56px;
+  background: var(--surface-0);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-card);
+  z-index: 100;
+  min-width: 180px;
+  overflow: hidden;
+}
+
+.overflowMenuItem {
+  width: 100%;
+  padding: var(--space-3) var(--space-4);
+  border: none;
+  background: transparent;
+  text-align: left;
+  font-size: var(--font-size-body);
+  font-weight: var(--font-weight-body-medium);
+  color: var(--text-900);
+  min-height: 48px;
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  -webkit-tap-highlight-color: transparent;
+  transition: background 0.15s ease;
+}
+
+.overflowMenuItem:active {
+  background: var(--surface-50);
+}
+
 /* ── Legacy compat - keep backButton in case Layout references it ── */
 .backButton {
   display: inline-flex;

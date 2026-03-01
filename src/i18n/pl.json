@@ -111,7 +111,9 @@
   "sync": {
     "title": "Status synchronizacji",
     "items": "pozycji",
-    "listLabel": "Lista statusów synchronizacji"
+    "listLabel": "Lista statusów synchronizacji",
+    "tapToRetry": "Dotknij, aby ponowić",
+    "retrying": "Ponawianie..."
   },
   "pullToRefresh": {
     "pull": "Pociągnij, aby odświeżyć",

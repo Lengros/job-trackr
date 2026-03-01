@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState, useEffect, useRef } from 'react'
 import { useParams, useNavigate } from 'react-router-dom'
 import { useApp } from '../context/AppContext'
 import { useToast } from '../context/ToastContext'
@@ -13,6 +13,8 @@ import {
   Plus,
   Trash,
   PencilSimple,
+  DotsThreeVertical,
+  ArrowCounterClockwise,
 } from '@phosphor-icons/react'
 import styles from '../styles/JobDetail.module.css'
 
@@ -23,18 +25,35 @@ export default function JobDetail() {
   const { showToast } = useToast()
   const strings = useStrings()
   const formatCurrency = useCurrencyFormatter()
-  const [showConfirm, setShowConfirm] = useState(false)
-  const [pendingStatus, setPendingStatus] = useState(null)
+  const [showReopenConfirm, setShowReopenConfirm] = useState(false)
+  const [showOverflowMenu, setShowOverflowMenu] = useState(false)
   const [uploading, setUploading] = useState(false)
   const [deletePhotoTarget, setDeletePhotoTarget] = useState(null)
   const [deleteExpenseTarget, setDeleteExpenseTarget] = useState(null)
   const [notesText, setNotesText] = useState(null) // lazy init from job.notes
+  const overflowRef = useRef(null)
 
   const statusLabels = {
     new: strings.status.new,
     in_progress: strings.status.inProgress,
     completed: strings.status.completed,
   }
+
+  // Close overflow menu when clicking outside
+  useEffect(() => {
+    if (!showOverflowMenu) return
+    const handleClickOutside = (e) => {
+      if (overflowRef.current && !overflowRef.current.contains(e.target)) {
+        setShowOverflowMenu(false)
+      }
+    }
+    document.addEventListener('mousedown', handleClickOutside)
+    document.addEventListener('touchstart', handleClickOutside)
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside)
+      document.removeEventListener('touchstart', handleClickOutside)
+    }
+  }, [showOverflowMenu])
 
   const job = state.jobs.find((j) => j.id === Number(jobId))
   const jobIdNum = Number(jobId)
@@ -54,27 +73,48 @@ export default function JobDetail() {
   const currentNotes = notesText !== null ? notesText : (job.notes || '')
   const charCount = currentNotes.length
 
-  const handleStatusChange = (newStatus) => {
-    setPendingStatus(newStatus)
-    setShowConfirm(true)
-  }
-
-  const confirmStatusChange = () => {
+  // Forward status transitions: no confirmation dialog, instant dispatch + undo toast
+  const handleForwardStatusChange = (newStatus) => {
     const previousStatus = job.status
-    const targetStatus = pendingStatus
     dispatch({
       type: 'UPDATE_JOB_STATUS',
-      payload: { jobId: job.id, newStatus: targetStatus },
+      payload: { jobId: job.id, newStatus },
     })
-    if (targetStatus === 'completed') {
+    if (newStatus === 'completed') {
       haptic.success()
     }
-    setShowConfirm(false)
-    setPendingStatus(null)
 
     showToast({
       type: 'success',
-      message: `${strings.toast.statusChanged} ${statusLabels[targetStatus]}`,
+      message: `${strings.toast.statusChanged} ${statusLabels[newStatus]}`,
+      actionLabel: strings.toast.undo,
+      action: () => {
+        dispatch({
+          type: 'UPDATE_JOB_STATUS',
+          payload: { jobId: job.id, newStatus: previousStatus },
+        })
+      },
+      duration: 4000,
+    })
+  }
+
+  // Reopen (done→in_progress): requires confirmation dialog
+  const handleReopenRequest = () => {
+    setShowOverflowMenu(false)
+    setShowReopenConfirm(true)
+  }
+
+  const confirmReopen = () => {
+    const previousStatus = job.status
+    dispatch({
+      type: 'UPDATE_JOB_STATUS',
+      payload: { jobId: job.id, newStatus: 'in_progress' },
+    })
+    setShowReopenConfirm(false)
+
+    showToast({
+      type: 'success',
+      message: `${strings.toast.statusChanged} ${statusLabels['in_progress']}`,
       actionLabel: strings.toast.undo,
       action: () => {
         dispatch({
@@ -138,7 +178,7 @@ export default function JobDetail() {
     // On mobile, geo: URI will open the default maps app
   }
 
-  // CTA label
+  // CTA label - forward transitions only (no confirmation needed)
   const ctaLabel =
     job.status === 'new'
       ? strings.jobDetail.startJob
@@ -147,24 +187,48 @@ export default function JobDetail() {
       : null
   const ctaAction =
     job.status === 'new'
-      ? () => handleStatusChange('in_progress')
+      ? () => handleForwardStatusChange('in_progress')
       : job.status === 'in_progress'
-      ? () => handleStatusChange('completed')
+      ? () => handleForwardStatusChange('completed')
       : null
 
   return (
     <PageTransition>
       <div className={styles.container}>
-        {/* Status Badge */}
-        <div
-          className={styles.statusBar}
-          data-status={job.status}
-          role="status"
-          aria-live="polite"
-        >
-          <span className={styles.statusLabel}>
-            {statusLabels[job.status]}
-          </span>
+        {/* Status Badge + Overflow Menu */}
+        <div className={styles.statusRow}>
+          <div
+            className={styles.statusBar}
+            data-status={job.status}
+            role="status"
+            aria-live="polite"
+          >
+            <span className={styles.statusLabel}>
+              {statusLabels[job.status]}
+            </span>
+          </div>
+          {job.status === 'completed' && (
+            <div style={{ position: 'relative' }} ref={overflowRef}>
+              <button
+                className={styles.overflowBtn}
+                onClick={() => setShowOverflowMenu((prev) => !prev)}
+                aria-label="More actions"
+              >
+                <DotsThreeVertical size={24} weight="bold" />
+              </button>
+              {showOverflowMenu && (
+                <div className={styles.overflowMenu}>
+                  <button
+                    className={styles.overflowMenuItem}
+                    onClick={handleReopenRequest}
+                  >
+                    <ArrowCounterClockwise size={18} />
+                    {strings.jobDetail.reopenJob}
+                  </button>
+                </div>
+              )}
+            </div>
+          )}
         </div>
 
         {/* Address as h1 with MapPin */}
@@ -352,29 +416,26 @@ export default function JobDetail() {
           </div>
         )}
 
-        {/* Confirmation Dialog */}
-        {showConfirm && (
+        {/* Reopen Confirmation Dialog (only for done→in_progress) */}
+        {showReopenConfirm && (
           <div
             className={styles.overlay}
             role="dialog"
             aria-modal="true"
-            aria-label={strings.confirm.statusChange}
+            aria-label={strings.confirm.reopenConfirmation}
           >
             <div className={styles.dialog}>
-              <p>
-                {strings.confirm.changeStatus}{' '}
-                <strong>{statusLabels[pendingStatus]}</strong>?
-              </p>
+              <p>{strings.confirm.reopenJob}</p>
               <div className={styles.dialogButtons}>
                 <button
                   className={styles.cancelButton}
-                  onClick={() => setShowConfirm(false)}
+                  onClick={() => setShowReopenConfirm(false)}
                 >
                   {strings.confirm.cancel}
                 </button>
                 <button
                   className={styles.confirmButton}
-                  onClick={confirmStatusChange}
+                  onClick={confirmReopen}
                 >
                   {strings.confirm.confirm}
                 </button>
