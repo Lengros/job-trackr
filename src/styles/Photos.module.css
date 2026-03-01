@@ -44,7 +44,7 @@
   color: var(--text-500);
 }
 
-/* Delete button: 24x24 circle, top-right, red bg, white × */
+/* Delete button: 24x24 circle, top-right, red bg, white × — 48px tap target via ::after */
 .deleteBtn {
   position: absolute;
   top: -6px;
@@ -65,6 +65,17 @@
   cursor: pointer;
   z-index: 2;
   line-height: 1;
+}
+
+/* Extend tap target to 48x48 minimum via pseudo-element */
+.deleteBtn::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 48px;
+  height: 48px;
+  transform: translate(-50%, -50%);
 }
 
 .deleteBtn:active {
@@ -179,6 +190,7 @@
   font-weight: var(--font-weight-label);
   cursor: pointer;
   margin-top: 12px;
+  min-height: 48px;
   transition: background-color 0.15s ease, border-color 0.15s ease;
 }
 

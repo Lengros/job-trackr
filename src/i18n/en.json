@@ -50,6 +50,7 @@
     "workCost": "Work Cost",
     "startJob": "Start Job",
     "completeJob": "Complete Job",
+    "reopenJob": "Reopen Job",
     "notFound": "Job not found",
     "scopeOfWork": "Scope of Work",
     "notes": "Notes",
@@ -122,13 +123,15 @@
     "deletePhoto": "Delete this photo?",
     "deleteExpense": "Delete this expense?",
     "completeJob": "Mark this job as Completed?",
+    "reopenJob": "Are you sure?",
     "cancel": "Cancel",
     "confirm": "Confirm",
     "delete": "Delete",
     "statusChange": "Confirm status change",
     "photoDeletion": "Confirm photo deletion",
     "expenseDeletion": "Confirm expense deletion",
-    "jobCompletion": "Confirm job completion"
+    "jobCompletion": "Confirm job completion",
+    "reopenConfirmation": "Confirm job reopen"
   },
   "toast": {
     "statusChanged": "Status changed to",
@@ -148,7 +151,15 @@
     "offline": "You are offline",
     "offlineMessage": "No saved jobs. Connect to the network and try again.",
     "retry": "Retry",
-    "noJobs": "No jobs"
+    "noJobs": "No jobs for today",
+    "noJobsSubtitle": "Check again later",
+    "refresh": "Refresh",
+    "noExpenses": "No material costs",
+    "noExpensesSubtitle": "Add items to track expenses",
+    "addItem": "Add Item",
+    "noPhotos": "No photos",
+    "noPhotosSubtitle": "Take photos to document this job",
+    "addPhoto": "Add Photo"
   },
   "profile": {
     "noProfile": "No profile selected",

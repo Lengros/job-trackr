@@ -175,7 +175,7 @@
   color: var(--brand-700);
   font-size: var(--font-size-button-sm);
   font-weight: var(--font-weight-button-sm);
-  min-height: 36px;
+  min-height: 48px;
   white-space: nowrap;
   transition: background 0.15s ease;
   -webkit-tap-highlight-color: transparent;
@@ -279,6 +279,17 @@
   -webkit-tap-highlight-color: transparent;
 }
 
+/* Extend tap target to 48x48 minimum via ::after pseudo-element */
+.photoDeleteBtn::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 48px;
+  height: 48px;
+  transform: translate(-50%, -50%);
+}
+
 .photoUploading {
   background: var(--brand-100);
   border: 2px dashed var(--brand-400);
@@ -362,8 +373,10 @@
 }
 
 .expenseActionBtn {
-  width: 32px;
-  height: 32px;
+  width: 48px;
+  height: 48px;
+  min-width: 48px;
+  min-height: 48px;
   border-radius: var(--radius-sm);
   border: 1px solid var(--border);
   background: var(--surface-0);

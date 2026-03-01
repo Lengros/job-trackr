@@ -4,6 +4,7 @@ import { useApp } from '../context/AppContext'
 import { useStrings, useCurrencyFormatter } from '../i18n/useStrings'
 import haptic from '../utils/haptic'
 import PageTransition from '../components/PageTransition'
+import EmptyState from '../components/EmptyState'
 import { CurrencyDollar, Trash, Plus } from '@phosphor-icons/react'
 import styles from '../styles/Expenses.module.css'
 
@@ -333,15 +334,13 @@ export default function Expenses() {
       <h2 className={styles.title}>{strings.expenses.title}</h2>
 
       {jobExpenses.length === 0 && !addingNew ? (
-        <div className={styles.emptyState}>
-          <span className={styles.emptyIcon} aria-hidden="true"><CurrencyDollar size={48} /></span>
-          <p>{strings.expenses.noExpenses}</p>
-          <p className={styles.emptyHint}>{strings.expenses.addFirstExpense}</p>
-          <button className={styles.addButton} onClick={handleStartAdd}>
-            <Plus size={18} weight="bold" aria-hidden="true" />
-            {strings.expenses.addExpense}
-          </button>
-        </div>
+        <EmptyState
+          icon={<CurrencyDollar size={48} />}
+          title={strings.empty.noExpenses}
+          subtitle={strings.empty.noExpensesSubtitle}
+          actionLabel={strings.empty.addItem}
+          onAction={handleStartAdd}
+        />
       ) : (
         <>
           <div className={styles.expenseList} role="list" aria-label={strings.expenses.listLabel}>

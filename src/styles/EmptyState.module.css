@@ -1,0 +1,55 @@
+/* EmptyState — design guide §7 */
+/* Centered content: icon, title, subtitle, optional action */
+
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: var(--space-8) var(--space-4);
+  min-height: 200px;
+  gap: var(--space-2);
+}
+
+.icon {
+  color: var(--text-500);
+  margin-bottom: var(--space-2);
+  opacity: 0.5;
+}
+
+.title {
+  font-size: var(--font-size-h3);
+  font-weight: var(--font-weight-h3);
+  line-height: var(--line-height-h3);
+  color: var(--text-900);
+}
+
+.subtitle {
+  font-size: var(--font-size-body);
+  font-weight: var(--font-weight-body);
+  line-height: var(--line-height-body);
+  color: var(--text-500);
+  max-width: 280px;
+}
+
+.actionButton {
+  margin-top: var(--space-3);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-2);
+  height: 44px;
+  padding: 0 var(--space-5);
+  border: 1.5px solid var(--brand-600);
+  border-radius: var(--radius-md);
+  background: transparent;
+  color: var(--brand-600);
+  font-size: var(--font-size-button-sm);
+  font-weight: var(--font-weight-button-sm);
+  transition: background-color 0.15s ease;
+}
+
+.actionButton:active {
+  background: var(--brand-100);
+}

@@ -4,6 +4,7 @@ import { useApp } from '../context/AppContext'
 import { useStrings } from '../i18n/useStrings'
 import haptic from '../utils/haptic'
 import PageTransition from '../components/PageTransition'
+import EmptyState from '../components/EmptyState'
 import { Camera, X, Image } from '@phosphor-icons/react'
 import styles from '../styles/Photos.module.css'
 
@@ -78,11 +79,13 @@ export default function Photos() {
       </p>
 
       {jobPhotos.length === 0 && !uploading ? (
-        <div className={styles.emptyState}>
-          <span className={styles.emptyIcon} aria-hidden="true"><Camera size={48} /></span>
-          <p>{strings.photos.noPhotos}</p>
-          <p className={styles.emptyHint}>{strings.photos.addFirstPhoto}</p>
-        </div>
+        <EmptyState
+          icon={<Camera size={48} />}
+          title={strings.empty.noPhotos}
+          subtitle={strings.empty.noPhotosSubtitle}
+          actionLabel={strings.empty.addPhoto}
+          onAction={handleCameraClick}
+        />
       ) : (
         <div className={styles.grid} role="list" aria-label={strings.photos.gallery}>
           {jobPhotos.map((photo, index) => (

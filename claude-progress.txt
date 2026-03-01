@@ -1,3 +1,51 @@
+## Session - 2026-03-01T20:24 (Features #70, #82, #69 - Screen Redesigns)
+
+### Completed Features
+
+- Feature #70: Redesign Job Detail Screen - PASSING
+  - Complete rewrite of JobDetail.jsx as single scrollable view (no separate sub-screens)
+  - Status badge at top with colored dot + pill
+  - Address as h1 with MapPin icon, tappable geo: URI link
+  - Client name (body text, muted)
+  - Phone row: tappable tel: link with phone icon, brand-100 background, 56px min-height
+  - Scope of Work section (h2 + paragraph)
+  - Notes textarea with auto-save on every onChange dispatch
+  - Inline Photos section: 4-column grid, add button, delete with confirmation
+  - Inline Expenses section: rows with edit/delete buttons, add item button
+  - Totals section: Materials Total, Labor Cost, divider, Grand Total (display font)
+  - Sticky CTA: "Start Job" / "Mark Complete" with confirmation dialog
+  - Desktop fallback for geo: URI (user agent detection → Google Maps)
+
+- Feature #82: Phone and Address Tap Integration - PASSING
+  - Phone row min-height: 56px (mobile tap target)
+  - Address link min-height: 56px (mobile tap target)
+  - handleAddressClick: detects iOS/Android for native geo: URI, falls back to Google Maps on desktop
+
+- Feature #69: Redesign Job List Screen - PASSING
+  - Complete rewrite of JobList.jsx and JobList.module.css
+  - Removed all pull-to-refresh code (touch/mouse handlers, keyboard shortcut, refs, CSS)
+  - Filter chips: pill-shaped buttons (border-radius: full) with counts
+  - Sort: chronological by createdDate (earliest first), completed jobs always at bottom
+  - Date headers: shown when multi-day, uppercase label style (FEB 22, 2026)
+  - Time prefix: left-aligned (15:30, 10:00) in caption font, 42px min-width
+  - Card layout: status dot + address (h3), contact name, work type, status badge + amount + sync icon
+  - Completed cards: opacity 0.6 muted styling
+  - Card styles: 12px radius (--radius-lg), 16px padding (--space-4), 12px gap (--space-3)
+  - Empty state with ClipboardText icon (48px), message, retry button
+  - Verified: all filter chips, card navigation, 2 masters (Ivan, Mike), zero console errors
+
+### Code Changes
+- Modified: src/screens/JobDetail.jsx - complete rewrite as single scrollable view
+- Modified: src/styles/JobDetail.module.css - new styles for inline sections, totals, sticky CTA
+- Modified: src/screens/JobList.jsx - complete rewrite with sorting, date grouping, filter chips
+- Modified: src/styles/JobList.module.css - new chip, card, date header styles; removed PTR styles
+
+### Current Status
+- 81/86 features passing (~94.2%)
+- Dev server running on localhost:5173
+
+---
+
 ## Session - 2026-03-01T20:20 (Feature #73 - Redesign Job Summary Screen)
 
 ### Completed Features

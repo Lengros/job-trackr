@@ -50,6 +50,7 @@
     "workCost": "Koszt pracy",
     "startJob": "Rozpocznij",
     "completeJob": "Zakończ zlecenie",
+    "reopenJob": "Wznów zlecenie",
     "notFound": "Nie znaleziono zlecenia",
     "scopeOfWork": "Zakres prac",
     "notes": "Notatki",
@@ -122,13 +123,15 @@
     "deletePhoto": "Usunąć to zdjęcie?",
     "deleteExpense": "Usunąć tę pozycję?",
     "completeJob": "Oznaczyć zlecenie jako zakończone?",
+    "reopenJob": "Czy na pewno?",
     "cancel": "Anuluj",
     "confirm": "Potwierdź",
     "delete": "Usuń",
     "statusChange": "Potwierdzenie zmiany statusu",
     "photoDeletion": "Potwierdzenie usunięcia zdjęcia",
     "expenseDeletion": "Potwierdzenie usunięcia pozycji",
-    "jobCompletion": "Potwierdzenie zakończenia zlecenia"
+    "jobCompletion": "Potwierdzenie zakończenia zlecenia",
+    "reopenConfirmation": "Potwierdzenie wznowienia zlecenia"
   },
   "toast": {
     "statusChanged": "Status zmieniony →",
@@ -148,7 +151,15 @@
     "offline": "Jesteś offline",
     "offlineMessage": "Brak zapisanych zleceń. Połącz się z siecią i spróbuj ponownie.",
     "retry": "Ponów",
-    "noJobs": "Brak zleceń"
+    "noJobs": "Brak zleceń na dziś",
+    "noJobsSubtitle": "Sprawdź ponownie później",
+    "refresh": "Odśwież",
+    "noExpenses": "Brak kosztów materiałów",
+    "noExpensesSubtitle": "Dodaj pozycje, aby śledzić koszty",
+    "addItem": "Dodaj pozycję",
+    "noPhotos": "Brak zdjęć",
+    "noPhotosSubtitle": "Zrób zdjęcia, aby udokumentować to zlecenie",
+    "addPhoto": "Dodaj zdjęcie"
   },
   "profile": {
     "noProfile": "Nie wybrano profilu",

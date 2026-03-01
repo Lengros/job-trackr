@@ -4,6 +4,7 @@ import { useApp } from '../context/AppContext'
 import { useStrings, useCurrencyFormatter } from '../i18n/useStrings'
 import PageTransition from '../components/PageTransition'
 import SkeletonCard from '../components/SkeletonCard'
+import EmptyState from '../components/EmptyState'
 import {
   CheckCircle,
   Clock,
@@ -185,45 +186,29 @@ export default function JobList() {
               <SkeletonCard />
             </>
           ) : !state.isOnline && masterJobs.length === 0 ? (
-            <div className={styles.emptyState}>
-              <span
-                className={styles.emptyIcon}
-                role="img"
-                aria-hidden="true"
-              >
-                <WifiSlash size={48} />
-              </span>
-              <p className={styles.emptyTitle}>{strings.empty.offline}</p>
-              <p className={styles.emptySubtext}>
-                {strings.empty.offlineMessage}
-              </p>
-              <button
-                className={styles.retryButton}
-                onClick={() => {
-                  setIsLoading(true)
-                  setTimeout(() => setIsLoading(false), SKELETON_LOAD_MS)
-                }}
-              >
-                {strings.empty.retry}
-              </button>
-            </div>
+            <EmptyState
+              icon={<WifiSlash size={48} />}
+              title={strings.empty.offline}
+              subtitle={strings.empty.offlineMessage}
+              actionLabel={strings.empty.retry}
+              onAction={() => {
+                setIsLoading(true)
+                setTimeout(() => setIsLoading(false), SKELETON_LOAD_MS)
+              }}
+            />
           ) : filteredJobs.length === 0 ? (
-            <div className={styles.emptyState}>
-              <span
-                className={styles.emptyIcon}
-                role="img"
-                aria-hidden="true"
-              >
-                <ClipboardText size={48} />
-              </span>
-              <p>
-                {activeTab === 'all'
-                  ? strings.empty.noJobs
-                  : `${strings.empty.noJobs} (${tabLabels[
-                      activeTab
-                    ].toLowerCase()})`}
-              </p>
-            </div>
+            <EmptyState
+              icon={<ClipboardText size={48} />}
+              title={activeTab === 'all'
+                ? strings.empty.noJobs
+                : `${strings.empty.noJobs} (${tabLabels[activeTab].toLowerCase()})`}
+              subtitle={strings.empty.noJobsSubtitle}
+              actionLabel={strings.empty.refresh}
+              onAction={() => {
+                setIsLoading(true)
+                setTimeout(() => setIsLoading(false), SKELETON_LOAD_MS)
+              }}
+            />
           ) : (
             dateGroups.map((group) => (
               <div key={group.dateKey} className={styles.dateGroup}>
