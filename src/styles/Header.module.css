@@ -79,3 +79,46 @@
 .actionButton:active {
   background: var(--surface-50);
 }
+
+/* Sync Indicator — subtle, state-driven */
+.syncIndicator {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  min-width: 40px;
+  min-height: 40px;
+  border: none;
+  background: transparent;
+  border-radius: var(--radius-full);
+  transition: background-color 0.15s ease;
+}
+
+.syncIndicator:active {
+  background: var(--surface-50);
+}
+
+/* Online + Syncing: rotating blue spinner */
+.syncSyncing {
+  color: var(--brand-600);
+}
+
+.spinIcon {
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+/* Offline: empty circle in warning color */
+.syncOffline {
+  color: var(--warning);
+}
+
+/* Sync Error: warning triangle in error color */
+.syncError {
+  color: var(--error);
+}

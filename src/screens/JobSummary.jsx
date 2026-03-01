@@ -2,6 +2,7 @@ import { useState } from 'react'
 import { useParams } from 'react-router-dom'
 import { useApp } from '../context/AppContext'
 import { useToast } from '../context/ToastContext'
+import { useStrings, formatCurrency } from '../i18n/useStrings'
 import haptic from '../utils/haptic'
 import PageTransition from '../components/PageTransition'
 import styles from '../styles/JobSummary.module.css'
@@ -11,6 +12,7 @@ export default function JobSummary() {
   const { state, dispatch } = useApp()
   const { showToast } = useToast()
   const [showConfirm, setShowConfirm] = useState(false)
+  const strings = useStrings()
 
   const job = state.jobs.find((j) => j.id === Number(jobId))
   const jobExpenses = state.expenses.filter((e) => e.jobId === Number(jobId))
@@ -21,7 +23,7 @@ export default function JobSummary() {
   const grandTotal = (job?.workCost || 0) + totalExpenses
 
   if (!job) {
-    return <div>Job not found</div>
+    return <div>{strings.jobDetail.notFound}</div>
   }
 
   const handleComplete = () => {
@@ -35,8 +37,8 @@ export default function JobSummary() {
 
     showToast({
       type: 'success',
-      message: 'Status changed \u2192 Completed',
-      actionLabel: 'Undo',
+      message: `${strings.toast.statusChanged} ${strings.status.completed}`,
+      actionLabel: strings.toast.undo,
       action: () => {
         dispatch({
           type: 'UPDATE_JOB_STATUS',
@@ -50,45 +52,45 @@ export default function JobSummary() {
   return (
     <PageTransition>
     <div className={styles.container}>
-      <h2 className={styles.title}>Job Summary</h2>
+      <h2 className={styles.title}>{strings.summary.title}</h2>
       <p className={styles.jobNumber}>{job.number}</p>
 
       <div className={styles.receipt}>
         <div className={styles.section}>
-          <h3>Work Cost</h3>
+          <h3>{strings.summary.workCost}</h3>
           <div className={styles.lineItem}>
-            <span>Service fee</span>
-            <span>${job.workCost.toFixed(2)}</span>
+            <span>{strings.summary.serviceFee}</span>
+            <span>{formatCurrency(job.workCost)}</span>
           </div>
         </div>
 
         <div className={styles.divider} />
 
         <div className={styles.section}>
-          <h3>Expenses</h3>
+          <h3>{strings.summary.expenses}</h3>
           {jobExpenses.length === 0 ? (
-            <p className={styles.noExpenses}>No expenses</p>
+            <p className={styles.noExpenses}>{strings.summary.noExpenses}</p>
           ) : (
             jobExpenses.map((exp) => (
               <div key={exp.id} className={styles.lineItem}>
                 <span>
-                  {exp.name} ({exp.quantity} × ${exp.unitPrice.toFixed(2)})
+                  {exp.name} ({exp.quantity} × {formatCurrency(exp.unitPrice)})
                 </span>
-                <span>${(exp.quantity * exp.unitPrice).toFixed(2)}</span>
+                <span>{formatCurrency(exp.quantity * exp.unitPrice)}</span>
               </div>
             ))
           )}
           <div className={styles.subtotal}>
-            <span>Total Expenses</span>
-            <span>${totalExpenses.toFixed(2)}</span>
+            <span>{strings.summary.totalExpenses}</span>
+            <span>{formatCurrency(totalExpenses)}</span>
           </div>
         </div>
 
         <div className={styles.divider} />
 
         <div className={styles.grandTotal}>
-          <span>Grand Total</span>
-          <span>${grandTotal.toFixed(2)}</span>
+          <span>{strings.summary.grandTotal}</span>
+          <span>{formatCurrency(grandTotal)}</span>
         </div>
       </div>
 
@@ -97,23 +99,23 @@ export default function JobSummary() {
           className={styles.completeButton}
           onClick={() => setShowConfirm(true)}
         >
-          Complete Job
+          {strings.jobDetail.completeJob}
         </button>
       )}
 
       {showConfirm && (
         <div className={styles.overlay} role="dialog" aria-modal="true" aria-label="Confirm job completion">
           <div className={styles.dialog}>
-            <p>Mark this job as <strong>Completed</strong>?</p>
+            <p>{strings.confirm.completeJob}</p>
             <div className={styles.dialogButtons}>
               <button
                 className={styles.cancelButton}
                 onClick={() => setShowConfirm(false)}
               >
-                Cancel
+                {strings.confirm.cancel}
               </button>
               <button className={styles.confirmButton} onClick={handleComplete}>
-                Confirm
+                {strings.confirm.confirm}
               </button>
             </div>
           </div>

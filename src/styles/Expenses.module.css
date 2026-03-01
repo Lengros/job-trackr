@@ -18,15 +18,17 @@
 }
 
 .title {
-  font-size: 1.375rem;
-  font-weight: 700;
+  font-size: var(--font-size-h1);
+  font-weight: var(--font-weight-h1);
+  line-height: var(--line-height-h1);
   margin-bottom: 16px;
 }
 
 /* Table wrapper */
 .tableWrapper {
   background: var(--surface-0);
-  border-radius: var(--radius-sm);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
   box-shadow: var(--shadow-card);
   overflow: hidden;
   margin-bottom: 12px;
@@ -40,7 +42,7 @@
   padding: 8px 8px 8px 12px;
   background: var(--surface-50);
   border-bottom: 2px solid var(--border);
-  font-size: 0.75rem;
+  font-size: var(--font-size-caption);
   font-weight: 700;
   color: var(--text-500);
   text-transform: uppercase;
@@ -59,7 +61,7 @@
   align-items: center;
   padding: 10px 8px 10px 12px;
   border-top: 1px solid var(--border);
-  font-size: 0.875rem;
+  font-size: var(--font-size-body);
 }
 
 .row:first-child {
@@ -128,30 +130,32 @@
   align-items: center;
   padding: 16px;
   background: var(--surface-0);
-  border-radius: var(--radius-sm);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
   box-shadow: var(--shadow-card);
   margin-bottom: 12px;
-  font-size: 1rem;
-  font-weight: 600;
+  font-size: var(--font-size-body-medium);
+  font-weight: var(--font-weight-body-medium);
 }
 
 .totalAmount {
-  font-size: 1.25rem;
-  font-weight: 700;
+  font-size: var(--font-size-h2);
+  font-weight: var(--font-weight-display);
   color: var(--brand-700);
   font-variant-numeric: tabular-nums;
 }
 
 .form {
   background: var(--surface-0);
-  border-radius: var(--radius-sm);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
   box-shadow: var(--shadow-card);
   padding: 16px;
 }
 
 .form h3 {
-  font-size: 1rem;
-  font-weight: 700;
+  font-size: var(--font-size-h3);
+  font-weight: var(--font-weight-h3);
   margin-bottom: 12px;
 }
 
@@ -161,8 +165,8 @@
 
 .formField label {
   display: block;
-  font-size: 0.8125rem;
-  font-weight: 600;
+  font-size: var(--font-size-label);
+  font-weight: var(--font-weight-label);
   color: var(--text-500);
   margin-bottom: 6px;
   letter-spacing: 0.01em;
@@ -185,7 +189,7 @@
 
 .error {
   display: block;
-  font-size: 0.75rem;
+  font-size: var(--font-size-caption);
   color: var(--error);
   margin-top: 6px;
   font-weight: 500;
@@ -211,14 +215,14 @@
 }
 
 .liveTotalLabel {
-  font-size: 0.875rem;
-  font-weight: 600;
+  font-size: var(--font-size-body);
+  font-weight: var(--font-weight-label);
   color: var(--text-500);
 }
 
 .liveTotalValue {
-  font-size: 1.125rem;
-  font-weight: 700;
+  font-size: var(--font-size-h3);
+  font-weight: var(--font-weight-display);
   color: var(--brand-700);
   font-variant-numeric: tabular-nums;
 }
@@ -236,8 +240,8 @@
   border-radius: var(--radius-lg);
   background: var(--cta);
   color: white;
-  font-size: 1.125rem;
-  font-weight: 700;
+  font-size: var(--font-size-button);
+  font-weight: var(--font-weight-button);
   min-height: 56px;
   box-shadow: var(--shadow-cta);
   transition: transform 0.1s ease, background-color 0.15s ease;
@@ -260,8 +264,8 @@
   border-radius: var(--radius-lg);
   background: var(--surface-0);
   color: var(--text-900);
-  font-size: 1rem;
-  font-weight: 600;
+  font-size: var(--font-size-button);
+  font-weight: var(--font-weight-button);
   min-height: 56px;
 }
 
@@ -285,7 +289,7 @@
 }
 
 .emptyHint {
-  font-size: 0.875rem;
+  font-size: var(--font-size-body);
   margin-top: 4px;
 }
 
@@ -311,7 +315,7 @@
 }
 
 .dialog p {
-  font-size: 1rem;
+  font-size: var(--font-size-body);
   margin-bottom: 20px;
 }
 
@@ -326,8 +330,8 @@
   padding: 12px;
   border: none;
   border-radius: var(--radius-lg);
-  font-size: 1rem;
-  font-weight: 600;
+  font-size: var(--font-size-button);
+  font-weight: var(--font-weight-button);
   min-height: 56px;
   transition: transform 0.1s ease;
 }

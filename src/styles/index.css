@@ -76,6 +76,51 @@
 
   /* ── Typography ── */
   --font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+
+  /* ── Type Scale ── */
+  --font-size-display: 1.75rem;       /* 28px */
+  --font-weight-display: 900;
+  --line-height-display: 1.2;
+
+  --font-size-h1: 1.5rem;             /* 24px */
+  --font-weight-h1: 700;
+  --line-height-h1: 1.2;
+
+  --font-size-h2: 1.25rem;            /* 20px */
+  --font-weight-h2: 700;
+  --line-height-h2: 1.2;
+
+  --font-size-h3: 1.0625rem;          /* 17px */
+  --font-weight-h3: 600;
+  --line-height-h3: 1.3;
+
+  --font-size-body: 0.9375rem;        /* 15px */
+  --font-weight-body: 400;
+  --line-height-body: 1.5;
+
+  --font-size-body-medium: 0.9375rem; /* 15px */
+  --font-weight-body-medium: 500;
+  --line-height-body-medium: 1.5;
+
+  --font-size-label: 0.8125rem;       /* 13px */
+  --font-weight-label: 600;
+  --line-height-label: 1.4;
+
+  --font-size-caption: 0.75rem;       /* 12px */
+  --font-weight-caption: 400;
+  --line-height-caption: 1.4;
+
+  --font-size-button: 1rem;           /* 16px */
+  --font-weight-button: 600;
+  --line-height-button: 1;
+
+  --font-size-button-sm: 0.875rem;    /* 14px */
+  --font-weight-button-sm: 600;
+  --line-height-button-sm: 1;
+
+  --font-size-tab: 0.75rem;           /* 12px — spec 11px raised to 12px min */
+  --font-weight-tab: 500;
+  --line-height-tab: 1.2;
 }
 
 *,
@@ -94,10 +139,12 @@ html {
 
 body {
   font-family: var(--font-family);
+  font-size: var(--font-size-body);
+  font-weight: var(--font-weight-body);
+  line-height: var(--line-height-body);
   font-variant-numeric: tabular-nums;
   background: var(--surface-50);
   color: var(--text-900);
-  line-height: 1.5;
   min-height: 100vh;
   -webkit-font-smoothing: antialiased;
   overflow-x: hidden;
@@ -116,7 +163,7 @@ button {
 
 input {
   font-family: inherit;
-  font-size: 0.9375rem;
+  font-size: var(--font-size-body);
   height: 52px;
   min-height: 52px;
   padding: 14px 16px;

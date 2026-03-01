@@ -9,14 +9,16 @@
 }
 
 .title {
-  font-size: 1.75rem;
-  font-weight: 700;
+  font-size: var(--font-size-display);
+  font-weight: var(--font-weight-display);
+  line-height: var(--line-height-display);
   color: var(--brand-700);
   margin-bottom: 4px;
 }
 
 .subtitle {
-  font-size: 1rem;
+  font-size: var(--font-size-body);
+  font-weight: var(--font-weight-body);
   color: var(--text-500);
   margin-bottom: 32px;
 }
@@ -37,7 +39,7 @@
   padding: 16px;
   background: var(--surface-0);
   border: 1px solid var(--border);
-  border-radius: var(--radius-sm);
+  border-radius: var(--radius-lg);
   box-shadow: var(--shadow-card);
   cursor: pointer;
   transition: all 0.15s ease;
@@ -45,10 +47,9 @@
   min-height: 72px;
 }
 
-.card:hover,
 .card:active {
-  border-color: var(--brand-700);
-  box-shadow: 0 2px 8px rgba(37, 99, 235, 0.2);
+  border-color: var(--brand-600);
+  background: var(--brand-100);
 }
 
 .avatar {
@@ -70,12 +71,14 @@
 }
 
 .name {
-  font-size: 1.125rem;
-  font-weight: 600;
+  font-size: var(--font-size-h3);
+  font-weight: var(--font-weight-h3);
+  line-height: var(--line-height-h3);
   color: var(--text-900);
 }
 
 .specialization {
-  font-size: 0.875rem;
+  font-size: var(--font-size-button-sm);
+  font-weight: var(--font-weight-caption);
   color: var(--text-500);
 }

@@ -18,28 +18,30 @@
 }
 
 .title {
-  font-size: 1.375rem;
-  font-weight: 700;
+  font-size: var(--font-size-h1);
+  font-weight: var(--font-weight-h1);
+  line-height: var(--line-height-h1);
   margin-bottom: 4px;
 }
 
 .jobNumber {
-  font-size: 0.875rem;
+  font-size: var(--font-size-button-sm);
+  font-weight: var(--font-weight-caption);
   color: var(--text-500);
   margin-bottom: 16px;
 }
 
 .receipt {
   background: var(--surface-0);
-  border-radius: var(--radius-sm);
+  border-radius: var(--radius-lg);
   box-shadow: var(--shadow-card);
   padding: 16px;
   margin-bottom: 12px;
 }
 
 .section h3 {
-  font-size: 0.8125rem;
-  font-weight: 600;
+  font-size: var(--font-size-label);
+  font-weight: var(--font-weight-label);
   color: var(--text-500);
   text-transform: uppercase;
   letter-spacing: 0.5px;
@@ -51,7 +53,7 @@
   justify-content: space-between;
   align-items: baseline;
   padding: 6px 0;
-  font-size: 0.875rem;
+  font-size: var(--font-size-body);
   gap: 8px;
 }
 
@@ -63,15 +65,15 @@
 
 .lineItem span:last-child {
   font-variant-numeric: tabular-nums;
-  font-weight: 600;
+  font-weight: var(--font-weight-display);
   flex-shrink: 0;
   text-align: right;
 }
 
 .noExpenses {
-  font-size: 0.875rem;
+  font-size: var(--font-size-body);
   color: var(--text-500);
-  font-style: italic;
+  font-style: normal;
 }
 
 .subtotal {
@@ -81,12 +83,13 @@
   padding: 10px 0 0;
   margin-top: 8px;
   border-top: 1px solid var(--border);
-  font-size: 0.9375rem;
-  font-weight: 600;
+  font-size: var(--font-size-body-medium);
+  font-weight: var(--font-weight-body-medium);
 }
 
 .subtotal span:last-child {
   font-variant-numeric: tabular-nums;
+  font-weight: var(--font-weight-display);
 }
 
 .divider {
@@ -99,8 +102,9 @@
   display: flex;
   justify-content: space-between;
   align-items: baseline;
-  font-size: 1.25rem;
-  font-weight: 700;
+  font-size: var(--font-size-display);
+  font-weight: var(--font-weight-display);
+  line-height: var(--line-height-display);
 }
 
 .grandTotal span:last-child {
@@ -115,8 +119,8 @@
   border-radius: var(--radius-lg);
   background: var(--cta);
   color: white;
-  font-size: 1.125rem;
-  font-weight: 700;
+  font-size: var(--font-size-button);
+  font-weight: var(--font-weight-button);
   min-height: 56px;
   box-shadow: var(--shadow-cta);
   transition: transform 0.1s ease, background-color 0.15s ease;
@@ -154,9 +158,9 @@
 }
 
 .dialog p {
-  font-size: 1rem;
+  font-size: var(--font-size-body);
   margin-bottom: 20px;
-  line-height: 1.4;
+  line-height: var(--line-height-body);
 }
 
 .dialogButtons {
@@ -170,8 +174,8 @@
   padding: 12px;
   border: none;
   border-radius: var(--radius-lg);
-  font-size: 1rem;
-  font-weight: 600;
+  font-size: var(--font-size-button);
+  font-weight: var(--font-weight-button);
   min-height: 56px;
   transition: transform 0.1s ease;
 }

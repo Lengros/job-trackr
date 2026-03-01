@@ -1,10 +1,12 @@
 import { useNavigate } from 'react-router-dom'
 import { useApp } from '../context/AppContext'
+import { useStrings } from '../i18n/useStrings'
 import PageTransition from '../components/PageTransition'
 import styles from '../styles/MasterSelection.module.css'
 
 export default function MasterSelection() {
   const { state, dispatch } = useApp()
+  const strings = useStrings()
   const navigate = useNavigate()
 
   const handleSelect = (masterId) => {
@@ -15,8 +17,8 @@ export default function MasterSelection() {
   return (
     <PageTransition>
     <div className={styles.container}>
-      <h1 className={styles.title}>JobTrackr</h1>
-      <p className={styles.subtitle}>Select your profile to get started</p>
+      <h1 className={styles.title}>{strings.app.name}</h1>
+      <p className={styles.subtitle}>{strings.app.selectProfile}</p>
       <div className={styles.grid} role="list" aria-label="Available workers">
         {state.masters.map((master) => (
           <button

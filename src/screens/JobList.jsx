@@ -1,13 +1,13 @@
 import { useState, useRef, useCallback, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { useApp } from '../context/AppContext'
+import { useStrings } from '../i18n/useStrings'
 import PageTransition from '../components/PageTransition'
 import SkeletonCard from '../components/SkeletonCard'
 import { CheckCircle, Clock, ArrowsClockwise, Warning, Lightning, ArrowDown, ClipboardText, WifiSlash } from '@phosphor-icons/react'
 import styles from '../styles/JobList.module.css'
 
 const TABS = ['all', 'new', 'in_progress', 'completed']
-const TAB_LABELS = { all: 'All', new: 'New', in_progress: 'In Progress', completed: 'Completed' }
 
 const STATUS_CLASS = {
   new: 'statusNew',
@@ -21,6 +21,29 @@ const SKELETON_LOAD_MS = 800
 export default function JobList() {
   const { state } = useApp()
   const navigate = useNavigate()
+  const strings = useStrings()
+
+  const tabLabels = {
+    all: strings.tabs.all,
+    new: strings.tabs.new,
+    in_progress: strings.tabs.inProgress,
+    completed: strings.tabs.completed,
+  }
+
+  const statusLabels = {
+    new: strings.status.new,
+    in_progress: strings.status.inProgress,
+    completed: strings.status.completed,
+  }
+
+  const syncStatusLabels = {
+    synced: strings.syncStatus.synced,
+    syncing: strings.syncStatus.syncing,
+    pending: strings.syncStatus.pending,
+    error: strings.syncStatus.error,
+    conflict: strings.syncStatus.conflict,
+  }
+
   const [activeTab, setActiveTab] = useState('all')
   const [pullDistance, setPullDistance] = useState(0)
   const [refreshing, setRefreshing] = useState(false)
@@ -151,7 +174,7 @@ export default function JobList() {
             className={`${styles.tab} ${activeTab === tab ? styles.activeTab : ''}`}
             onClick={() => setActiveTab(tab)}
           >
-            {TAB_LABELS[tab]}
+            {tabLabels[tab]}
             <span className={styles.count}>{getCount(tab)}</span>
           </button>
         ))}
@@ -164,7 +187,7 @@ export default function JobList() {
           aria-label="Pull to refresh indicator"
         >
           <div className={`${styles.pullSpinner} ${refreshing ? styles.spinning : ''}`}>
-            {refreshing ? <ArrowsClockwise size={20} /> : pullDistance >= PULL_THRESHOLD ? <><ArrowDown size={20} /> Release to refresh</> : <><ArrowDown size={20} /> Pull to refresh</>}
+            {refreshing ? <ArrowsClockwise size={20} /> : pullDistance >= PULL_THRESHOLD ? <><ArrowDown size={20} /> {strings.pullToRefresh.release}</> : <><ArrowDown size={20} /> {strings.pullToRefresh.pull}</>}
           </div>
         </div>
       )}
@@ -181,8 +204,8 @@ export default function JobList() {
           /* Offline with no cached data: show empty state with retry button */
           <div className={styles.emptyState}>
             <span className={styles.emptyIcon} role="img" aria-hidden="true"><WifiSlash size={48} /></span>
-            <p className={styles.emptyTitle}>You're offline</p>
-            <p className={styles.emptySubtext}>No cached jobs available. Connect to the network and try again.</p>
+            <p className={styles.emptyTitle}>{strings.empty.offline}</p>
+            <p className={styles.emptySubtext}>{strings.empty.offlineMessage}</p>
             <button
               className={styles.retryButton}
               onClick={() => {
@@ -190,13 +213,13 @@ export default function JobList() {
                 setTimeout(() => setIsLoading(false), SKELETON_LOAD_MS)
               }}
             >
-              Retry
+              {strings.empty.retry}
             </button>
           </div>
         ) : filteredJobs.length === 0 ? (
           <div className={styles.emptyState}>
             <span className={styles.emptyIcon} role="img" aria-hidden="true"><ClipboardText size={48} /></span>
-            <p>No {activeTab === 'all' ? '' : TAB_LABELS[activeTab].toLowerCase()} jobs</p>
+            <p>{activeTab === 'all' ? strings.empty.noJobs : `${strings.empty.noJobs} (${tabLabels[activeTab].toLowerCase()})`}</p>
           </div>
         ) : (
           filteredJobs.map((job) => (
@@ -205,38 +228,43 @@ export default function JobList() {
               className={styles.card}
               onClick={() => navigate(`/jobs/${job.id}`)}
               role="listitem"
-              aria-label={`${job.number}, ${job.address}, ${TAB_LABELS[job.status] || job.status}`}
+              aria-label={`${job.number}, ${job.address}, ${statusLabels[job.status] || job.status}`}
             >
-              <div className={styles.cardHeader}>
-                <span className={styles.jobNumber}>{job.number}</span>
+              <div className={styles.cardTop}>
+                <span className={`${styles.statusDot} ${styles[STATUS_CLASS[job.status]] || ''}`} />
+                <span className={styles.address}>{job.address}</span>
+              </div>
+              <div className={styles.cardMiddle}>
+                <span className={styles.contact}>{job.contactName}</span>
+                <span className={styles.separator}>·</span>
+                <span className={styles.time}>
+                  {new Date(job.createdDate).toLocaleDateString()}
+                </span>
+              </div>
+              <span className={styles.workType}>{job.workType}</span>
+              <div className={styles.cardBottom}>
                 <span
                   className={`${styles.statusBadge} ${styles[STATUS_CLASS[job.status]] || ''}`}
                   role="status"
                   aria-live="polite"
                 >
-                  {TAB_LABELS[job.status] || job.status}
+                  {statusLabels[job.status] || job.status}
                 </span>
-              </div>
-              <div className={styles.cardBody}>
-                <span className={styles.address}>{job.address}</span>
-                <span className={styles.workType}>{job.workType}</span>
-              </div>
-              <div className={styles.cardFooter}>
-                <span className={styles.date}>
-                  {new Date(job.createdDate).toLocaleDateString()}
-                </span>
-                <span
-                  className={`${styles.syncIcon} ${styles[`sync_${job.syncStatus}`]}`}
-                  title={job.syncStatus}
-                  aria-label={`Sync status: ${job.syncStatus}`}
-                  role="img"
-                >
-                  {job.syncStatus === 'synced' && <CheckCircle size={20} />}
-                  {job.syncStatus === 'pending' && <Clock size={20} />}
-                  {job.syncStatus === 'syncing' && <ArrowsClockwise size={20} />}
-                  {job.syncStatus === 'error' && <Warning size={20} />}
-                  {job.syncStatus === 'conflict' && <Lightning size={20} />}
-                </span>
+                <div className={styles.cardBottomRight}>
+                  <span className={styles.amount}>${job.workCost.toFixed(2)}</span>
+                  <span
+                    className={`${styles.syncIcon} ${styles[`sync_${job.syncStatus}`]}`}
+                    title={syncStatusLabels[job.syncStatus] || job.syncStatus}
+                    aria-label={`${strings.nav.sync}: ${syncStatusLabels[job.syncStatus] || job.syncStatus}`}
+                    role="img"
+                  >
+                    {job.syncStatus === 'synced' && <CheckCircle size={16} />}
+                    {job.syncStatus === 'pending' && <Clock size={16} />}
+                    {job.syncStatus === 'syncing' && <ArrowsClockwise size={16} />}
+                    {job.syncStatus === 'error' && <Warning size={16} />}
+                    {job.syncStatus === 'conflict' && <Lightning size={16} />}
+                  </span>
+                </div>
               </div>
             </button>
           ))

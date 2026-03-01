@@ -30,8 +30,8 @@
   height: 32px;
   padding: 4px 14px;
   border-radius: 16px;
-  font-size: 0.875rem;
-  font-weight: 600;
+  font-size: var(--font-size-button-sm);
+  font-weight: var(--font-weight-button-sm);
   white-space: nowrap;
 }
 
@@ -74,15 +74,16 @@
 
 .infoCard {
   background: var(--surface-0);
-  border-radius: var(--radius-sm);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
   box-shadow: var(--shadow-card);
   padding: 16px;
   margin-bottom: 16px;
 }
 
 .jobNumber {
-  font-size: 1.25rem;
-  font-weight: 700;
+  font-size: var(--font-size-h2);
+  font-weight: var(--font-weight-h2);
   margin-bottom: 12px;
 }
 
@@ -92,8 +93,8 @@
 
 .field label {
   display: block;
-  font-size: 0.75rem;
-  font-weight: 600;
+  font-size: var(--font-size-label);
+  font-weight: var(--font-weight-label);
   color: var(--text-500);
   text-transform: uppercase;
   letter-spacing: 0.5px;
@@ -101,14 +102,14 @@
 }
 
 .field p {
-  font-size: 1rem;
+  font-size: var(--font-size-body);
   color: var(--text-900);
-  line-height: 1.4;
+  line-height: var(--line-height-body);
 }
 
 .cost {
-  font-size: 1.25rem !important;
-  font-weight: 700;
+  font-size: var(--font-size-h2) !important;
+  font-weight: var(--font-weight-display);
   color: var(--brand-700) !important;
   font-variant-numeric: tabular-nums;
 }
@@ -131,8 +132,8 @@
   border-radius: var(--radius-lg);
   background: var(--cta);
   color: white;
-  font-size: 1.125rem;
-  font-weight: 700;
+  font-size: var(--font-size-button);
+  font-weight: var(--font-weight-button);
   min-height: 56px;
   margin-bottom: 16px;
   box-shadow: var(--shadow-cta);
@@ -164,8 +165,8 @@
   border: 1.5px solid var(--border);
   border-radius: var(--radius-lg);
   background: var(--surface-0);
-  font-size: 1rem;
-  font-weight: 600;
+  font-size: var(--font-size-button);
+  font-weight: var(--font-weight-button);
   color: var(--text-900);
   min-height: 56px;
   transition: all 0.15s ease;
@@ -203,9 +204,9 @@
 }
 
 .dialog p {
-  font-size: 1rem;
+  font-size: var(--font-size-body);
   margin-bottom: 20px;
-  line-height: 1.4;
+  line-height: var(--line-height-body);
 }
 
 .dialogButtons {
@@ -219,8 +220,8 @@
   padding: 12px;
   border: none;
   border-radius: var(--radius-lg);
-  font-size: 1rem;
-  font-weight: 600;
+  font-size: var(--font-size-button);
+  font-weight: var(--font-weight-button);
   min-height: 56px;
   transition: transform 0.1s ease;
 }

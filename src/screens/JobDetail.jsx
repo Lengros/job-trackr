@@ -72,15 +72,15 @@ export default function JobDetail() {
       <div className={styles.infoCard}>
         <h2 className={styles.jobNumber}>{job.number}</h2>
         <div className={styles.field}>
-          <label>Address</label>
+          <label>{strings.jobDetail.address}</label>
           <p>{job.address}</p>
         </div>
         <div className={styles.field}>
-          <label>Contact</label>
+          <label>{strings.jobDetail.contact}</label>
           <p>{job.contactName}</p>
         </div>
         <div className={styles.field}>
-          <label>Phone</label>
+          <label>{strings.jobDetail.phone}</label>
           <p>
             <a
               href={`tel:${job.contactPhone.replace(/[^+\d]/g, '')}`}
@@ -93,16 +93,16 @@ export default function JobDetail() {
           </p>
         </div>
         <div className={styles.field}>
-          <label>Work Description</label>
+          <label>{strings.jobDetail.workDescription}</label>
           <p>{job.workDescription}</p>
         </div>
         <div className={styles.field}>
-          <label>Comments</label>
+          <label>{strings.jobDetail.comments}</label>
           <p>{job.comments}</p>
         </div>
         <div className={styles.field}>
-          <label>Work Cost</label>
-          <p className={styles.cost}>${job.workCost.toFixed(2)}</p>
+          <label>{strings.jobDetail.workCost}</label>
+          <p className={styles.cost}>{formatCurrency(job.workCost)}</p>
         </div>
       </div>
 
@@ -111,7 +111,7 @@ export default function JobDetail() {
           className={styles.actionButton}
           onClick={() => handleStatusChange('in_progress')}
         >
-          Start Job
+          {strings.jobDetail.startJob}
         </button>
       )}
       {job.status === 'in_progress' && (
@@ -119,7 +119,7 @@ export default function JobDetail() {
           className={styles.actionButton}
           onClick={() => handleStatusChange('completed')}
         >
-          Complete Job
+          {strings.jobDetail.completeJob}
         </button>
       )}
 
@@ -128,19 +128,19 @@ export default function JobDetail() {
           className={styles.navButton}
           onClick={() => navigate(`/jobs/${job.id}/photos`)}
         >
-          <Camera size={20} /> Photos
+          <Camera size={20} /> {strings.nav.photos}
         </button>
         <button
           className={styles.navButton}
           onClick={() => navigate(`/jobs/${job.id}/expenses`)}
         >
-          <CurrencyDollar size={20} /> Expenses
+          <CurrencyDollar size={20} /> {strings.nav.expenses}
         </button>
         <button
           className={styles.navButton}
           onClick={() => navigate(`/jobs/${job.id}/summary`)}
         >
-          <ClipboardText size={20} /> Summary
+          <ClipboardText size={20} /> {strings.nav.summary}
         </button>
       </div>
 
@@ -148,20 +148,20 @@ export default function JobDetail() {
         <div className={styles.overlay} role="dialog" aria-modal="true" aria-label="Confirm status change">
           <div className={styles.dialog}>
             <p>
-              Change status to <strong>{STATUS_LABELS[pendingStatus]}</strong>?
+              {strings.confirm.changeStatus} <strong>{statusLabels[pendingStatus]}</strong>?
             </p>
             <div className={styles.dialogButtons}>
               <button
                 className={styles.cancelButton}
                 onClick={() => setShowConfirm(false)}
               >
-                Cancel
+                {strings.confirm.cancel}
               </button>
               <button
                 className={styles.confirmButton}
                 onClick={confirmStatusChange}
               >
-                Confirm
+                {strings.confirm.confirm}
               </button>
             </div>
           </div>

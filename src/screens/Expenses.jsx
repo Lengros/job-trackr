@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import { useParams } from 'react-router-dom'
 import { useApp } from '../context/AppContext'
+import { useStrings, formatCurrency } from '../i18n/useStrings'
 import haptic from '../utils/haptic'
 import PageTransition from '../components/PageTransition'
 import { CurrencyDollar, PencilSimple, Trash } from '@phosphor-icons/react'
@@ -9,6 +10,7 @@ import styles from '../styles/Expenses.module.css'
 export default function Expenses() {
   const { jobId } = useParams()
   const { state, dispatch } = useApp()
+  const strings = useStrings()
 
   const [name, setName] = useState('')
   const [quantity, setQuantity] = useState('')
@@ -30,22 +32,22 @@ export default function Expenses() {
 
   const validate = () => {
     const newErrors = {}
-    if (!name.trim()) newErrors.name = 'Item name is required'
+    if (!name.trim()) newErrors.name = strings.validation.nameRequired
     if (!quantity && quantity !== 0) {
-      newErrors.quantity = 'Quantity is required'
+      newErrors.quantity = strings.validation.quantityRequired
     } else if (Number(quantity) <= 0) {
-      newErrors.quantity = 'Quantity must be greater than 0'
+      newErrors.quantity = strings.validation.quantityPositive
     } else if (!Number.isFinite(Number(quantity))) {
-      newErrors.quantity = 'Please enter a valid number'
+      newErrors.quantity = strings.validation.quantityInvalid
     }
     if (!unitPrice && unitPrice !== 0) {
-      newErrors.unitPrice = 'Unit price is required'
+      newErrors.unitPrice = strings.validation.priceRequired
     } else if (Number(unitPrice) < 0) {
-      newErrors.unitPrice = 'Unit price cannot be negative'
+      newErrors.unitPrice = strings.validation.priceNegative
     } else if (Number(unitPrice) <= 0) {
-      newErrors.unitPrice = 'Unit price must be greater than 0'
+      newErrors.unitPrice = strings.validation.pricePositive
     } else if (!Number.isFinite(Number(unitPrice))) {
-      newErrors.unitPrice = 'Please enter a valid price'
+      newErrors.unitPrice = strings.validation.priceInvalid
     }
     setErrors(newErrors)
     return Object.keys(newErrors).length === 0
@@ -113,31 +115,31 @@ export default function Expenses() {
   return (
     <PageTransition>
     <div className={styles.container}>
-      <h2 className={styles.title}>Expenses</h2>
+      <h2 className={styles.title}>{strings.expenses.title}</h2>
 
       {jobExpenses.length === 0 ? (
         <div className={styles.emptyState}>
           <span className={styles.emptyIcon} aria-hidden="true"><CurrencyDollar size={48} /></span>
-          <p>No expenses yet</p>
-          <p className={styles.emptyHint}>Add your first expense below</p>
+          <p>{strings.expenses.noExpenses}</p>
+          <p className={styles.emptyHint}>{strings.expenses.addFirstExpense}</p>
         </div>
       ) : (
         <>
           <div className={styles.tableWrapper} role="table" aria-label="Expenses list">
             <div className={styles.tableHeader} role="row">
-              <span className={styles.colName} role="columnheader">Name</span>
-              <span className={styles.colQty} role="columnheader">Qty</span>
-              <span className={styles.colPrice} role="columnheader">Unit Price</span>
-              <span className={styles.colTotal} role="columnheader">Total</span>
-              <span className={styles.colActions} role="columnheader"><span className="sr-only">Actions</span></span>
+              <span className={styles.colName} role="columnheader">{strings.expenses.colName}</span>
+              <span className={styles.colQty} role="columnheader">{strings.expenses.colQty}</span>
+              <span className={styles.colPrice} role="columnheader">{strings.expenses.colUnitPrice}</span>
+              <span className={styles.colTotal} role="columnheader">{strings.expenses.colTotal}</span>
+              <span className={styles.colActions} role="columnheader"><span className="sr-only">{strings.expenses.colActions}</span></span>
             </div>
             <div className={styles.list}>
               {jobExpenses.map((expense) => (
                 <div key={expense.id} className={styles.row} role="row">
-                  <span className={styles.colName} data-label="Name" role="cell">{expense.name}</span>
-                  <span className={styles.colQty} data-label="Qty" role="cell">{expense.quantity}</span>
-                  <span className={styles.colPrice} data-label="Unit Price" role="cell">${expense.unitPrice.toFixed(2)}</span>
-                  <span className={`${styles.colTotal} ${styles.totalValue}`} data-label="Total" role="cell">${(Math.round(expense.quantity * expense.unitPrice * 100) / 100).toFixed(2)}</span>
+                  <span className={styles.colName} data-label={strings.expenses.colName} role="cell">{expense.name}</span>
+                  <span className={styles.colQty} data-label={strings.expenses.colQty} role="cell">{expense.quantity}</span>
+                  <span className={styles.colPrice} data-label={strings.expenses.colUnitPrice} role="cell">{formatCurrency(expense.unitPrice)}</span>
+                  <span className={`${styles.colTotal} ${styles.totalValue}`} data-label={strings.expenses.colTotal} role="cell">{formatCurrency(Math.round(expense.quantity * expense.unitPrice * 100) / 100)}</span>
                   <span className={styles.colActions} role="cell">
                     <button
                       className={styles.editBtn}
@@ -159,18 +161,18 @@ export default function Expenses() {
             </div>
           </div>
           <div className={styles.totalBar}>
-            <span>Total Expenses</span>
+            <span>{strings.expenses.totalExpenses}</span>
             <span className={styles.totalAmount}>
-              ${totalExpenses.toFixed(2)}
+              {formatCurrency(totalExpenses)}
             </span>
           </div>
         </>
       )}
 
       <form className={styles.form} onSubmit={handleSubmit}>
-        <h3>{editingId ? 'Edit Expense' : 'Add Expense'}</h3>
+        <h3>{editingId ? strings.expenses.editExpense : strings.expenses.addExpense}</h3>
         <div className={styles.formField}>
-          <label htmlFor="exp-name">Item Name</label>
+          <label htmlFor="exp-name">{strings.expenses.itemName}</label>
           <input
             id="exp-name"
             type="text"
@@ -181,7 +183,7 @@ export default function Expenses() {
                 setErrors(prev => { const n = {...prev}; delete n.name; return n })
               }
             }}
-            placeholder="e.g. Copper Pipe"
+            placeholder={strings.expenses.placeholderName}
             className={errors.name ? styles.inputError : ''}
             aria-invalid={!!errors.name}
             aria-describedby={errors.name ? 'exp-name-error' : undefined}
@@ -192,7 +194,7 @@ export default function Expenses() {
         </div>
         <div className={styles.formRow}>
           <div className={styles.formField}>
-            <label htmlFor="exp-qty">Quantity</label>
+            <label htmlFor="exp-qty">{strings.expenses.quantity}</label>
             <input
               id="exp-qty"
               type="number"
@@ -204,7 +206,7 @@ export default function Expenses() {
                   setErrors(prev => { const n = {...prev}; delete n.quantity; return n })
                 }
               }}
-              placeholder="0"
+              placeholder={strings.expenses.placeholderQty}
               step="1"
               className={errors.quantity ? styles.inputError : ''}
               aria-invalid={!!errors.quantity}
@@ -216,7 +218,7 @@ export default function Expenses() {
             )}
           </div>
           <div className={styles.formField}>
-            <label htmlFor="exp-price">Unit Price ($)</label>
+            <label htmlFor="exp-price">{strings.expenses.unitPrice}</label>
             <input
               id="exp-price"
               type="number"
@@ -228,7 +230,7 @@ export default function Expenses() {
                   setErrors(prev => { const n = {...prev}; delete n.unitPrice; return n })
                 }
               }}
-              placeholder="0.00"
+              placeholder={strings.expenses.placeholderPrice}
               step="0.01"
               className={errors.unitPrice ? styles.inputError : ''}
               aria-invalid={!!errors.unitPrice}
@@ -242,8 +244,8 @@ export default function Expenses() {
         </div>
         {liveLineTotal > 0 && (
           <div className={styles.liveTotal}>
-            <span className={styles.liveTotalLabel}>Line Total:</span>
-            <span className={styles.liveTotalValue}>${liveLineTotal.toFixed(2)}</span>
+            <span className={styles.liveTotalLabel}>{strings.expenses.lineTotal}</span>
+            <span className={styles.liveTotalValue}>{formatCurrency(liveLineTotal)}</span>
           </div>
         )}
         <div className={styles.formActions}>
@@ -253,11 +255,11 @@ export default function Expenses() {
               className={styles.cancelButton}
               onClick={handleCancelEdit}
             >
-              Cancel
+              {strings.confirm.cancel}
             </button>
           )}
           <button type="submit" className={styles.submitButton}>
-            {editingId ? 'Save Changes' : 'Add Expense'}
+            {editingId ? strings.expenses.saveChanges : strings.expenses.addExpense}
           </button>
         </div>
       </form>
@@ -265,16 +267,16 @@ export default function Expenses() {
       {deleteTarget !== null && (
         <div className={styles.overlay} role="dialog" aria-modal="true" aria-label="Confirm expense deletion">
           <div className={styles.dialog}>
-            <p>Delete this expense?</p>
+            <p>{strings.confirm.deleteExpense}</p>
             <div className={styles.dialogButtons}>
               <button
                 className={styles.cancelBtn}
                 onClick={() => setDeleteTarget(null)}
               >
-                Cancel
+                {strings.confirm.cancel}
               </button>
               <button className={styles.confirmBtn} onClick={confirmDelete}>
-                Delete
+                {strings.confirm.delete}
               </button>
             </div>
           </div>

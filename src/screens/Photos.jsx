@@ -45,8 +45,8 @@ export default function Photos() {
       {jobPhotos.length === 0 && !uploading ? (
         <div className={styles.emptyState}>
           <span className={styles.emptyIcon} aria-hidden="true"><Camera size={48} /></span>
-          <p>No photos yet</p>
-          <p className={styles.emptyHint}>Add your first photo to document this job</p>
+          <p>{strings.photos.noPhotos}</p>
+          <p className={styles.emptyHint}>{strings.photos.addFirstPhoto}</p>
         </div>
       ) : (
         <div className={styles.grid} role="list" aria-label="Photo gallery">
@@ -78,19 +78,19 @@ export default function Photos() {
         disabled={uploading}
         aria-label={uploading ? 'Uploading photo' : 'Add photo'}
       >
-        {uploading ? 'Uploading...' : <><Plus size={20} aria-hidden="true" /> Add Photo</>}
+        {uploading ? strings.photos.uploading : <><Plus size={20} aria-hidden="true" /> {strings.photos.addPhoto}</>}
       </button>
 
       {deleteTarget !== null && (
         <div className={styles.overlay} role="dialog" aria-modal="true" aria-label="Confirm photo deletion">
           <div className={styles.dialog}>
-            <p>Delete this photo?</p>
+            <p>{strings.confirm.deletePhoto}</p>
             <div className={styles.dialogButtons}>
               <button className={styles.cancelButton} onClick={() => setDeleteTarget(null)}>
-                Cancel
+                {strings.confirm.cancel}
               </button>
               <button className={styles.confirmButton} onClick={confirmDelete}>
-                Delete
+                {strings.confirm.delete}
               </button>
             </div>
           </div>

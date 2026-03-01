@@ -18,13 +18,15 @@
 }
 
 .title {
-  font-size: 1.375rem;
-  font-weight: 700;
+  font-size: var(--font-size-h1);
+  font-weight: var(--font-weight-h1);
+  line-height: var(--line-height-h1);
   margin-bottom: 4px;
 }
 
 .count {
-  font-size: 0.875rem;
+  font-size: var(--font-size-caption);
+  font-weight: var(--font-weight-caption);
   color: var(--text-500);
   margin-bottom: 16px;
 }
@@ -40,7 +42,7 @@
   position: relative;
   aspect-ratio: 1;
   background: var(--border);
-  border-radius: var(--radius-sm);
+  border-radius: var(--radius-lg);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -107,8 +109,8 @@
   border-radius: var(--radius-lg);
   background: var(--cta);
   color: white;
-  font-size: 1.125rem;
-  font-weight: 700;
+  font-size: var(--font-size-button);
+  font-weight: var(--font-weight-button);
   min-height: 56px;
   box-shadow: var(--shadow-cta);
   transition: transform 0.1s ease, background-color 0.15s ease;
@@ -144,7 +146,7 @@
 }
 
 .emptyHint {
-  font-size: 0.875rem;
+  font-size: var(--font-size-body);
   margin-top: 4px;
 }
 
@@ -170,7 +172,7 @@
 }
 
 .dialog p {
-  font-size: 1rem;
+  font-size: var(--font-size-body);
   margin-bottom: 20px;
 }
 
@@ -185,8 +187,8 @@
   padding: 12px;
   border: none;
   border-radius: var(--radius-lg);
-  font-size: 1rem;
-  font-weight: 600;
+  font-size: var(--font-size-button);
+  font-weight: var(--font-weight-button);
   min-height: 56px;
   transition: transform 0.1s ease;
 }

@@ -25,8 +25,8 @@
   border-radius: 8px;
   background: var(--surface-0);
   color: var(--text-500);
-  font-size: 0.8125rem;
-  font-weight: 600;
+  font-size: var(--font-size-label);
+  font-weight: var(--font-weight-label);
   min-height: 48px;
   white-space: nowrap;
   transition: all 0.15s ease;
@@ -47,7 +47,7 @@
   padding: 0 6px;
   border-radius: 11px;
   background: rgba(0, 0, 0, 0.1);
-  font-size: 0.75rem;
+  font-size: var(--font-size-caption);
   font-weight: 700;
 }
 
@@ -70,49 +70,101 @@
   padding: 16px;
   background: var(--surface-0);
   border: 1px solid var(--border);
-  border-radius: var(--radius-sm);
+  border-radius: var(--radius-lg);
   box-shadow: var(--shadow-card);
   cursor: pointer;
   transition: all 0.15s ease;
   text-align: left;
 }
 
-.card:hover,
 .card:active {
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.12);
+  border-color: var(--brand-600);
+  background: var(--brand-100);
 }
 
-.cardHeader {
+/* Card top row: status dot + address */
+.cardTop {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.statusDot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  flex-shrink: 0;
+  background-color: var(--text-500);
+}
+
+.statusDot.statusNew {
+  background-color: var(--brand-700);
+}
+
+.statusDot.statusInProgress {
+  background-color: var(--warning);
+}
+
+.statusDot.statusCompleted {
+  background-color: var(--success);
+}
+
+.address {
+  font-size: var(--font-size-button);
+  font-weight: var(--font-weight-h2);
+  color: var(--text-900);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+/* Card middle row: contact · date */
+.cardMiddle {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  color: var(--text-500);
+  font-size: var(--font-size-body);
+}
+
+.contact {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.separator {
+  flex-shrink: 0;
+  opacity: 0.6;
+}
+
+.time {
+  flex-shrink: 0;
+}
+
+/* Work type caption */
+.workType {
+  font-size: var(--font-size-label);
+  color: var(--text-500);
+}
+
+/* Card bottom row: status badge + amount + sync */
+.cardBottom {
   display: flex;
   justify-content: space-between;
   align-items: center;
-}
-
-.jobNumber {
-  font-size: 1rem;
-  font-weight: 700;
-  color: var(--text-900);
+  margin-top: 4px;
 }
 
 .statusBadge {
   display: inline-flex;
   align-items: center;
-  height: 28px;
-  padding: 4px 12px;
-  border-radius: 14px;
-  font-size: 0.8125rem;
-  font-weight: 600;
+  height: 26px;
+  padding: 4px 10px;
+  border-radius: 13px;
+  font-size: var(--font-size-caption);
+  font-weight: var(--font-weight-label);
   white-space: nowrap;
-}
-
-.statusBadge::before {
-  content: '';
-  display: inline-block;
-  width: 8px;
-  height: 8px;
-  border-radius: 50%;
-  margin-right: 6px;
-  flex-shrink: 0;
 }
 
 .statusNew {
@@ -120,17 +172,9 @@
   color: var(--brand-800);
 }
 
-.statusNew::before {
-  background-color: var(--brand-700);
-}
-
 .statusInProgress {
   background-color: var(--warning-bg);
   color: var(--warning-text);
-}
-
-.statusInProgress::before {
-  background-color: var(--warning);
 }
 
 .statusCompleted {
@@ -138,38 +182,17 @@
   color: var(--success);
 }
 
-.statusCompleted::before {
-  background-color: var(--success);
-}
-
-.cardBody {
+.cardBottomRight {
   display: flex;
-  flex-direction: column;
-  gap: 2px;
-}
-
-.address {
-  font-size: 0.875rem;
-  color: var(--text-900);
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
-}
-
-.workType {
-  font-size: 0.8125rem;
-  color: var(--text-500);
-}
-
-.cardFooter {
-  display: flex;
-  justify-content: space-between;
   align-items: center;
+  gap: 8px;
 }
 
-.date {
-  font-size: 0.8125rem;
-  color: var(--text-500);
+.amount {
+  font-size: var(--font-size-body);
+  font-weight: var(--font-weight-display);
+  color: var(--text-900);
+  font-variant-numeric: tabular-nums;
 }
 
 .syncIcon {
@@ -213,8 +236,8 @@
   overflow: hidden;
   transition: height 0.2s ease, opacity 0.2s ease;
   color: var(--brand-700);
-  font-size: 0.875rem;
-  font-weight: 600;
+  font-size: var(--font-size-button-sm);
+  font-weight: var(--font-weight-button-sm);
   margin-bottom: 8px;
 }
 
@@ -259,14 +282,14 @@
 }
 
 .emptyTitle {
-  font-size: 1.125rem;
-  font-weight: 700;
+  font-size: var(--font-size-h3);
+  font-weight: var(--font-weight-h3);
   color: var(--text-900);
   margin-bottom: 4px;
 }
 
 .emptySubtext {
-  font-size: 0.875rem;
+  font-size: var(--font-size-body);
   color: var(--text-500);
   margin-bottom: 16px;
   max-width: 280px;
@@ -281,8 +304,8 @@
   color: white;
   border: none;
   border-radius: var(--radius-sm);
-  font-size: 0.9375rem;
-  font-weight: 600;
+  font-size: var(--font-size-body);
+  font-weight: var(--font-weight-button);
   min-height: 48px;
   cursor: pointer;
   transition: background 0.15s ease;

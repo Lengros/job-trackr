@@ -1,51 +1,71 @@
-import { useCallback } from 'react'
+import { useCallback, useMemo } from 'react'
 import { useNavigate, useLocation } from 'react-router-dom'
 import { useApp } from '../context/AppContext'
+import { useStrings } from '../i18n/useStrings'
 import haptic from '../utils/haptic'
-import { ArrowLeft, ArrowsClockwise } from '@phosphor-icons/react'
+import { ArrowLeft, ArrowsClockwise, Circle, WarningCircle } from '@phosphor-icons/react'
 import styles from '../styles/Header.module.css'
 
-// Map routes to their parent (back destination) and title
+// Map routes to their parent (back destination) and title key
 function getRouteInfo(pathname) {
-  // /jobs/:id/photos -> back to /jobs/:id
-  // /jobs/:id/expenses -> back to /jobs/:id
-  // /jobs/:id/summary -> back to /jobs/:id
-  // /jobs/:id -> back to /jobs
-  // /sync -> back to /jobs
-  // /jobs -> no back (root level within app)
-
   if (/^\/jobs\/\d+\/photos$/.test(pathname)) {
     const jobId = pathname.match(/\/jobs\/(\d+)/)[1]
-    return { backTo: `/jobs/${jobId}`, title: 'Photos', hasBack: true }
+    return { backTo: `/jobs/${jobId}`, title: 'photos', hasBack: true }
   }
   if (/^\/jobs\/\d+\/expenses$/.test(pathname)) {
     const jobId = pathname.match(/\/jobs\/(\d+)/)[1]
-    return { backTo: `/jobs/${jobId}`, title: 'Expenses', hasBack: true }
+    return { backTo: `/jobs/${jobId}`, title: 'expenses', hasBack: true }
   }
   if (/^\/jobs\/\d+\/summary$/.test(pathname)) {
     const jobId = pathname.match(/\/jobs\/(\d+)/)[1]
-    return { backTo: `/jobs/${jobId}`, title: 'Summary', hasBack: true }
+    return { backTo: `/jobs/${jobId}`, title: 'summary', hasBack: true }
   }
   if (/^\/jobs\/\d+$/.test(pathname)) {
-    return { backTo: '/jobs', title: 'Job Detail', hasBack: true }
+    return { backTo: '/jobs', title: 'jobDetail', hasBack: true }
   }
   if (pathname === '/sync') {
-    return { backTo: '/jobs', title: 'Sync Status', hasBack: true }
+    return { backTo: '/jobs', title: 'syncStatus', hasBack: true }
   }
-  // /jobs or other root-level pages
   return { backTo: null, title: null, hasBack: false }
+}
+
+// Determine sync indicator state from app state
+function getSyncState(state) {
+  if (!state.isOnline) {
+    return 'offline'
+  }
+  if (state.isSyncing) {
+    return 'syncing'
+  }
+  const masterJobs = state.jobs.filter(
+    (j) => j.assignedMasterId === state.selectedMasterId
+  )
+  const hasError = masterJobs.some(
+    (j) => j.syncStatus === 'error' || j.syncStatus === 'conflict'
+  )
+  if (hasError) {
+    return 'error'
+  }
+  return 'synced'
 }
 
 export default function Header() {
   const { state, dispatch } = useApp()
+  const strings = useStrings()
   const navigate = useNavigate()
   const location = useLocation()
   const master = state.masters.find((m) => m.id === state.selectedMasterId)
 
-  const { backTo, title, hasBack } = getRouteInfo(location.pathname)
+  const { backTo, title: titleKey, hasBack } = getRouteInfo(location.pathname)
+  const localizedTitle = titleKey ? strings.nav[titleKey] : null
+  const displayTitle = localizedTitle || (master ? master.name : strings.app.name)
 
-  // Determine display title: use route-specific title, or fall back to master name
-  const displayTitle = title || (master ? master.name : 'JobTrackr')
+  const syncState = useMemo(() => getSyncState(state), [
+    state.isOnline,
+    state.isSyncing,
+    state.jobs,
+    state.selectedMasterId,
+  ])
 
   const handleToggleNetwork = useCallback(() => {
     const wasOffline = !state.isOnline
@@ -63,6 +83,55 @@ export default function Header() {
     }
   }, [state.isOnline, state.jobs, dispatch])
 
+  // Render the sync indicator based on state
+  const renderSyncIndicator = () => {
+    // Online + Synced = hidden (no visual noise)
+    if (syncState === 'synced') {
+      return null
+    }
+
+    // Online + Syncing = rotating blue spinner
+    if (syncState === 'syncing') {
+      return (
+        <button
+          className={`${styles.syncIndicator} ${styles.syncSyncing}`}
+          onClick={() => navigate('/sync')}
+          aria-label={strings.syncStatus.syncing}
+        >
+          <ArrowsClockwise size={20} weight="bold" className={styles.spinIcon} />
+        </button>
+      )
+    }
+
+    // Offline = empty circle in warning color
+    if (syncState === 'offline') {
+      return (
+        <button
+          className={`${styles.syncIndicator} ${styles.syncOffline}`}
+          onClick={handleToggleNetwork}
+          aria-label={strings.network.offline}
+        >
+          <Circle size={20} weight="regular" />
+        </button>
+      )
+    }
+
+    // Sync Error = warning triangle in error color
+    if (syncState === 'error') {
+      return (
+        <button
+          className={`${styles.syncIndicator} ${styles.syncError}`}
+          onClick={() => navigate('/sync')}
+          aria-label={strings.syncStatus.error}
+        >
+          <WarningCircle size={20} weight="fill" />
+        </button>
+      )
+    }
+
+    return null
+  }
+
   return (
     <header className={styles.header} role="banner">
       <div className={styles.headerLeft}>
@@ -78,13 +147,7 @@ export default function Header() {
         <h1 className={styles.title}>{displayTitle}</h1>
       </div>
       <div className={styles.headerRight}>
-        <button
-          className={styles.actionButton}
-          onClick={() => navigate('/sync')}
-          aria-label="View sync status"
-        >
-          <ArrowsClockwise size={24} weight="regular" />
-        </button>
+        {renderSyncIndicator()}
       </div>
     </header>
   )

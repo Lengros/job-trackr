@@ -1,0 +1,125 @@
+{
+  "app": {
+    "name": "JobTrackr",
+    "selectProfile": "Wybierz swój profil, aby rozpocząć"
+  },
+  "tabs": {
+    "all": "Wszystkie",
+    "new": "Nowe",
+    "inProgress": "W trakcie",
+    "completed": "Zakończone"
+  },
+  "status": {
+    "new": "Nowe",
+    "inProgress": "W trakcie",
+    "completed": "Zakończone"
+  },
+  "syncStatus": {
+    "synced": "Zsynchronizowane",
+    "syncing": "Synchronizacja...",
+    "pending": "Oczekujące",
+    "error": "Błąd",
+    "conflict": "Konflikt"
+  },
+  "network": {
+    "online": "Online",
+    "offline": "Offline"
+  },
+  "nav": {
+    "back": "Wstecz",
+    "photos": "Zdjęcia",
+    "expenses": "Koszty materiału",
+    "summary": "Podsumowanie",
+    "jobDetail": "Szczegóły zlecenia",
+    "syncStatus": "Status synchronizacji",
+    "sync": "Sync"
+  },
+  "jobDetail": {
+    "address": "Adres",
+    "contact": "Kontakt",
+    "phone": "Telefon",
+    "workDescription": "Opis pracy",
+    "comments": "Uwagi",
+    "workCost": "Koszt pracy",
+    "startJob": "Rozpocznij zlecenie",
+    "completeJob": "Zakończ zlecenie",
+    "notFound": "Nie znaleziono zlecenia"
+  },
+  "photos": {
+    "title": "Zdjęcia",
+    "photoSingular": "zdjęcie",
+    "photoPlural": "zdjęcia",
+    "photoPluralMany": "zdjęć",
+    "noPhotos": "Brak zdjęć",
+    "addFirstPhoto": "Dodaj pierwsze zdjęcie, aby udokumentować to zlecenie",
+    "addPhoto": "Dodaj zdjęcie",
+    "uploading": "Wysyłanie..."
+  },
+  "expenses": {
+    "title": "Koszty materiału",
+    "noExpenses": "Brak kosztów",
+    "addFirstExpense": "Dodaj pierwszą pozycję poniżej",
+    "colName": "Nazwa",
+    "colQty": "Ilość",
+    "colUnitPrice": "Cena jedn.",
+    "colTotal": "Suma",
+    "colActions": "Akcje",
+    "totalExpenses": "Koszty materiału razem",
+    "addExpense": "Dodaj pozycję",
+    "editExpense": "Edytuj pozycję",
+    "itemName": "Nazwa pozycji",
+    "quantity": "Ilość",
+    "unitPrice": "Cena jedn. (zł)",
+    "placeholderName": "np. Rura miedziana",
+    "placeholderQty": "0",
+    "placeholderPrice": "0,00",
+    "lineTotal": "Suma pozycji:",
+    "saveChanges": "Zapisz zmiany"
+  },
+  "summary": {
+    "title": "Podsumowanie zlecenia",
+    "workCost": "Koszt pracy",
+    "serviceFee": "Usługa",
+    "expenses": "Koszty materiału",
+    "noExpenses": "Brak kosztów",
+    "totalExpenses": "Koszty materiału razem",
+    "grandTotal": "Do zapłaty"
+  },
+  "sync": {
+    "title": "Status synchronizacji",
+    "items": "pozycji"
+  },
+  "pullToRefresh": {
+    "pull": "Pociągnij, aby odświeżyć",
+    "release": "Puść, aby odświeżyć"
+  },
+  "confirm": {
+    "changeStatus": "Zmienić status na",
+    "deletePhoto": "Usunąć to zdjęcie?",
+    "deleteExpense": "Usunąć tę pozycję?",
+    "completeJob": "Oznaczyć zlecenie jako zakończone?",
+    "cancel": "Anuluj",
+    "confirm": "Potwierdź",
+    "delete": "Usuń"
+  },
+  "toast": {
+    "statusChanged": "Status zmieniony →",
+    "undo": "Cofnij"
+  },
+  "validation": {
+    "nameRequired": "Nazwa pozycji jest wymagana",
+    "quantityRequired": "Ilość jest wymagana",
+    "quantityPositive": "Ilość musi być większa od 0",
+    "quantityInvalid": "Podaj prawidłową liczbę",
+    "priceRequired": "Cena jedn. jest wymagana",
+    "priceNegative": "Cena jedn. nie może być ujemna",
+    "pricePositive": "Cena jedn. musi być większa od 0",
+    "priceInvalid": "Podaj prawidłową cenę"
+  },
+  "empty": {
+    "offline": "Jesteś offline",
+    "offlineMessage": "Brak zapisanych zleceń. Połącz się z siecią i spróbuj ponownie.",
+    "retry": "Ponów",
+    "noJobs": "Brak zleceń"
+  }
+}
