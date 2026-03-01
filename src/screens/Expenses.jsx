@@ -1,7 +1,9 @@
 import { useState } from 'react'
 import { useParams, useNavigate } from 'react-router-dom'
 import { useApp } from '../context/AppContext'
+import haptic from '../utils/haptic'
 import PageTransition from '../components/PageTransition'
+import { ArrowLeft, CurrencyDollar, PencilSimple, Trash } from '@phosphor-icons/react'
 import styles from '../styles/Expenses.module.css'
 
 export default function Expenses() {
@@ -52,7 +54,10 @@ export default function Expenses() {
 
   const handleSubmit = (e) => {
     e.preventDefault()
-    if (!validate()) return
+    if (!validate()) {
+      haptic.error()
+      return
+    }
 
     if (editingId) {
       dispatch({
@@ -109,48 +114,48 @@ export default function Expenses() {
   return (
     <PageTransition>
     <div className={styles.container}>
-      <button className={styles.backButton} onClick={() => navigate(`/jobs/${jobId}`)}>
-        ← Back
+      <button className={styles.backButton} onClick={() => navigate(`/jobs/${jobId}`)} aria-label="Back to job detail">
+        <ArrowLeft size={20} aria-hidden="true" /> Back
       </button>
       <h2 className={styles.title}>Expenses</h2>
 
       {jobExpenses.length === 0 ? (
         <div className={styles.emptyState}>
-          <span className={styles.emptyIcon}>💰</span>
+          <span className={styles.emptyIcon} aria-hidden="true"><CurrencyDollar size={48} /></span>
           <p>No expenses yet</p>
           <p className={styles.emptyHint}>Add your first expense below</p>
         </div>
       ) : (
         <>
-          <div className={styles.tableWrapper}>
+          <div className={styles.tableWrapper} role="table" aria-label="Expenses list">
             <div className={styles.tableHeader} role="row">
-              <span className={styles.colName}>Name</span>
-              <span className={styles.colQty}>Qty</span>
-              <span className={styles.colPrice}>Unit Price</span>
-              <span className={styles.colTotal}>Total</span>
-              <span className={styles.colActions}></span>
+              <span className={styles.colName} role="columnheader">Name</span>
+              <span className={styles.colQty} role="columnheader">Qty</span>
+              <span className={styles.colPrice} role="columnheader">Unit Price</span>
+              <span className={styles.colTotal} role="columnheader">Total</span>
+              <span className={styles.colActions} role="columnheader"><span className="sr-only">Actions</span></span>
             </div>
             <div className={styles.list}>
               {jobExpenses.map((expense) => (
                 <div key={expense.id} className={styles.row} role="row">
-                  <span className={styles.colName} data-label="Name">{expense.name}</span>
-                  <span className={styles.colQty} data-label="Qty">{expense.quantity}</span>
-                  <span className={styles.colPrice} data-label="Unit Price">${expense.unitPrice.toFixed(2)}</span>
-                  <span className={`${styles.colTotal} ${styles.totalValue}`} data-label="Total">${(Math.round(expense.quantity * expense.unitPrice * 100) / 100).toFixed(2)}</span>
-                  <span className={styles.colActions}>
+                  <span className={styles.colName} data-label="Name" role="cell">{expense.name}</span>
+                  <span className={styles.colQty} data-label="Qty" role="cell">{expense.quantity}</span>
+                  <span className={styles.colPrice} data-label="Unit Price" role="cell">${expense.unitPrice.toFixed(2)}</span>
+                  <span className={`${styles.colTotal} ${styles.totalValue}`} data-label="Total" role="cell">${(Math.round(expense.quantity * expense.unitPrice * 100) / 100).toFixed(2)}</span>
+                  <span className={styles.colActions} role="cell">
                     <button
                       className={styles.editBtn}
                       onClick={() => handleEdit(expense)}
-                      aria-label="Edit expense"
+                      aria-label={`Edit expense: ${expense.name}`}
                     >
-                      ✎
+                      <PencilSimple size={16} aria-hidden="true" />
                     </button>
                     <button
                       className={styles.deleteBtn}
                       onClick={() => setDeleteTarget(expense.id)}
-                      aria-label="Delete expense"
+                      aria-label={`Delete expense: ${expense.name}`}
                     >
-                      ✕
+                      <Trash size={16} aria-hidden="true" />
                     </button>
                   </span>
                 </div>
@@ -182,8 +187,10 @@ export default function Expenses() {
             }}
             placeholder="e.g. Copper Pipe"
             className={errors.name ? styles.inputError : ''}
+            aria-invalid={!!errors.name}
+            aria-describedby={errors.name ? 'exp-name-error' : undefined}
           />
-          {errors.name && <span className={styles.error}>{errors.name}</span>}
+          {errors.name && <span id="exp-name-error" className={styles.error} role="alert">{errors.name}</span>}
         </div>
         <div className={styles.formRow}>
           <div className={styles.formField}>
@@ -201,9 +208,11 @@ export default function Expenses() {
               placeholder="0"
               step="1"
               className={errors.quantity ? styles.inputError : ''}
+              aria-invalid={!!errors.quantity}
+              aria-describedby={errors.quantity ? 'exp-qty-error' : undefined}
             />
             {errors.quantity && (
-              <span className={styles.error}>{errors.quantity}</span>
+              <span id="exp-qty-error" className={styles.error} role="alert">{errors.quantity}</span>
             )}
           </div>
           <div className={styles.formField}>
@@ -221,9 +230,11 @@ export default function Expenses() {
               placeholder="0.00"
               step="0.01"
               className={errors.unitPrice ? styles.inputError : ''}
+              aria-invalid={!!errors.unitPrice}
+              aria-describedby={errors.unitPrice ? 'exp-price-error' : undefined}
             />
             {errors.unitPrice && (
-              <span className={styles.error}>{errors.unitPrice}</span>
+              <span id="exp-price-error" className={styles.error} role="alert">{errors.unitPrice}</span>
             )}
           </div>
         </div>
@@ -250,7 +261,7 @@ export default function Expenses() {
       </form>
 
       {deleteTarget !== null && (
-        <div className={styles.overlay}>
+        <div className={styles.overlay} role="dialog" aria-modal="true" aria-label="Confirm expense deletion">
           <div className={styles.dialog}>
             <p>Delete this expense?</p>
             <div className={styles.dialogButtons}>

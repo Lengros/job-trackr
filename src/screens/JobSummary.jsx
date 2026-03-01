@@ -1,7 +1,9 @@
 import { useState } from 'react'
 import { useParams, useNavigate } from 'react-router-dom'
 import { useApp } from '../context/AppContext'
+import haptic from '../utils/haptic'
 import PageTransition from '../components/PageTransition'
+import { ArrowLeft } from '@phosphor-icons/react'
 import styles from '../styles/JobSummary.module.css'
 
 export default function JobSummary() {
@@ -27,14 +29,15 @@ export default function JobSummary() {
       type: 'UPDATE_JOB_STATUS',
       payload: { jobId: job.id, newStatus: 'completed' },
     })
+    haptic.success()
     setShowConfirm(false)
   }
 
   return (
     <PageTransition>
     <div className={styles.container}>
-      <button className={styles.backButton} onClick={() => navigate(`/jobs/${jobId}`)}>
-        ← Back
+      <button className={styles.backButton} onClick={() => navigate(`/jobs/${jobId}`)} aria-label="Back to job detail">
+        <ArrowLeft size={20} aria-hidden="true" /> Back
       </button>
       <h2 className={styles.title}>Job Summary</h2>
       <p className={styles.jobNumber}>{job.number}</p>
@@ -88,7 +91,7 @@ export default function JobSummary() {
       )}
 
       {showConfirm && (
-        <div className={styles.overlay}>
+        <div className={styles.overlay} role="dialog" aria-modal="true" aria-label="Confirm job completion">
           <div className={styles.dialog}>
             <p>Mark this job as <strong>Completed</strong>?</p>
             <div className={styles.dialogButtons}>

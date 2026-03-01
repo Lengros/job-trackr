@@ -1,7 +1,9 @@
 import { useState } from 'react'
 import { useParams, useNavigate } from 'react-router-dom'
 import { useApp } from '../context/AppContext'
+import haptic from '../utils/haptic'
 import PageTransition from '../components/PageTransition'
+import { ArrowLeft, Phone, Camera, CurrencyDollar, ClipboardText } from '@phosphor-icons/react'
 import styles from '../styles/JobDetail.module.css'
 
 const STATUS_LABELS = {
@@ -33,6 +35,9 @@ export default function JobDetail() {
       type: 'UPDATE_JOB_STATUS',
       payload: { jobId: job.id, newStatus: pendingStatus },
     })
+    if (pendingStatus === 'completed') {
+      haptic.success()
+    }
     setShowConfirm(false)
     setPendingStatus(null)
   }
@@ -40,11 +45,11 @@ export default function JobDetail() {
   return (
     <PageTransition>
     <div className={styles.container}>
-      <button className={styles.backButton} onClick={() => navigate('/jobs')}>
-        ← Back
+      <button className={styles.backButton} onClick={() => navigate('/jobs')} aria-label="Back to job list">
+        <ArrowLeft size={20} aria-hidden="true" /> Back
       </button>
 
-      <div className={styles.statusBar} data-status={job.status}>
+      <div className={styles.statusBar} data-status={job.status} role="status" aria-live="polite">
         <span className={styles.statusLabel}>{STATUS_LABELS[job.status]}</span>
       </div>
 
@@ -60,7 +65,16 @@ export default function JobDetail() {
         </div>
         <div className={styles.field}>
           <label>Phone</label>
-          <p>{job.contactPhone}</p>
+          <p>
+            <a
+              href={`tel:${job.contactPhone.replace(/[^+\d]/g, '')}`}
+              aria-label={`Call ${job.contactName}, ${job.contactPhone}`}
+              className={styles.phoneLink}
+            >
+              <Phone size={16} aria-hidden="true" style={{ verticalAlign: 'middle', marginRight: 4 }} />
+              {job.contactPhone}
+            </a>
+          </p>
         </div>
         <div className={styles.field}>
           <label>Work Description</label>
@@ -98,24 +112,24 @@ export default function JobDetail() {
           className={styles.navButton}
           onClick={() => navigate(`/jobs/${job.id}/photos`)}
         >
-          📷 Photos
+          <Camera size={20} /> Photos
         </button>
         <button
           className={styles.navButton}
           onClick={() => navigate(`/jobs/${job.id}/expenses`)}
         >
-          💰 Expenses
+          <CurrencyDollar size={20} /> Expenses
         </button>
         <button
           className={styles.navButton}
           onClick={() => navigate(`/jobs/${job.id}/summary`)}
         >
-          📋 Summary
+          <ClipboardText size={20} /> Summary
         </button>
       </div>
 
       {showConfirm && (
-        <div className={styles.overlay}>
+        <div className={styles.overlay} role="dialog" aria-modal="true" aria-label="Confirm status change">
           <div className={styles.dialog}>
             <p>
               Change status to <strong>{STATUS_LABELS[pendingStatus]}</strong>?
