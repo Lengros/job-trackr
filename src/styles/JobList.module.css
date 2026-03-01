@@ -30,7 +30,7 @@
   color: var(--text-500);
   font-size: var(--font-size-button-sm);
   font-weight: var(--font-weight-button-sm);
-  min-height: 40px;
+  min-height: 48px;
   white-space: nowrap;
   transition: all 0.15s ease;
   flex-shrink: 0;
@@ -102,6 +102,7 @@
   cursor: pointer;
   transition: all 0.15s ease;
   text-align: left;
+  min-height: 64px;
   -webkit-tap-highlight-color: transparent;
 }
 

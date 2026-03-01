@@ -2,21 +2,6 @@
   padding: 16px;
 }
 
-.backButton {
-  display: inline-flex;
-  align-items: center;
-  gap: 4px;
-  padding: 8px 16px 8px 0;
-  border: none;
-  background: transparent;
-  color: var(--brand-700);
-  font-size: var(--font-size-button);
-  font-weight: var(--font-weight-button);
-  min-height: 48px;
-  min-width: 44px;
-  margin-bottom: 8px;
-}
-
 .title {
   font-size: var(--font-size-h1);
   font-weight: var(--font-weight-h1);
@@ -24,106 +9,240 @@
   margin-bottom: 16px;
 }
 
-/* Table wrapper */
-.tableWrapper {
+/* Expense list */
+.expenseList {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-bottom: 12px;
+}
+
+/* Individual expense item (read-only) */
+.expenseItem {
   background: var(--surface-0);
   border: 1px solid var(--border);
   border-radius: var(--radius-lg);
   box-shadow: var(--shadow-card);
-  overflow: hidden;
-  margin-bottom: 12px;
+  padding: 12px 16px;
+  cursor: pointer;
+  transition: background-color 0.1s ease, border-color 0.15s ease;
 }
 
-/* Table header row */
-.tableHeader {
-  display: grid;
-  grid-template-columns: minmax(60px, 1fr) 36px 64px 72px 88px;
-  align-items: center;
-  padding: 8px 8px 8px 12px;
+.expenseItem:active:not(.editing) {
   background: var(--surface-50);
-  border-bottom: 2px solid var(--border);
-  font-size: var(--font-size-caption);
-  font-weight: var(--font-weight-h1);
-  color: var(--text-500);
-  text-transform: uppercase;
-  letter-spacing: 0.04em;
 }
 
-.list {
-  overflow-y: auto;
-  max-height: 320px;
+.expenseItem.editing {
+  cursor: default;
+  border-color: var(--brand-600);
+  box-shadow: 0 0 0 2px rgba(59, 130, 246, 0.15);
 }
 
-/* Data row */
-.row {
-  display: grid;
-  grid-template-columns: minmax(60px, 1fr) 36px 64px 72px 88px;
+/* Top row: title + delete button */
+.itemTopRow {
+  display: flex;
   align-items: center;
-  padding: 10px 8px 10px 12px;
-  border-top: 1px solid var(--border);
+  justify-content: space-between;
+  gap: 8px;
+  margin-bottom: 4px;
+}
+
+.itemName {
   font-size: var(--font-size-body);
-}
-
-.row:first-child {
-  border-top: none;
-}
-
-/* Column styles */
-.colName {
   font-weight: var(--font-weight-label);
+  color: var(--text-900);
+  flex: 1;
   min-width: 0;
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
 }
 
-.colQty {
-  text-align: center;
-  font-variant-numeric: tabular-nums;
-}
-
-.colPrice {
-  text-align: right;
-  font-variant-numeric: tabular-nums;
-}
-
-.colTotal {
-  text-align: right;
-  font-variant-numeric: tabular-nums;
-}
-
-.totalValue {
-  font-weight: var(--font-weight-h1);
-  color: var(--text-900);
-}
-
-.colActions {
-  display: flex;
-  gap: 0;
-  justify-content: flex-end;
-}
-
-.editBtn,
-.deleteBtn {
-  width: 48px;
-  height: 48px;
-  min-width: 48px;
-  min-height: 48px;
+.inlineDeleteBtn {
+  width: 36px;
+  height: 36px;
+  min-width: 36px;
+  min-height: 36px;
   border: none;
-  border-radius: var(--radius-lg);
+  border-radius: var(--radius-sm);
   background: transparent;
-  font-size: var(--font-size-h3);
+  color: var(--text-500);
   display: flex;
   align-items: center;
   justify-content: center;
   cursor: pointer;
-  color: var(--text-500);
   padding: 0;
+  flex-shrink: 0;
+  transition: color 0.15s ease, background-color 0.15s ease;
 }
 
-.editBtn:active { color: var(--brand-700); background: rgba(37, 99, 235, 0.08); }
-.deleteBtn:active { color: var(--error); background: var(--error-bg); }
+.inlineDeleteBtn:active {
+  color: var(--error);
+  background: var(--error-bg);
+}
 
+/* Bottom row: qty × price + total */
+.itemBottomRow {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.itemQtyPrice {
+  font-size: var(--font-size-caption);
+  color: var(--text-500);
+  font-variant-numeric: tabular-nums;
+}
+
+.itemTotal {
+  font-size: var(--font-size-body);
+  font-weight: var(--font-weight-h1);
+  color: var(--text-900);
+  font-variant-numeric: tabular-nums;
+}
+
+/* Inline editing row */
+.editRow {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.editTitleRow {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.inlineInput {
+  border: 1.5px solid var(--border);
+  border-radius: var(--radius-sm);
+  background: var(--surface-0);
+  font-size: var(--font-size-body);
+  color: var(--text-900);
+  outline: none;
+  transition: border-color 0.15s ease, box-shadow 0.15s ease;
+  font-family: inherit;
+  height: 44px;
+  min-height: 44px;
+  padding: 10px 12px;
+}
+
+.inlineInput:focus {
+  border-color: var(--border-focus);
+  box-shadow: 0 0 0 2px rgba(59, 130, 246, 0.2);
+}
+
+.titleInput {
+  flex: 1;
+  min-width: 0;
+}
+
+.numInput {
+  width: 100%;
+  -moz-appearance: textfield;
+}
+
+.numInput::-webkit-outer-spin-button,
+.numInput::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+.inputError {
+  border-color: var(--border-error) !important;
+}
+
+.inputError:focus {
+  border-color: var(--border-error) !important;
+  box-shadow: 0 0 0 2px rgba(220, 38, 38, 0.2) !important;
+}
+
+.error {
+  display: block;
+  font-size: var(--font-size-caption);
+  color: var(--error);
+  font-weight: var(--font-weight-body-medium);
+  line-height: 1.4;
+}
+
+/* Autocomplete chips */
+.chipScroller {
+  display: flex;
+  gap: 6px;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none;
+  padding: 2px 0;
+}
+
+.chipScroller::-webkit-scrollbar {
+  display: none;
+}
+
+.chip {
+  flex-shrink: 0;
+  padding: 6px 12px;
+  border: 1.5px solid var(--border);
+  border-radius: var(--radius-full);
+  background: var(--surface-0);
+  color: var(--text-500);
+  font-size: var(--font-size-caption);
+  font-weight: var(--font-weight-label);
+  cursor: pointer;
+  white-space: nowrap;
+  font-family: inherit;
+  transition: background-color 0.15s ease, border-color 0.15s ease, color 0.15s ease;
+}
+
+.chip:active {
+  background: var(--brand-100);
+  border-color: var(--brand-600);
+  color: var(--brand-700);
+}
+
+/* Values row: qty × price = total */
+.editValuesRow {
+  display: flex;
+  align-items: flex-end;
+  gap: 8px;
+}
+
+.editField {
+  flex: 1;
+  min-width: 0;
+}
+
+.miniLabel {
+  display: block;
+  font-size: 11px;
+  font-weight: var(--font-weight-label);
+  color: var(--text-500);
+  margin-bottom: 4px;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+.timesSign {
+  font-size: var(--font-size-body);
+  color: var(--text-500);
+  padding-bottom: 12px;
+  flex-shrink: 0;
+}
+
+.editTotal {
+  font-size: var(--font-size-body);
+  font-weight: var(--font-weight-h1);
+  color: var(--brand-700);
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+  padding-bottom: 12px;
+  min-width: 64px;
+  text-align: right;
+  flex-shrink: 0;
+}
+
+/* Total bar */
 .totalBar {
   display: flex;
   justify-content: space-between;
@@ -145,130 +264,31 @@
   font-variant-numeric: tabular-nums;
 }
 
-.form {
-  background: var(--surface-0);
-  border: 1px solid var(--border);
-  border-radius: var(--radius-lg);
-  box-shadow: var(--shadow-card);
-  padding: 16px;
-}
-
-.form h3 {
-  font-size: var(--font-size-h3);
-  font-weight: var(--font-weight-h3);
-  margin-bottom: 12px;
-}
-
-.formField {
-  margin-bottom: 12px;
-}
-
-.formField label {
-  display: block;
-  font-size: var(--font-size-label);
-  font-weight: var(--font-weight-label);
-  color: var(--text-500);
-  margin-bottom: 6px;
-  letter-spacing: 0.01em;
-}
-
-.formField input {
-  width: 100%;
-  /* Global input styles handle: 52px height, 1.5px border, 10px radius, 14px 16px padding */
-  /* Focus ring and error states also handled globally via aria-invalid */
-}
-
-.inputError {
-  border-color: var(--border-error) !important;
-}
-
-.inputError:focus {
-  border-color: var(--border-error) !important;
-  box-shadow: 0 0 0 2px rgba(220, 38, 38, 0.2) !important;
-}
-
-.error {
-  display: block;
-  font-size: var(--font-size-caption);
-  color: var(--error);
-  margin-top: 6px;
-  font-weight: var(--font-weight-body-medium);
-  line-height: 1.4;
-}
-
-.formRow {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 12px;
-}
-
-/* Live line total preview */
-.liveTotal {
+/* Add expense button */
+.addButton {
   display: flex;
-  justify-content: space-between;
   align-items: center;
-  padding: 10px 12px;
-  margin-bottom: 8px;
-  background: var(--surface-50);
-  border-radius: 8px;
-  border: 1px dashed var(--border);
-}
-
-.liveTotalLabel {
-  font-size: var(--font-size-body);
-  font-weight: var(--font-weight-label);
-  color: var(--text-500);
-}
-
-.liveTotalValue {
-  font-size: var(--font-size-h3);
-  font-weight: var(--font-weight-display);
+  justify-content: center;
+  gap: 6px;
+  width: 100%;
+  padding: 14px;
+  border: 2px dashed var(--border);
+  border-radius: var(--radius-lg);
+  background: transparent;
   color: var(--brand-700);
-  font-variant-numeric: tabular-nums;
-}
-
-.formActions {
-  display: flex;
-  gap: 12px;
-  margin-top: 4px;
-}
-
-.submitButton {
-  flex: 1;
-  padding: 12px;
-  border: none;
-  border-radius: var(--radius-lg);
-  background: var(--cta);
-  color: white;
-  font-size: var(--font-size-button);
+  font-size: var(--font-size-button-sm);
   font-weight: var(--font-weight-button);
-  min-height: 56px;
-  box-shadow: var(--shadow-cta);
-  transition: transform 0.1s ease, background-color 0.15s ease;
+  min-height: 48px;
+  cursor: pointer;
+  transition: background-color 0.15s ease, border-color 0.15s ease;
 }
 
-.submitButton:active {
-  transform: scale(0.98);
-  background: var(--cta-pressed);
+.addButton:active {
+  background: var(--brand-100);
+  border-color: var(--brand-600);
 }
 
-.submitButton:disabled {
-  opacity: 0.5;
-  pointer-events: none;
-}
-
-.cancelButton {
-  flex: 1;
-  padding: 12px;
-  border: 1.5px solid var(--border);
-  border-radius: var(--radius-lg);
-  background: var(--surface-0);
-  color: var(--text-900);
-  font-size: var(--font-size-button);
-  font-weight: var(--font-weight-button);
-  min-height: 56px;
-}
-
+/* Empty state */
 .emptyState {
   display: flex;
   flex-direction: column;
@@ -291,6 +311,7 @@
 .emptyHint {
   font-size: var(--font-size-body);
   margin-top: 4px;
+  margin-bottom: 16px;
 }
 
 /* Confirmation Dialog */
