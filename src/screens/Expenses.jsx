@@ -189,6 +189,8 @@ export default function Expenses() {
             className={errors.name ? styles.inputError : ''}
             aria-invalid={!!errors.name}
             aria-describedby={errors.name ? 'exp-name-error' : undefined}
+            autoComplete="off"
+            enterKeyHint="done"
           />
           {errors.name && <span id="exp-name-error" className={styles.error} role="alert">{errors.name}</span>}
         </div>
@@ -198,6 +200,7 @@ export default function Expenses() {
             <input
               id="exp-qty"
               type="number"
+              inputMode="decimal"
               value={quantity}
               onChange={(e) => {
                 setQuantity(e.target.value)
@@ -210,6 +213,7 @@ export default function Expenses() {
               className={errors.quantity ? styles.inputError : ''}
               aria-invalid={!!errors.quantity}
               aria-describedby={errors.quantity ? 'exp-qty-error' : undefined}
+              enterKeyHint="done"
             />
             {errors.quantity && (
               <span id="exp-qty-error" className={styles.error} role="alert">{errors.quantity}</span>
@@ -220,6 +224,7 @@ export default function Expenses() {
             <input
               id="exp-price"
               type="number"
+              inputMode="decimal"
               value={unitPrice}
               onChange={(e) => {
                 setUnitPrice(e.target.value)
@@ -232,6 +237,7 @@ export default function Expenses() {
               className={errors.unitPrice ? styles.inputError : ''}
               aria-invalid={!!errors.unitPrice}
               aria-describedby={errors.unitPrice ? 'exp-price-error' : undefined}
+              enterKeyHint="done"
             />
             {errors.unitPrice && (
               <span id="exp-price-error" className={styles.error} role="alert">{errors.unitPrice}</span>

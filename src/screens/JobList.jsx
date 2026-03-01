@@ -2,7 +2,8 @@ import { useState, useRef, useCallback, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { useApp } from '../context/AppContext'
 import PageTransition from '../components/PageTransition'
-import { CheckCircle, Clock, ArrowsClockwise, Warning, Lightning, ArrowDown, ClipboardText } from '@phosphor-icons/react'
+import SkeletonCard from '../components/SkeletonCard'
+import { CheckCircle, Clock, ArrowsClockwise, Warning, Lightning, ArrowDown, ClipboardText, WifiSlash } from '@phosphor-icons/react'
 import styles from '../styles/JobList.module.css'
 
 const TABS = ['all', 'new', 'in_progress', 'completed']
@@ -15,6 +16,7 @@ const STATUS_CLASS = {
 }
 
 const PULL_THRESHOLD = 60
+const SKELETON_LOAD_MS = 800
 
 export default function JobList() {
   const { state } = useApp()
@@ -22,9 +24,18 @@ export default function JobList() {
   const [activeTab, setActiveTab] = useState('all')
   const [pullDistance, setPullDistance] = useState(0)
   const [refreshing, setRefreshing] = useState(false)
+  const [isLoading, setIsLoading] = useState(true)
   const startYRef = useRef(null)
   const pullingRef = useRef(false)
   const listRef = useRef(null)
+
+  // Simulate initial data load with skeleton screens
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setIsLoading(false)
+    }, SKELETON_LOAD_MS)
+    return () => clearTimeout(timer)
+  }, [])
 
   const masterJobs = state.jobs.filter(
     (job) => job.assignedMasterId === state.selectedMasterId
@@ -159,7 +170,30 @@ export default function JobList() {
       )}
 
       <div className={styles.list} role="list" aria-label="Job list">
-        {filteredJobs.length === 0 ? (
+        {isLoading && !(!state.isOnline && masterJobs.length === 0) ? (
+          /* Show 3 skeleton cards during initial data load */
+          <>
+            <SkeletonCard />
+            <SkeletonCard />
+            <SkeletonCard />
+          </>
+        ) : !state.isOnline && masterJobs.length === 0 ? (
+          /* Offline with no cached data: show empty state with retry button */
+          <div className={styles.emptyState}>
+            <span className={styles.emptyIcon} role="img" aria-hidden="true"><WifiSlash size={48} /></span>
+            <p className={styles.emptyTitle}>You're offline</p>
+            <p className={styles.emptySubtext}>No cached jobs available. Connect to the network and try again.</p>
+            <button
+              className={styles.retryButton}
+              onClick={() => {
+                setIsLoading(true)
+                setTimeout(() => setIsLoading(false), SKELETON_LOAD_MS)
+              }}
+            >
+              Retry
+            </button>
+          </div>
+        ) : filteredJobs.length === 0 ? (
           <div className={styles.emptyState}>
             <span className={styles.emptyIcon} role="img" aria-hidden="true"><ClipboardText size={48} /></span>
             <p>No {activeTab === 'all' ? '' : TAB_LABELS[activeTab].toLowerCase()} jobs</p>

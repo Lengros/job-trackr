@@ -231,3 +231,38 @@
   margin-bottom: 12px;
   color: var(--text-500);
 }
+
+.emptyTitle {
+  font-size: 18px;
+  font-weight: 700;
+  color: var(--text-900);
+  margin-bottom: 4px;
+}
+
+.emptySubtext {
+  font-size: 14px;
+  color: var(--text-500);
+  margin-bottom: 16px;
+  max-width: 280px;
+}
+
+.retryButton {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 12px 32px;
+  background: var(--brand-700);
+  color: white;
+  border: none;
+  border-radius: var(--radius-sm);
+  font-size: 15px;
+  font-weight: 600;
+  min-height: 48px;
+  cursor: pointer;
+  transition: background 0.15s ease;
+}
+
+.retryButton:hover,
+.retryButton:active {
+  background: var(--brand-800);
+}

@@ -61,8 +61,10 @@
   right: 0;
   width: 48px;
   height: 48px;
+  min-width: 48px;
+  min-height: 48px;
   border: none;
-  border-radius: 0 var(--radius-sm) 0 12px;
+  border-radius: 0 var(--radius-sm) 0 var(--radius-lg);
   background: rgba(0, 0, 0, 0.55);
   color: white;
   font-size: 16px;
@@ -103,16 +105,23 @@
   padding: 14px;
   border: none;
   border-radius: var(--radius-lg);
-  background: var(--brand-700);
+  background: var(--cta);
   color: white;
-  font-size: 16px;
+  font-size: 18px;
   font-weight: 700;
-  min-height: 48px;
-  transition: opacity 0.15s ease;
+  min-height: 56px;
+  box-shadow: var(--shadow-cta);
+  transition: transform 0.1s ease, background-color 0.15s ease;
+}
+
+.addButton:active {
+  transform: scale(0.98);
+  background: var(--cta-pressed);
 }
 
 .addButton:disabled {
-  opacity: 0.6;
+  opacity: 0.5;
+  pointer-events: none;
 }
 
 .emptyState {
@@ -178,15 +187,22 @@
   border-radius: var(--radius-lg);
   font-size: 16px;
   font-weight: 600;
-  min-height: 48px;
+  min-height: 56px;
+  transition: transform 0.1s ease;
 }
 
 .cancelButton {
-  background: var(--surface-50);
-  color: var(--text-500);
+  background: var(--surface-0);
+  color: var(--text-900);
+  border: 1.5px solid var(--border);
 }
 
 .confirmButton {
-  background: var(--error);
-  color: white;
+  background: var(--surface-0);
+  color: var(--error);
+  border: 1.5px solid var(--error);
+}
+
+.confirmButton:active {
+  background: var(--error-bg);
 }
