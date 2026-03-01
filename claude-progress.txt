@@ -1,3 +1,62 @@
+## Session 18 - 2026-03-01T17:25
+
+### Completed Features
+- Feature #80: Add ARIA Attributes and Screen Reader Support - PASSING
+  - Added role="list" and role="listitem" to:
+    - Job list container and job cards
+    - Photo gallery and photo thumbnails
+    - Sync status list and items
+    - Master selection grid and cards
+  - Added role="status" with aria-live="polite" to:
+    - Job list status badges (New/In Progress/Completed)
+    - Job detail status bar
+    - Sync status badges (Synced/Pending/Error/Conflict)
+    - Sync Status page subtitle (Online/Offline indicator)
+    - Photo count indicator
+  - Added role="alert" to offline network toggle (only when offline)
+  - Added role="dialog" with aria-modal="true" to all confirmation dialogs:
+    - Job status change dialog
+    - Photo delete dialog
+    - Expense delete dialog
+    - Job completion dialog on summary
+  - Added descriptive aria-labels to all icon buttons:
+    - Back buttons ("Back to job list", "Back to job detail")
+    - Delete buttons ("Delete photo 1", "Delete expense: Toilet")
+    - Edit buttons ("Edit expense: Sink faucet")
+    - Add Photo button ("Add photo" / "Uploading photo")
+    - Sync icons ("Sync status: synced/pending/error/conflict")
+  - Added phone links with tel: href and descriptive aria-label:
+    - "Call Sarah Johnson, +1 (555) 123-4567" format
+    - Styled with phoneLink CSS class
+  - Added alt text to photo placeholders ("Job photo 1", "Job photo 2", etc.)
+  - Added aria-hidden="true" to all decorative icons (Phosphor icons)
+  - Added aria-invalid and aria-describedby to expense form validation fields
+  - Added role="alert" to form error messages
+  - Added role="table", role="columnheader", role="cell" to expense table
+  - Added role="banner" to header
+  - Added aria-label="Logged in as [name]" to master name display
+  - Added sr-only CSS utility class in index.css
+  - Zero console errors across all screens
+  - Verified all ARIA attributes via Playwright browser automation
+
+### Code Changes
+- Modified: src/screens/JobList.jsx - ARIA roles and labels on list, cards, badges, sync icons
+- Modified: src/screens/JobDetail.jsx - status role, phone link, back button, dialog role
+- Modified: src/screens/Photos.jsx - gallery list roles, alt text, delete labels, dialog role
+- Modified: src/screens/Expenses.jsx - table roles, edit/delete labels, form validation ARIA, dialog role
+- Modified: src/screens/JobSummary.jsx - back button label, dialog role
+- Modified: src/screens/SyncStatus.jsx - list roles, status badges, back button label
+- Modified: src/screens/MasterSelection.jsx - list roles, card labels
+- Modified: src/components/Header.jsx - banner role, alert role for offline, aria-hidden on icons
+- Modified: src/styles/JobDetail.module.css - phoneLink styles
+- Modified: src/styles/index.css - sr-only utility class
+
+### Current Status
+- 54/83 features passing (~65%)
+- Dev server running on port 5191
+
+---
+
 ## Session 17 - 2026-03-01T17:23
 
 ### Completed Features
