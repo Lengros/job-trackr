@@ -1,3 +1,166 @@
+## Session 21 - 2026-03-01T20:13 (Features #58, #56 - i18n Audit & Typography)
+
+### Completed Features
+
+- Feature #58: Centralized String Table (pl.json) - PASSING
+  - Audited all components for hardcoded strings
+  - Updated en.json with missing keys: bottomTabs, aria, profile, nav, pullToRefresh, photos, expenses, confirm, network, sync
+  - Rewrote Profile.jsx and BottomTabBar.jsx to use useStrings()
+  - Updated aria-labels in: MasterSelection, Header, Photos, Expenses, JobDetail, JobSummary, SyncStatus
+  - Replaced hardcoded $ currency format in JobList with formatCurrency()
+  - Verified both EN and PL languages in browser — all strings correct
+
+- Feature #56: Implement Typography Scale - PASSING
+  - Type scale CSS variables already defined in index.css
+  - Replaced all hardcoded font-size and font-weight values across all CSS modules:
+    - MasterSelection: avatar → h2 tokens
+    - LanguageSwitcher: option → label tokens
+    - Toast: actionBtn → h1 weight
+    - SyncStatus: backButton → button tokens, networkToggle → body/button tokens, badge → h1 weight
+    - Profile: avatar → display/h1 tokens
+    - Photos: backButton → button tokens, deleteBtn font-size → button token
+    - BottomTabBar: tabLabel → tab tokens
+    - JobDetail: badge → label weight, grandTotalAmount → display weight, backButton → button tokens
+    - JobSummary: backButton → button tokens
+    - Expenses: backButton → button tokens, tableHeader → h1 weight, colName → label weight, totalValue → h1 weight, editBtn/deleteBtn → h3 size, error → body-medium weight
+    - JobList: count → h1 weight, spinning → h1 size
+  - Build passes with zero errors
+  - Browser verification: all screens display correct typography
+  - Zero console errors
+  - No text below 12px (minimum is caption/tab at 12px)
+  - No italic body text found
+
+### Code Changes
+- Modified: src/i18n/en.json - added missing i18n keys
+- Modified: src/components/BottomTabBar.jsx - use useStrings() for labels
+- Modified: src/screens/Profile.jsx - use useStrings() for all labels
+- Modified: src/screens/MasterSelection.jsx - i18n aria-labels
+- Modified: src/components/Header.jsx - i18n aria-label
+- Modified: src/screens/Photos.jsx - i18n aria-labels
+- Modified: src/screens/Expenses.jsx - i18n aria-labels
+- Modified: src/screens/JobDetail.jsx - i18n aria-labels
+- Modified: src/screens/JobSummary.jsx - i18n aria-label
+- Modified: src/screens/SyncStatus.jsx - i18n aria-labels
+- Modified: src/screens/JobList.jsx - i18n aria-labels + formatCurrency
+- Modified: 11 CSS module files - replaced hardcoded font values with CSS variable tokens
+
+---
+
+## Session 20 - 2026-03-01T20:00 (Features #84, #85, #86 - Internationalization)
+
+### Completed Features
+
+- Feature #84: i18n Infrastructure Setup - PASSING
+  - Infrastructure already built by previous agents:
+    - src/context/LanguageContext.jsx - LanguageProvider with localStorage persistence
+    - src/i18n/en.json and src/i18n/pl.json - Full translation files
+    - src/i18n/useStrings.js - useStrings hook with dot-notation key lookup
+  - Verified infrastructure works end-to-end via browser testing
+  - No code changes needed
+
+- Feature #85: Language Switcher Component - PASSING
+  - Created src/components/LanguageSwitcher.jsx - EN/PL radio button toggle
+  - Created src/styles/LanguageSwitcher.module.css - Pill-style toggle with active state
+  - Integrated into Header.jsx (appears in top-right area)
+  - Accessibility: role="radiogroup", aria-checked, 44px min tap targets
+  - Language persists via localStorage after page reload
+  - Switching is instant with no page reload
+
+- Feature #86: Translate All UI Strings to Polish - PASSING
+  - Replaced static formatCurrency with locale-aware useCurrencyFormatter() in 4 screens:
+    JobList.jsx, Expenses.jsx, JobSummary.jsx, JobDetail.jsx
+  - Added useDateFormatter() hook - locale-aware date formatting (en-US vs pl-PL)
+  - Added useTimeFormatter() hook - locale-aware time formatting
+  - Updated date formatting in JobList.jsx and SyncStatus.jsx
+  - Updated time formatting in Profile.jsx (was hardcoded to pl-PL)
+  - Added "language" translation section to both en.json and pl.json
+  - Updated LanguageSwitcher to use translated aria-labels
+  - Currency: $150.00 (EN) → 150,00 zł (PL)
+  - Dates: 2/25/2026 (EN) → 25.02.2026 (PL)
+  - Time: 09:13 PM (EN) → 21:13 (PL)
+  - All 20 top-level JSON keys match between en.json and pl.json
+  - All screens verified in both languages via playwright-cli
+  - Zero console errors on fresh navigation
+
+### Code Changes
+- New: src/components/LanguageSwitcher.jsx - language toggle component
+- New: src/styles/LanguageSwitcher.module.css - toggle styling
+- Modified: src/components/Header.jsx - added LanguageSwitcher import/render
+- Modified: src/i18n/en.json - added "language" section
+- Modified: src/i18n/pl.json - added "language" section
+- Modified: src/i18n/useStrings.js - added useDateFormatter, useTimeFormatter hooks
+- Modified: src/screens/JobList.jsx - locale-aware currency and date formatting
+- Modified: src/screens/Expenses.jsx - locale-aware currency formatting
+- Modified: src/screens/JobSummary.jsx - locale-aware currency formatting
+- Modified: src/screens/JobDetail.jsx - locale-aware currency formatting
+- Modified: src/screens/SyncStatus.jsx - locale-aware date formatting
+- Modified: src/screens/Profile.jsx - locale-aware time formatting
+
+### Current Status
+- 74/86 features passing (86.0%)
+- All 3 internationalization features complete
+- Changes committed in 7b0d071
+
+---
+
+## Session - 2026-03-01T20:00 (Features #66, #67, #68)
+
+### Completed Features
+
+- Feature #66: Implement Bottom Tab Bar - PASSING
+  - BottomTabBar component already existed from a previous agent
+  - 2 tabs: Jobs (Wrench icon) and Profile (User icon) with i18n labels
+  - Height: 56px + env(safe-area-inset-bottom) with fixed positioning
+  - Active tab: brand-700 blue for icon + text, bold weight icon
+  - Inactive tab: text-500 muted color, regular weight icon
+  - Labels: 11px Medium (500) weight
+  - Integrated with React Router for navigation between /jobs and /profile
+  - Content area properly padded to avoid overlap
+  - No badge/notification dots per MVP spec
+  - Zero console errors
+
+- Feature #67: Update Screen Layout Structure - PASSING
+  - 3-zone layout: fixed app bar (56px), scrollable content, fixed tab bar (56px)
+  - Fixed sticky CTA bars to position ABOVE the tab bar (bottom: 56px + safe-area-inset-bottom)
+  - Previously CTAs at bottom: 0 overlapped the tab bar
+  - Added bottomActionBar class in Layout.module.css as reusable fixed action slot
+  - Updated JobDetail stickyCtaBar to sit above tab bar
+  - Made JobSummary "Complete Job" button sticky above tab bar (new ctaSpacer + stickyCtaBar)
+  - Updated card gap in JobList from 12px to 16px (var(--space-4)) per design guide §4
+  - All safe area insets properly applied: env(safe-area-inset-top) on header, env(safe-area-inset-bottom) on tab bar
+  - Content scrolls freely without overlapping fixed elements
+  - Primary action buttons in bottom 40% of screen (thumb zone)
+  - Zero console errors
+
+- Feature #68: Create Profile Tab Screen - PASSING
+  - Profile screen already existed from a previous agent
+  - Displays selected master name and specialization (e.g., "Ivan", "Plumber")
+  - Avatar with initial letter and master's avatar color
+  - Phone: +1 (555) 000-0000 (read-only placeholder)
+  - Sync status: shows count of pending items and last sync time
+  - App version: v0.0.1
+  - Log Out button navigates back to master selection
+  - Verified with multiple masters (Ivan/Plumber, Mike/Electrician) - different data shows correctly
+  - Uses i18n strings (strings.profile.*) for all labels
+  - Styled with design system: cards, spacing, typography
+  - Route /profile connected to bottom tab bar
+  - Zero console errors
+
+### Code Changes
+- Modified: src/styles/Layout.module.css - added bottomActionBar reusable class
+- Modified: src/styles/JobDetail.module.css - fixed stickyCtaBar to bottom: 56px + safe-area
+- Modified: src/styles/JobSummary.module.css - added ctaSpacer + stickyCtaBar styles
+- Modified: src/screens/JobSummary.jsx - wrapped Complete button in sticky bar
+- Modified: src/styles/JobList.module.css - updated card gap to 16px
+
+### Current Status
+- 74/86 features passing (86.0%)
+- Dev server running on port 5174
+- All 3 features verified through browser automation with Playwright
+- Zero console errors across all tested screens
+
+---
+
 ## Session 19 - 2026-03-01T17:28
 
 ### Completed Features
