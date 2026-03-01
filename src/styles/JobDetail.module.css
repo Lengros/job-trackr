@@ -64,6 +64,7 @@
   color: var(--text-900);
   margin-bottom: var(--space-1);
   padding: var(--space-2) 0;
+  min-height: 56px;
   -webkit-tap-highlight-color: transparent;
 }
 
@@ -105,7 +106,7 @@
   font-size: var(--font-size-body);
   font-weight: var(--font-weight-body-medium);
   margin-bottom: var(--space-5);
-  min-height: 48px;
+  min-height: 56px;
   -webkit-tap-highlight-color: transparent;
   transition: background 0.15s ease;
 }

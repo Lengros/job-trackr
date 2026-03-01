@@ -120,8 +120,23 @@ export default function JobDetail() {
     setDeleteExpenseTarget(null)
   }
 
-  // Geo link for address
-  const geoLink = `geo:0,0?q=${encodeURIComponent(job.address)}`
+  // Geo link for address - uses geo: URI (Android/iOS support)
+  // Fallback to Google Maps on desktop/unsupported platforms
+  const encodedAddress = encodeURIComponent(job.address)
+  const geoLink = `geo:0,0?q=${encodedAddress}`
+  const mapsLink = `https://www.google.com/maps/search/?api=1&query=${encodedAddress}`
+
+  const handleAddressClick = (e) => {
+    // Try geo: URI first (works on mobile), fallback to Google Maps
+    const isIOS = /iPhone|iPad|iPod/i.test(navigator.userAgent)
+    const isAndroid = /Android/i.test(navigator.userAgent)
+    if (!isIOS && !isAndroid) {
+      // Desktop: use Google Maps
+      e.preventDefault()
+      window.open(mapsLink, '_blank')
+    }
+    // On mobile, geo: URI will open the default maps app
+  }
 
   // CTA label
   const ctaLabel =
@@ -157,6 +172,7 @@ export default function JobDetail() {
           href={geoLink}
           className={styles.addressLink}
           aria-label={`${job.address} — ${strings.jobDetail.openMap}`}
+          onClick={handleAddressClick}
         >
           <MapPin size={20} weight="bold" className={styles.mapIcon} aria-hidden="true" />
           <h1 className={styles.address}>{job.address}</h1>
