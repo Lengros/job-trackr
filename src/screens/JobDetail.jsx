@@ -2,29 +2,31 @@ import { useState } from 'react'
 import { useParams, useNavigate } from 'react-router-dom'
 import { useApp } from '../context/AppContext'
 import { useToast } from '../context/ToastContext'
+import { useStrings, formatCurrency } from '../i18n/useStrings'
 import haptic from '../utils/haptic'
 import PageTransition from '../components/PageTransition'
 import { Phone, Camera, CurrencyDollar, ClipboardText } from '@phosphor-icons/react'
 import styles from '../styles/JobDetail.module.css'
-
-const STATUS_LABELS = {
-  new: 'New',
-  in_progress: 'In Progress',
-  completed: 'Completed',
-}
 
 export default function JobDetail() {
   const { jobId } = useParams()
   const navigate = useNavigate()
   const { state, dispatch } = useApp()
   const { showToast } = useToast()
+  const strings = useStrings()
   const [showConfirm, setShowConfirm] = useState(false)
   const [pendingStatus, setPendingStatus] = useState(null)
+
+  const statusLabels = {
+    new: strings.status.new,
+    in_progress: strings.status.inProgress,
+    completed: strings.status.completed,
+  }
 
   const job = state.jobs.find((j) => j.id === Number(jobId))
 
   if (!job) {
-    return <div className={styles.notFound}>Job not found</div>
+    return <div className={styles.notFound}>{strings.jobDetail.notFound}</div>
   }
 
   const handleStatusChange = (newStatus) => {
@@ -48,8 +50,8 @@ export default function JobDetail() {
     // Show toast with undo action
     showToast({
       type: 'success',
-      message: `Status changed \u2192 ${STATUS_LABELS[targetStatus]}`,
-      actionLabel: 'Undo',
+      message: `${strings.toast.statusChanged} ${statusLabels[targetStatus]}`,
+      actionLabel: strings.toast.undo,
       action: () => {
         dispatch({
           type: 'UPDATE_JOB_STATUS',
@@ -64,7 +66,7 @@ export default function JobDetail() {
     <PageTransition>
     <div className={styles.container}>
       <div className={styles.statusBar} data-status={job.status} role="status" aria-live="polite">
-        <span className={styles.statusLabel}>{STATUS_LABELS[job.status]}</span>
+        <span className={styles.statusLabel}>{statusLabels[job.status]}</span>
       </div>
 
       <div className={styles.infoCard}>

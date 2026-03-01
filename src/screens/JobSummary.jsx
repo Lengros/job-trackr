@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { useParams, useNavigate } from 'react-router-dom'
+import { useParams } from 'react-router-dom'
 import { useApp } from '../context/AppContext'
 import { useToast } from '../context/ToastContext'
 import haptic from '../utils/haptic'
@@ -8,7 +8,6 @@ import styles from '../styles/JobSummary.module.css'
 
 export default function JobSummary() {
   const { jobId } = useParams()
-  const navigate = useNavigate()
   const { state, dispatch } = useApp()
   const { showToast } = useToast()
   const [showConfirm, setShowConfirm] = useState(false)
@@ -26,12 +25,26 @@ export default function JobSummary() {
   }
 
   const handleComplete = () => {
+    const previousStatus = job.status
     dispatch({
       type: 'UPDATE_JOB_STATUS',
       payload: { jobId: job.id, newStatus: 'completed' },
     })
     haptic.success()
     setShowConfirm(false)
+
+    showToast({
+      type: 'success',
+      message: 'Status changed \u2192 Completed',
+      actionLabel: 'Undo',
+      action: () => {
+        dispatch({
+          type: 'UPDATE_JOB_STATUS',
+          payload: { jobId: job.id, newStatus: previousStatus },
+        })
+      },
+      duration: 4000,
+    })
   }
 
   return (

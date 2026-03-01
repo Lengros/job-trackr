@@ -1,6 +1,7 @@
 import { useState } from 'react'
-import { useParams, useNavigate } from 'react-router-dom'
+import { useParams } from 'react-router-dom'
 import { useApp } from '../context/AppContext'
+import { useStrings } from '../i18n/useStrings'
 import haptic from '../utils/haptic'
 import PageTransition from '../components/PageTransition'
 import { Camera, Trash, Plus } from '@phosphor-icons/react'
@@ -8,8 +9,8 @@ import styles from '../styles/Photos.module.css'
 
 export default function Photos() {
   const { jobId } = useParams()
-  const navigate = useNavigate()
   const { state, dispatch } = useApp()
+  const strings = useStrings()
   const [uploading, setUploading] = useState(false)
   const [deleteTarget, setDeleteTarget] = useState(null)
 
@@ -36,9 +37,9 @@ export default function Photos() {
   return (
     <PageTransition>
     <div className={styles.container}>
-      <h2 className={styles.title}>Photos</h2>
+      <h2 className={styles.title}>{strings.photos.title}</h2>
       <p className={styles.count} aria-live="polite">
-        {jobPhotos.length} {jobPhotos.length === 1 ? 'photo' : 'photos'}
+        {jobPhotos.length} {jobPhotos.length === 1 ? strings.photos.photoSingular : (jobPhotos.length >= 2 && jobPhotos.length <= 4) ? strings.photos.photoPlural : strings.photos.photoPluralMany}
       </p>
 
       {jobPhotos.length === 0 && !uploading ? (

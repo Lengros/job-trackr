@@ -11,7 +11,6 @@ const STATUS_LABELS = {
 }
 
 export default function SyncStatus() {
-  const navigate = useNavigate()
   const { state } = useApp()
 
   const masterJobs = state.jobs.filter(

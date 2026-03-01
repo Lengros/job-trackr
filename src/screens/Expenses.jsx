@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { useParams, useNavigate } from 'react-router-dom'
+import { useParams } from 'react-router-dom'
 import { useApp } from '../context/AppContext'
 import haptic from '../utils/haptic'
 import PageTransition from '../components/PageTransition'
@@ -8,7 +8,6 @@ import styles from '../styles/Expenses.module.css'
 
 export default function Expenses() {
   const { jobId } = useParams()
-  const navigate = useNavigate()
   const { state, dispatch } = useApp()
 
   const [name, setName] = useState('')

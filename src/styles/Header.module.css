@@ -51,10 +51,10 @@
 }
 
 .title {
-  font-size: 1.25rem;
-  font-weight: 700;
+  font-size: var(--font-size-h2);
+  font-weight: var(--font-weight-h2);
+  line-height: var(--line-height-h2);
   color: var(--text-900);
-  line-height: 1.2;
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
