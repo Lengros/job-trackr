@@ -35,6 +35,8 @@ export default function JobDetail() {
   const [notesText, setNotesText] = useState(null) // lazy init from job.notes
   const [viewerOpen, setViewerOpen] = useState(false)
   const [viewerIndex, setViewerIndex] = useState(0)
+  const [viewerZoom, setViewerZoom] = useState(1)
+  const pinchRef = useRef(null)
   const overflowRef = useRef(null)
 
   const statusLabels = {
@@ -555,33 +557,69 @@ export default function JobDetail() {
               {viewerIndex > 0 && (
                 <button
                   className={styles.photoViewerNavLeft}
-                  onClick={() => setViewerIndex((i) => Math.max(0, i - 1))}
+                  onClick={() => { setViewerIndex((i) => Math.max(0, i - 1)); setViewerZoom(1); }}
                   aria-label="Previous photo"
                 />
               )}
-              {/* Photo display area */}
+              {/* Photo display area with pinch-to-zoom and swipe */}
               <div
                 className={styles.photoViewerImage}
+                ref={pinchRef}
                 onTouchStart={(e) => {
-                  const touch = e.touches[0]
-                  e.currentTarget._touchStartX = touch.clientX
+                  if (e.touches.length === 2) {
+                    // Pinch start — record initial distance
+                    const dx = e.touches[0].clientX - e.touches[1].clientX
+                    const dy = e.touches[0].clientY - e.touches[1].clientY
+                    e.currentTarget._pinchStartDist = Math.hypot(dx, dy)
+                    e.currentTarget._pinchStartZoom = viewerZoom
+                    e.currentTarget._isPinching = true
+                  } else if (e.touches.length === 1) {
+                    // Single touch — swipe start
+                    e.currentTarget._touchStartX = e.touches[0].clientX
+                    e.currentTarget._isPinching = false
+                  }
+                }}
+                onTouchMove={(e) => {
+                  if (e.touches.length === 2 && e.currentTarget._pinchStartDist) {
+                    // Pinch move — update zoom
+                    const dx = e.touches[0].clientX - e.touches[1].clientX
+                    const dy = e.touches[0].clientY - e.touches[1].clientY
+                    const currentDist = Math.hypot(dx, dy)
+                    const scale = currentDist / e.currentTarget._pinchStartDist
+                    const newZoom = Math.min(4, Math.max(1, e.currentTarget._pinchStartZoom * scale))
+                    setViewerZoom(newZoom)
+                    e.currentTarget._isPinching = true
+                  }
                 }}
                 onTouchEnd={(e) => {
+                  if (e.currentTarget._isPinching) {
+                    // Was pinching — clean up
+                    delete e.currentTarget._pinchStartDist
+                    delete e.currentTarget._pinchStartZoom
+                    e.currentTarget._isPinching = false
+                    return
+                  }
+                  // Single touch swipe
                   const startX = e.currentTarget._touchStartX
                   if (startX === undefined) return
                   const endX = e.changedTouches[0].clientX
                   const diff = startX - endX
-                  if (Math.abs(diff) > 50) {
+                  if (Math.abs(diff) > 50 && viewerZoom <= 1) {
                     if (diff > 0 && viewerIndex < jobProblemPhotos.length - 1) {
                       setViewerIndex((i) => i + 1)
+                      setViewerZoom(1)
                     } else if (diff < 0 && viewerIndex > 0) {
                       setViewerIndex((i) => i - 1)
+                      setViewerZoom(1)
                     }
                   }
                   delete e.currentTarget._touchStartX
                 }}
               >
-                <div className={styles.photoViewerPlaceholder}>
+                <div
+                  className={styles.photoViewerPlaceholder}
+                  style={{ transform: `scale(${viewerZoom})`, transition: viewerZoom === 1 ? 'transform 0.2s ease' : 'none' }}
+                >
                   <Eye size={48} color="#888" />
                 </div>
                 {/* Offline overlay */}
@@ -595,7 +633,7 @@ export default function JobDetail() {
               {viewerIndex < jobProblemPhotos.length - 1 && (
                 <button
                   className={styles.photoViewerNavRight}
-                  onClick={() => setViewerIndex((i) => Math.min(jobProblemPhotos.length - 1, i + 1))}
+                  onClick={() => { setViewerIndex((i) => Math.min(jobProblemPhotos.length - 1, i + 1)); setViewerZoom(1); }}
                   aria-label="Next photo"
                 />
               )}
