@@ -1,3 +1,55 @@
+## Session - 2026-03-02T09:10 (Features #88, #89, #87 - Problem Photos)
+
+### Completed Features
+
+- Feature #88: Problem Photos — Thumbnail Strip - PASSING
+  - Added `problemPhotos` fixture data with JobProblemPhoto objects (id, jobId, remoteUrl, thumbnailUrl, createdAt, uploadedBy)
+  - JOB-001: 3 photos (client), JOB-002: 2 (dispatcher), JOB-004: 4 (mixed), JOB-005: 2 (dispatcher)
+  - JOB-003, JOB-006, JOB-007, JOB-008: 0 photos (section hidden)
+  - Problem Photos section between Scope of Work and Notes
+  - Eye icon + "Problem photos" header + count badge (e.g., "(3)")
+  - 80×80px thumbnails with 8px border-radius, 8px gap, horizontal scrollable strip
+  - No add/delete buttons — strictly read-only for the technician
+  - Section completely hidden when 0 photos (no empty state)
+  - Updated AppContext to include problemPhotos in state
+  - Added i18n strings for EN and PL
+  - Zero console errors
+
+- Feature #89: Problem Photos — Fullscreen Viewer - PASSING
+  - Fullscreen overlay with solid black background
+  - × close button top-left, 48×48px touch target
+  - Counter (e.g., "1/3") top-right with white text
+  - Tap-on-edges navigation: Previous/Next buttons on left/right edges
+  - Swipe left/right gesture for secondary navigation
+  - Pinch-to-zoom: two-finger gesture tracking with transform scale (1x-4x)
+  - Zoom resets to 1x when navigating between photos
+  - Swipe navigation disabled while zoomed in
+  - No edit/delete/share action buttons — view-only
+  - Offline overlay: "No connection — full photo unavailable" text when isOnline=false
+  - Zero console errors
+
+- Feature #87: Job Request Photos (Problem Attachments) - PASSING
+  - Broader feature description matching #88 + #89 combined
+  - All steps verified: section placement, thumbnail strip, fullscreen viewer, count label
+  - Read-only, visually distinct from work photos, mobile-friendly 80×80px thumbnails
+  - At least 2 fixture jobs with photos, at least 1 with 0 photos
+  - Zero console errors
+
+### Code Changes
+- Modified: src/data/fixtures.js - added problemPhotos array with 11 fixture photos across 4 jobs
+- Modified: src/context/AppContext.jsx - added problemPhotos to state initialization
+- Modified: src/screens/JobDetail.jsx - added Problem Photos section + Fullscreen Viewer component
+- Modified: src/styles/JobDetail.module.css - added styles for thumbnail strip, viewer overlay, pinch-zoom
+- Modified: src/i18n/en.json - added problemPhotos, problemPhoto, noConnectionFullPhoto strings
+- Modified: src/i18n/pl.json - added Polish translations
+
+### Current Status
+- **89/89 features passing (100%) 🎉**
+- All features complete!
+- Dev server running on port 5183
+
+---
+
 ## Session - 2026-03-01T20:33 (Feature #78 - Undo Toast for Status Changes)
 
 ### Completed Features
