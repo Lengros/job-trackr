@@ -61,7 +61,8 @@
     "grandTotal": "Do zapłaty",
     "addExpense": "+ Dodaj pozycję",
     "addPhoto": "+ Dodaj",
-    "openMap": "Otwórz mapę"
+    "openMap": "Otwórz mapę",
+    "problemPhotos": "Zdjęcia problemu"
   },
   "photos": {
     "title": "Zdjęcia",
@@ -190,6 +191,8 @@
     "deletePhoto": "Usuń zdjęcie {index}",
     "editExpense": "Edytuj pozycję: {name}",
     "deleteExpense": "Usuń pozycję: {name}",
-    "jobPhoto": "Zdjęcie zlecenia {index}"
+    "jobPhoto": "Zdjęcie zlecenia {index}",
+    "problemPhoto": "Zdjęcie problemu {index}",
+    "noConnectionFullPhoto": "Brak połączenia — pełne zdjęcie niedostępne"
   }
 }

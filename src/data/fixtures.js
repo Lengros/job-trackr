@@ -163,6 +163,32 @@ export const photos = [
   { id: 7, jobId: 7, thumbnailUrl: '', timestamp: '2026-02-21T18:00:00Z' },
 ]
 
+/**
+ * Problem photos — attached by dispatcher/client to illustrate the problem
+ * before the technician arrives. Read-only for the master.
+ */
+export const problemPhotos = [
+  // JOB-001 (id:1) — leaking kitchen faucet: 3 photos from client
+  { id: 1, jobId: 1, remoteUrl: '', thumbnailUrl: '', createdAt: '2026-02-24T18:00:00Z', uploadedBy: 'client' },
+  { id: 2, jobId: 1, remoteUrl: '', thumbnailUrl: '', createdAt: '2026-02-24T18:02:00Z', uploadedBy: 'client' },
+  { id: 3, jobId: 1, remoteUrl: '', thumbnailUrl: '', createdAt: '2026-02-24T18:05:00Z', uploadedBy: 'client' },
+  // JOB-002 (id:2) — bathroom fixture install: 2 photos from dispatcher
+  { id: 4, jobId: 2, remoteUrl: '', thumbnailUrl: '', createdAt: '2026-02-21T10:00:00Z', uploadedBy: 'dispatcher' },
+  { id: 5, jobId: 2, remoteUrl: '', thumbnailUrl: '', createdAt: '2026-02-21T10:03:00Z', uploadedBy: 'dispatcher' },
+  // JOB-004 (id:4) — circuit breaker panel: 4 photos from client (tests horizontal scroll)
+  { id: 6, jobId: 4, remoteUrl: '', thumbnailUrl: '', createdAt: '2026-02-25T14:00:00Z', uploadedBy: 'client' },
+  { id: 7, jobId: 4, remoteUrl: '', thumbnailUrl: '', createdAt: '2026-02-25T14:01:00Z', uploadedBy: 'client' },
+  { id: 8, jobId: 4, remoteUrl: '', thumbnailUrl: '', createdAt: '2026-02-25T14:02:00Z', uploadedBy: 'dispatcher' },
+  { id: 9, jobId: 4, remoteUrl: '', thumbnailUrl: '', createdAt: '2026-02-25T14:03:00Z', uploadedBy: 'client' },
+  // JOB-005 (id:5) — LED lighting: 2 photos from dispatcher
+  { id: 10, jobId: 5, remoteUrl: '', thumbnailUrl: '', createdAt: '2026-02-19T09:00:00Z', uploadedBy: 'dispatcher' },
+  { id: 11, jobId: 5, remoteUrl: '', thumbnailUrl: '', createdAt: '2026-02-19T09:05:00Z', uploadedBy: 'dispatcher' },
+  // JOB-003 (id:3) — no problem photos (0 photos)
+  // JOB-006 (id:6) — no problem photos (0 photos)
+  // JOB-007 (id:7) — no problem photos (0 photos)
+  // JOB-008 (id:8) — no problem photos (0 photos)
+]
+
 export const expenses = [
   { id: 1, jobId: 2, name: 'Toilet', quantity: 1, unitPrice: 189.99 },
   { id: 2, jobId: 2, name: 'Sink faucet', quantity: 1, unitPrice: 79.50 },

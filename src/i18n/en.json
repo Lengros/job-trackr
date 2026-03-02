@@ -61,7 +61,8 @@
     "grandTotal": "Grand Total",
     "addExpense": "+ Add Item",
     "addPhoto": "+ Add",
-    "openMap": "Open Map"
+    "openMap": "Open Map",
+    "problemPhotos": "Problem photos"
   },
   "photos": {
     "title": "Photos",
@@ -190,6 +191,8 @@
     "deletePhoto": "Delete photo {index}",
     "editExpense": "Edit expense: {name}",
     "deleteExpense": "Delete expense: {name}",
-    "jobPhoto": "Job photo {index}"
+    "jobPhoto": "Job photo {index}",
+    "problemPhoto": "Problem photo {index}",
+    "noConnectionFullPhoto": "No connection — full photo unavailable"
   }
 }

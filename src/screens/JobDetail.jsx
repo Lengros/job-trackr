@@ -15,6 +15,8 @@ import {
   PencilSimple,
   DotsThreeVertical,
   ArrowCounterClockwise,
+  Eye,
+  X,
 } from '@phosphor-icons/react'
 import styles from '../styles/JobDetail.module.css'
 
@@ -31,6 +33,8 @@ export default function JobDetail() {
   const [deletePhotoTarget, setDeletePhotoTarget] = useState(null)
   const [deleteExpenseTarget, setDeleteExpenseTarget] = useState(null)
   const [notesText, setNotesText] = useState(null) // lazy init from job.notes
+  const [viewerOpen, setViewerOpen] = useState(false)
+  const [viewerIndex, setViewerIndex] = useState(0)
   const overflowRef = useRef(null)
 
   const statusLabels = {
@@ -63,6 +67,7 @@ export default function JobDetail() {
   }
 
   const jobPhotos = state.photos.filter((p) => p.jobId === jobIdNum)
+  const jobProblemPhotos = (state.problemPhotos || []).filter((p) => p.jobId === jobIdNum)
   const jobExpenses = state.expenses.filter((e) => e.jobId === jobIdNum)
   const totalExpenses = jobExpenses.reduce(
     (sum, e) => sum + Math.round(e.quantity * e.unitPrice * 100) / 100,
@@ -262,6 +267,36 @@ export default function JobDetail() {
           </h2>
           <p className={styles.sectionBody}>{job.workDescription}</p>
         </section>
+
+        {/* Problem Photos — read-only strip from dispatcher/client */}
+        {jobProblemPhotos.length > 0 && (
+          <section className={styles.section}>
+            <div className={styles.problemPhotosHeader}>
+              <Eye size={20} weight="bold" className={styles.problemPhotosIcon} aria-hidden="true" />
+              <h2 className={styles.problemPhotosTitle}>
+                {strings.jobDetail.problemPhotos}
+                <span className={styles.badge}>({jobProblemPhotos.length})</span>
+              </h2>
+            </div>
+            <div className={styles.problemPhotosStrip}>
+              {jobProblemPhotos.map((photo, index) => (
+                <div
+                  key={photo.id}
+                  className={styles.problemPhotoThumb}
+                  onClick={() => { setViewerIndex(index); setViewerOpen(true); }}
+                  role="button"
+                  tabIndex={0}
+                  onKeyDown={(e) => { if (e.key === 'Enter' || e.key === ' ') { setViewerIndex(index); setViewerOpen(true); } }}
+                  aria-label={(strings.aria.problemPhoto || 'Problem photo {index}').replace('{index}', index + 1)}
+                >
+                  <div className={styles.problemPhotoPlaceholder}>
+                    <Eye size={24} aria-hidden="true" />
+                  </div>
+                </div>
+              ))}
+            </div>
+          </section>
+        )}
 
         {/* Notes / Comments */}
         <section className={styles.section}>
@@ -496,6 +531,74 @@ export default function JobDetail() {
                   {strings.confirm.delete}
                 </button>
               </div>
+            </div>
+          </div>
+        )}
+
+        {/* Fullscreen Problem Photo Viewer */}
+        {viewerOpen && jobProblemPhotos.length > 0 && (
+          <div className={styles.photoViewer} role="dialog" aria-modal="true" aria-label="Problem photo viewer">
+            <div className={styles.photoViewerTopBar}>
+              <button
+                className={styles.photoViewerCloseBtn}
+                onClick={() => setViewerOpen(false)}
+                aria-label="Close"
+              >
+                <X size={24} weight="bold" />
+              </button>
+              <span className={styles.photoViewerCounter}>
+                {viewerIndex + 1}/{jobProblemPhotos.length}
+              </span>
+            </div>
+            <div className={styles.photoViewerContent}>
+              {/* Tap left edge for previous */}
+              {viewerIndex > 0 && (
+                <button
+                  className={styles.photoViewerNavLeft}
+                  onClick={() => setViewerIndex((i) => Math.max(0, i - 1))}
+                  aria-label="Previous photo"
+                />
+              )}
+              {/* Photo display area */}
+              <div
+                className={styles.photoViewerImage}
+                onTouchStart={(e) => {
+                  const touch = e.touches[0]
+                  e.currentTarget._touchStartX = touch.clientX
+                }}
+                onTouchEnd={(e) => {
+                  const startX = e.currentTarget._touchStartX
+                  if (startX === undefined) return
+                  const endX = e.changedTouches[0].clientX
+                  const diff = startX - endX
+                  if (Math.abs(diff) > 50) {
+                    if (diff > 0 && viewerIndex < jobProblemPhotos.length - 1) {
+                      setViewerIndex((i) => i + 1)
+                    } else if (diff < 0 && viewerIndex > 0) {
+                      setViewerIndex((i) => i - 1)
+                    }
+                  }
+                  delete e.currentTarget._touchStartX
+                }}
+              >
+                <div className={styles.photoViewerPlaceholder}>
+                  <Eye size={48} color="#888" />
+                </div>
+                {/* Offline overlay */}
+                {!state.isOnline && (
+                  <div className={styles.photoViewerOffline}>
+                    {(strings.aria.noConnectionFullPhoto || 'No connection — full photo unavailable')}
+                  </div>
+                )}
+              </div>
+              {/* Tap right edge for next */}
+              {viewerIndex < jobProblemPhotos.length - 1 && (
+                <button
+                  className={styles.photoViewerNavRight}
+                  onClick={() => setViewerIndex((i) => Math.min(jobProblemPhotos.length - 1, i + 1))}
+                  aria-label="Next photo"
+                />
+              )}
             </div>
           </div>
         )}

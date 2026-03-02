@@ -1,5 +1,5 @@
 import { createContext, useContext, useReducer } from 'react'
-import { masters, jobs as initialJobs, photos as initialPhotos, expenses as initialExpenses } from '../data/fixtures'
+import { masters, jobs as initialJobs, photos as initialPhotos, expenses as initialExpenses, problemPhotos as initialProblemPhotos } from '../data/fixtures'
 
 const AppContext = createContext(null)
 
@@ -9,6 +9,7 @@ const initialState = {
   jobs: initialJobs,
   photos: initialPhotos,
   expenses: initialExpenses,
+  problemPhotos: initialProblemPhotos,
   isOnline: true,
   nextPhotoId: initialPhotos.length + 1,
   nextExpenseId: initialExpenses.length + 1,
