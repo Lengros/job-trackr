@@ -70,6 +70,7 @@ export default function JobDetail() {
 
   const jobPhotos = state.photos.filter((p) => p.jobId === jobIdNum)
   const jobProblemPhotos = (state.problemPhotos || []).filter((p) => p.jobId === jobIdNum)
+  const activeProblemPhoto = jobProblemPhotos[viewerIndex] || null
   const jobExpenses = state.expenses.filter((e) => e.jobId === jobIdNum)
   const totalExpenses = jobExpenses.reduce(
     (sum, e) => sum + Math.round(e.quantity * e.unitPrice * 100) / 100,
@@ -291,9 +292,17 @@ export default function JobDetail() {
                   onKeyDown={(e) => { if (e.key === 'Enter' || e.key === ' ') { setViewerIndex(index); setViewerOpen(true); } }}
                   aria-label={(strings.aria.problemPhoto || 'Problem photo {index}').replace('{index}', index + 1)}
                 >
-                  <div className={styles.problemPhotoPlaceholder}>
-                    <Eye size={24} aria-hidden="true" />
-                  </div>
+                  {photo.thumbnailUrl ? (
+                    <img
+                      className={styles.problemPhotoAsset}
+                      src={photo.thumbnailUrl}
+                      alt={(strings.aria.problemPhoto || 'Problem photo {index}').replace('{index}', index + 1)}
+                    />
+                  ) : (
+                    <div className={styles.problemPhotoPlaceholder}>
+                      <Eye size={24} aria-hidden="true" />
+                    </div>
+                  )}
                 </div>
               ))}
             </div>
@@ -343,9 +352,17 @@ export default function JobDetail() {
             <div className={styles.photoGrid}>
               {jobPhotos.map((photo, index) => (
                 <div key={photo.id} className={styles.photoThumb}>
-                  <div className={styles.photoPlaceholder}>
-                    <Camera size={24} aria-hidden="true" />
-                  </div>
+                  {photo.thumbnailUrl ? (
+                    <img
+                      className={styles.photoAsset}
+                      src={photo.thumbnailUrl}
+                      alt={strings.aria.jobPhoto.replace('{index}', index + 1)}
+                    />
+                  ) : (
+                    <div className={styles.photoPlaceholder}>
+                      <Camera size={24} aria-hidden="true" />
+                    </div>
+                  )}
                   <button
                     className={styles.photoDeleteBtn}
                     onClick={() => setDeletePhotoTarget(photo.id)}
@@ -616,14 +633,23 @@ export default function JobDetail() {
                   delete e.currentTarget._touchStartX
                 }}
               >
-                <div
-                  className={styles.photoViewerPlaceholder}
-                  style={{ transform: `scale(${viewerZoom})`, transition: viewerZoom === 1 ? 'transform 0.2s ease' : 'none' }}
-                >
-                  <Eye size={48} color="#888" />
-                </div>
+                {activeProblemPhoto?.thumbnailUrl ? (
+                  <img
+                    className={styles.photoViewerAsset}
+                    src={activeProblemPhoto.remoteUrl || activeProblemPhoto.thumbnailUrl}
+                    alt={(strings.aria.problemPhoto || 'Problem photo {index}').replace('{index}', viewerIndex + 1)}
+                    style={{ transform: `scale(${viewerZoom})`, transition: viewerZoom === 1 ? 'transform 0.2s ease' : 'none' }}
+                  />
+                ) : (
+                  <div
+                    className={styles.photoViewerPlaceholder}
+                    style={{ transform: `scale(${viewerZoom})`, transition: viewerZoom === 1 ? 'transform 0.2s ease' : 'none' }}
+                  >
+                    <Eye size={48} color="#888" />
+                  </div>
+                )}
                 {/* Offline overlay */}
-                {!state.isOnline && (
+                {!state.isOnline && !activeProblemPhoto?.remoteUrl && (
                   <div className={styles.photoViewerOffline}>
                     {(strings.aria.noConnectionFullPhoto || 'No connection — full photo unavailable')}
                   </div>

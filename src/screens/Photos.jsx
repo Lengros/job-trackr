@@ -90,9 +90,17 @@ export default function Photos() {
         <div className={styles.grid} role="list" aria-label={strings.photos.gallery}>
           {jobPhotos.map((photo, index) => (
             <div key={photo.id} className={styles.thumbnail} role="listitem">
-              <div className={styles.placeholder} role="img" alt={strings.aria.jobPhoto.replace('{index}', index + 1)} aria-label={strings.aria.jobPhoto.replace('{index}', index + 1)}>
-                <Camera size={32} aria-hidden="true" />
-              </div>
+              {photo.thumbnailUrl ? (
+                <img
+                  className={styles.thumbnailImage}
+                  src={photo.thumbnailUrl}
+                  alt={strings.aria.jobPhoto.replace('{index}', index + 1)}
+                />
+              ) : (
+                <div className={styles.placeholder} role="img" aria-label={strings.aria.jobPhoto.replace('{index}', index + 1)}>
+                  <Camera size={32} aria-hidden="true" />
+                </div>
+              )}
               <button
                 className={styles.deleteBtn}
                 onClick={() => handleDelete(photo.id)}

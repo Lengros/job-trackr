@@ -1,5 +1,6 @@
 import { createContext, useContext, useReducer } from 'react'
 import { masters, jobs as initialJobs, photos as initialPhotos, expenses as initialExpenses, problemPhotos as initialProblemPhotos } from '../data/fixtures'
+import { getMockUploadPhoto } from '../data/photoMocks'
 
 const AppContext = createContext(null)
 
@@ -37,10 +38,12 @@ function appReducer(state, action) {
     }
 
     case 'ADD_PHOTO': {
+      const { jobId } = action.payload
+      const existingCount = state.photos.filter((photo) => photo.jobId === jobId).length
       const newPhoto = {
         id: state.nextPhotoId,
-        jobId: action.payload.jobId,
-        thumbnailUrl: '',
+        jobId,
+        thumbnailUrl: getMockUploadPhoto(jobId, state.jobs, existingCount),
         timestamp: new Date().toISOString(),
       }
       return {

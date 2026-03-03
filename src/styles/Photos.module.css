@@ -37,11 +37,20 @@
 }
 
 .placeholder {
+  width: 100%;
+  height: 100%;
   display: flex;
   align-items: center;
   justify-content: center;
   opacity: 0.5;
   color: var(--text-500);
+}
+
+.thumbnailImage {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
 }
 
 /* Delete button: 24x24 circle, top-right, red bg, white × — 48px tap target via ::after */

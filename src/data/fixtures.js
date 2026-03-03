@@ -3,6 +3,38 @@
  * All data is in-memory — no backend or database.
  */
 
+import { getSeededProblemPhoto, getSeededResultPhoto } from './photoMocks'
+
+function withSeededResultPhoto() {
+  const photoIndexes = new Map()
+
+  return (photo) => {
+    const currentIndex = photoIndexes.get(photo.jobId) || 0
+    photoIndexes.set(photo.jobId, currentIndex + 1)
+
+    return {
+      ...photo,
+      thumbnailUrl: getSeededResultPhoto(photo.jobId, currentIndex),
+    }
+  }
+}
+
+function withSeededProblemPhoto() {
+  const photoIndexes = new Map()
+
+  return (photo) => {
+    const currentIndex = photoIndexes.get(photo.jobId) || 0
+    photoIndexes.set(photo.jobId, currentIndex + 1)
+    const seededPhoto = getSeededProblemPhoto(photo.jobId, currentIndex)
+
+    return {
+      ...photo,
+      remoteUrl: seededPhoto,
+      thumbnailUrl: seededPhoto,
+    }
+  }
+}
+
 export const masters = [
   {
     id: 1,
@@ -161,7 +193,7 @@ export const photos = [
   { id: 5, jobId: 7, thumbnailUrl: '', timestamp: '2026-02-20T18:30:00Z' },
   { id: 6, jobId: 7, thumbnailUrl: '', timestamp: '2026-02-20T19:00:00Z' },
   { id: 7, jobId: 7, thumbnailUrl: '', timestamp: '2026-02-21T18:00:00Z' },
-]
+].map(withSeededResultPhoto())
 
 /**
  * Problem photos — attached by dispatcher/client to illustrate the problem
@@ -187,7 +219,7 @@ export const problemPhotos = [
   // JOB-006 (id:6) — no problem photos (0 photos)
   // JOB-007 (id:7) — no problem photos (0 photos)
   // JOB-008 (id:8) — no problem photos (0 photos)
-]
+].map(withSeededProblemPhoto())
 
 export const expenses = [
   { id: 1, jobId: 2, name: 'Toilet', quantity: 1, unitPrice: 189.99 },
