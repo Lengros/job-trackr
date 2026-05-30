@@ -56,13 +56,14 @@
   flex-shrink: 0;
   width: 48px;
   height: 48px;
-  border-radius: 50%;
+  border-radius: var(--radius-md);   /* tool-tag squircle, not a circle */
   display: flex;
   align-items: center;
   justify-content: center;
-  color: white;
+  color: var(--cta);                 /* hi-vis initial on graphite */
+  font-family: var(--font-display);
   font-size: var(--font-size-h2);
-  font-weight: var(--font-weight-h2);
+  font-weight: 900;
 }
 
 .info {

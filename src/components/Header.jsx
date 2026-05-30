@@ -6,8 +6,10 @@ import { ArrowLeft, ArrowsClockwise, Circle, WarningCircle } from '@phosphor-ico
 import LanguageSwitcher from './LanguageSwitcher'
 import styles from '../styles/Header.module.css'
 
-// Map routes to their parent (back destination) and title key
-function getRouteInfo(pathname) {
+// Map routes to their parent (back destination) and title key.
+// `listRoot` is the user's home-list screen: /home for a master, /jobs for a
+// foreman — so Back from a job leads to the list the user actually came from.
+function getRouteInfo(pathname, listRoot) {
   if (/^\/jobs\/\d+\/photos$/.test(pathname)) {
     const jobId = pathname.match(/\/jobs\/(\d+)/)[1]
     return { backTo: `/jobs/${jobId}`, title: 'photos', hasBack: true }
@@ -21,10 +23,10 @@ function getRouteInfo(pathname) {
     return { backTo: `/jobs/${jobId}`, title: 'summary', hasBack: true }
   }
   if (/^\/jobs\/\d+$/.test(pathname)) {
-    return { backTo: '/jobs', title: 'jobDetail', hasBack: true }
+    return { backTo: listRoot, title: 'jobDetail', hasBack: true }
   }
   if (pathname === '/sync') {
-    return { backTo: '/jobs', title: 'syncStatus', hasBack: true }
+    return { backTo: listRoot, title: 'syncStatus', hasBack: true }
   }
   return { backTo: null, title: null, hasBack: false }
 }
@@ -56,7 +58,9 @@ export default function Header() {
   const location = useLocation()
   const master = state.masters.find((m) => m.id === state.selectedMasterId)
 
-  const { backTo, title: titleKey, hasBack } = getRouteInfo(location.pathname)
+  // Master's list home is /home; foreman's is /jobs (mirrors BottomTabBar).
+  const listRoot = master?.role === 'foreman' ? '/jobs' : '/home'
+  const { backTo, title: titleKey, hasBack } = getRouteInfo(location.pathname, listRoot)
   const localizedTitle = titleKey ? strings.nav[titleKey] : null
   const displayTitle = localizedTitle || (master ? master.name : strings.app.name)
 
@@ -126,7 +130,7 @@ export default function Header() {
             onClick={() => navigate(backTo)}
             aria-label={strings.nav.goBack}
           >
-            <ArrowLeft size={24} weight="regular" />
+            <ArrowLeft size={24} weight="bold" />
           </button>
         )}
         <h1 className={styles.title}>{displayTitle}</h1>

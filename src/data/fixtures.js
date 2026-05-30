@@ -35,30 +35,41 @@ function withSeededProblemPhoto() {
   }
 }
 
+// Worksite palette: avatars use the graphite ink scale (subtle per-master
+// variation, all in-family); the initial renders in hi-vis orange via CSS.
+//
+// `role` drives which experience the demo entry opens (this is a test-only
+// switcher; prod has a single real user and no selection step):
+//   - 'foreman' -> /jobs   (office/overview list — the dispatcher mental model)
+//   - 'master'  -> /home   (field worker: one active job + your cut)
 export const masters = [
   {
     id: 1,
     name: 'Ivan',
-    specialization: 'Plumber',
-    avatarColor: '#2563EB',
+    specialization: 'Foreman · sees all jobs',
+    role: 'foreman',
+    avatarColor: '#232830',
   },
   {
     id: 2,
     name: 'Mike',
     specialization: 'Electrician',
-    avatarColor: '#F59E0B',
+    role: 'master',
+    avatarColor: '#333A45',
   },
   {
     id: 3,
     name: 'James',
     specialization: 'General Builder',
-    avatarColor: '#16A34A',
+    role: 'master',
+    avatarColor: '#171A1F',
   },
   {
     id: 4,
     name: 'Alex',
     specialization: 'Plumber',
-    avatarColor: '#8B5CF6',
+    role: 'master',
+    avatarColor: '#4A525E',
   },
 ]
 

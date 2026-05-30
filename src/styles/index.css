@@ -1,55 +1,58 @@
-/* Inter Font — Google Fonts */
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;900&display=swap');
+/* Worksite Design System — Inter (body) + Archivo (display) */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Archivo:wght@600;700;800;900&display=swap');
 
-/* Global styles — JobTrackr Design System */
+/* Global styles — JobTrackr "Worksite" Design System
+   Direction: rugged industrial tool, not SaaS dashboard.
+   Structure on near-black ink + warm paper surfaces; ONE hi-vis accent (safety orange) reserved for ACTION.
+   High contrast for outdoor/sunlight legibility; bold weights; glanceable solid status blocks. */
 :root {
-  /* ── Brand Colors (Blue Scale) ── */
-  --brand-900: #1E3A8A;
-  --brand-800: #1E40AF;
-  --brand-700: #2563EB;
-  --brand-600: #3B82F6;
-  --brand-500: #60A5FA;
-  --brand-400: #93C5FD;
-  --brand-300: #BFDBFE;
-  --brand-200: #DBEAFE;
-  --brand-100: #EFF6FF;
+  /* ── Brand Colors → Graphite / Ink scale (industrial structure, NOT a colored brand) ── */
+  --brand-900: #0E1013;
+  --brand-800: #171A1F;
+  --brand-700: #232830;   /* primary structural ink — logo, strong headings */
+  --brand-600: #333A45;
+  --brand-500: #4A525E;
+  --brand-400: #6B7480;
+  --brand-300: #A8AEB8;
+  --brand-200: #D8DBE0;
+  --brand-100: #ECEEF0;   /* neutral tint bg (e.g. phone-link container) */
 
-  /* ── Surface Colors ── */
-  --surface-50: #F8FAFC;
+  /* ── Surface Colors — warm worksite paper ── */
+  --surface-50: #F4F2EC;
   --surface-0: #FFFFFF;
 
-  /* ── CTA Colors ── */
-  --cta: #F97316;
-  --cta-pressed: #EA580C;
+  /* ── CTA — hi-vis safety orange (the single accent; means "tap / act") ── */
+  --cta: #F25C05;
+  --cta-pressed: #C8470A;
 
-  /* ── Semantic Colors ── */
-  --success: #16A34A;
-  --success-bg: #DCFCE7;
-  --warning: #F59E0B;
-  --warning-bg: #FEF3C7;
-  --warning-text: #B45309;
-  --error: #DC2626;
-  --error-bg: rgba(220, 38, 38, 0.1);
-  --conflict: #8B5CF6;
-  --conflict-bg: rgba(139, 92, 246, 0.1);
+  /* ── Semantic Colors (deeper, higher-contrast) ── */
+  --success: #15803D;
+  --success-bg: #D8F2E0;
+  --warning: #D97706;
+  --warning-bg: #FCEBCF;
+  --warning-text: #8A4A06;
+  --error: #C81E1E;
+  --error-bg: rgba(200, 30, 30, 0.10);
+  --conflict: #7C3AED;
+  --conflict-bg: rgba(124, 58, 237, 0.10);
 
-  /* ── Text Colors ── */
-  --text-900: #1E293B;
-  --text-500: #64748B;
+  /* ── Text Colors — raised contrast for sunlight readability ── */
+  --text-900: #14171C;
+  --text-500: #555B64;   /* was #64748B; darkened so secondary text survives bright light */
 
-  /* ── Border ── */
-  --border: #E2E8F0;
-  --border-focus: #3B82F6;
-  --border-error: #DC2626;
+  /* ── Border — warm, more defined ── */
+  --border: #D9D5CC;
+  --border-focus: #F25C05;
+  --border-error: #C81E1E;
 
-  /* ── Status Semantic Tokens ── */
-  --status-new: #2563EB;
-  --status-in-progress: #F59E0B;
-  --status-done: #16A34A;
-  --sync-synced: #16A34A;
-  --sync-pending: #F59E0B;
-  --sync-error: #DC2626;
-  --offline-banner: #DC2626;
+  /* ── Status Semantic Tokens — solid, glanceable ── */
+  --status-new: #3F4A5A;       /* steel slate */
+  --status-in-progress: #D97706;  /* amber */
+  --status-done: #15803D;
+  --sync-synced: #15803D;
+  --sync-pending: #D97706;
+  --sync-error: #C81E1E;
+  --offline-banner: #C81E1E;
 
   /* ── Spacing (4px grid) ── */
   --space-1: 4px;
@@ -63,42 +66,43 @@
   --space-9: 36px;
   --space-10: 40px;
 
-  /* ── Border Radius ── */
-  --radius-sm: 8px;
-  --radius-md: 10px;
-  --radius-lg: 12px;
+  /* ── Border Radius — tighter, more solid/tool-like ── */
+  --radius-sm: 5px;
+  --radius-md: 7px;
+  --radius-lg: 9px;
   --radius-full: 9999px;
 
-  /* ── Shadows ── */
-  --shadow-card: 0 1px 3px rgba(0, 0, 0, 0.1);
-  --shadow-elevated: 0 4px 12px rgba(0, 0, 0, 0.15);
-  --shadow-cta: 0 4px 12px rgba(249, 115, 22, 0.25);
+  /* ── Shadows — grounded, rely on borders not floaty blur ── */
+  --shadow-card: 0 1px 2px rgba(20, 23, 28, 0.05);
+  --shadow-elevated: 0 8px 22px rgba(20, 23, 28, 0.18);
+  --shadow-cta: 0 5px 16px rgba(242, 92, 5, 0.38);
 
-  /* ── Typography ── */
+  /* ── Typography — Archivo (industrial display) + Inter (body) ── */
   --font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  --font-display: 'Archivo', 'Inter', -apple-system, sans-serif;
 
-  /* ── Type Scale ── */
-  --font-size-display: 1.75rem;       /* 28px */
+  /* ── Type Scale — heavier display, body raised to 16px for the field ── */
+  --font-size-display: 1.875rem;      /* 30px */
   --font-weight-display: 900;
-  --line-height-display: 1.2;
+  --line-height-display: 1.1;
 
   --font-size-h1: 1.5rem;             /* 24px */
-  --font-weight-h1: 700;
-  --line-height-h1: 1.2;
+  --font-weight-h1: 800;
+  --line-height-h1: 1.15;
 
-  --font-size-h2: 1.25rem;            /* 20px */
-  --font-weight-h2: 700;
+  --font-size-h2: 1.3125rem;          /* 21px */
+  --font-weight-h2: 800;
   --line-height-h2: 1.2;
 
   --font-size-h3: 1.0625rem;          /* 17px */
-  --font-weight-h3: 600;
+  --font-weight-h3: 700;
   --line-height-h3: 1.3;
 
-  --font-size-body: 0.9375rem;        /* 15px */
+  --font-size-body: 1rem;             /* 16px */
   --font-weight-body: 400;
   --line-height-body: 1.5;
 
-  --font-size-body-medium: 0.9375rem; /* 15px */
+  --font-size-body-medium: 1rem;      /* 16px */
   --font-weight-body-medium: 500;
   --line-height-body-medium: 1.5;
 
@@ -168,10 +172,11 @@ button {
 input {
   font-family: inherit;
   font-size: var(--font-size-body);
-  height: 52px;
-  min-height: 52px;
+  font-weight: 500;
+  height: 54px;
+  min-height: 54px;
   padding: 14px 16px;
-  border: 1.5px solid var(--border);
+  border: 2px solid var(--border);
   border-radius: var(--radius-md);
   background: var(--surface-0);
   color: var(--text-900);
@@ -183,7 +188,7 @@ input {
 
 input:focus {
   border-color: var(--border-focus);
-  box-shadow: 0 0 0 2px rgba(59, 130, 246, 0.2);
+  box-shadow: 0 0 0 3px rgba(242, 92, 5, 0.22);
 }
 
 input[aria-invalid="true"],
@@ -206,6 +211,20 @@ input.input-error:focus {
 
 .interactive:active {
   transform: scale(0.98);
+}
+
+/* ── Display font on semantic headings (industrial Archivo) ── */
+h1, h2, h3, h4 {
+  font-family: var(--font-display);
+  letter-spacing: -0.01em;
+}
+
+/* Utility: monetary values render in the display face, tabular, heavy */
+.money {
+  font-family: var(--font-display);
+  font-variant-numeric: tabular-nums;
+  font-weight: 800;
+  letter-spacing: -0.01em;
 }
 
 /* Utility: tabular numbers for costs/amounts */

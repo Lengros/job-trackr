@@ -15,44 +15,30 @@
 .statusLabel {
   display: inline-flex;
   align-items: center;
-  height: 28px;
-  padding: 4px 12px;
-  border-radius: 14px;
+  height: 32px;
+  padding: 5px 14px;
+  border-radius: var(--radius-sm);
+  font-family: var(--font-display);
   font-size: var(--font-size-button-sm);
-  font-weight: var(--font-weight-button-sm);
+  font-weight: 800;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  color: var(--surface-0);
   white-space: nowrap;
 }
 
 .statusLabel::before {
-  content: '';
-  display: inline-block;
-  width: 8px;
-  height: 8px;
-  border-radius: 50%;
-  margin-right: 6px;
-  flex-shrink: 0;
+  content: none;
 }
 
 .statusBar[data-status="new"] .statusLabel {
-  background: var(--brand-200);
-  color: var(--brand-800);
-}
-.statusBar[data-status="new"] .statusLabel::before {
-  background-color: var(--brand-700);
+  background: var(--status-new);
 }
 .statusBar[data-status="in_progress"] .statusLabel {
-  background: var(--warning-bg);
-  color: var(--warning-text);
-}
-.statusBar[data-status="in_progress"] .statusLabel::before {
-  background-color: var(--warning);
+  background: var(--status-in-progress);
 }
 .statusBar[data-status="completed"] .statusLabel {
-  background: var(--success-bg);
-  color: var(--success);
-}
-.statusBar[data-status="completed"] .statusLabel::before {
-  background-color: var(--success);
+  background: var(--status-done);
 }
 
 /* ── Address (h1) with MapPin ── */
@@ -435,7 +421,10 @@
 }
 
 .grandTotalAmount {
-  font-weight: var(--font-weight-display);
+  font-family: var(--font-display);
+  font-size: 1.5rem;
+  font-weight: 900;
+  letter-spacing: -0.01em;
   color: var(--text-900);
   font-variant-numeric: tabular-nums;
 }

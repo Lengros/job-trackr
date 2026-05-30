@@ -13,6 +13,24 @@
     "jobs": "Jobs",
     "profile": "Profile"
   },
+  "home": {
+    "labelActive": "Working on",
+    "labelNext": "Next up",
+    "yourCut": "Your cut",
+    "clientPays": "Client pays {amount}",
+    "materialsReimbursed": "materials {amount} · reimbursed",
+    "start": "Start job",
+    "reportDone": "Report done",
+    "quickPhoto": "Photo",
+    "quickMaterial": "Material",
+    "restOfDay": "Rest of today",
+    "dayEarnings": "You earn today",
+    "daySummary": "{open} open · {done} done",
+    "allDone": "All done for today",
+    "allDoneSubtitle": "Nice work — nothing left in your queue.",
+    "noJobs": "No jobs assigned",
+    "noJobsSubtitle": "Nothing assigned to you yet."
+  },
   "status": {
     "new": "New",
     "inProgress": "In Progress",
