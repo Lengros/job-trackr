@@ -47,13 +47,19 @@ export default function MasterHome() {
       .sort((a, b) => new Date(a.createdDate) - new Date(b.createdDate))[0] ||
     null
 
-  const restJobs = openJobs.filter((j) => j.id !== activeJob?.id)
+  // Secondary list is time-labelled, so order it by time (not fixture/id order).
+  const restJobs = openJobs
+    .filter((j) => j.id !== activeJob?.id)
+    .sort((a, b) => new Date(a.createdDate) - new Date(b.createdDate))
   const dayEarnings = openJobs.reduce((sum, j) => sum + (j.workCost || 0), 0)
 
   const expensesFor = (jobId) =>
     state.expenses
       .filter((e) => e.jobId === jobId)
       .reduce((s, e) => s + Math.round(e.quantity * e.unitPrice * 100) / 100, 0)
+
+  // Computed once — used three times in the hero money block below.
+  const activeExpenses = activeJob ? expensesFor(activeJob.id) : 0
 
   const timeOf = (iso) =>
     new Date(iso).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })
@@ -90,6 +96,16 @@ export default function MasterHome() {
             <section
               className={`${styles.hero} interactive`}
               onClick={() => navigate(`/jobs/${activeJob.id}`)}
+              onKeyDown={(e) => {
+                // Only the card itself; let nested buttons/links handle their own keys.
+                if (
+                  e.target === e.currentTarget &&
+                  (e.key === 'Enter' || e.key === ' ')
+                ) {
+                  e.preventDefault()
+                  navigate(`/jobs/${activeJob.id}`)
+                }
+              }}
               role="button"
               tabIndex={0}
               aria-label={`${activeJob.address} — ${strings.status[activeJob.status === 'in_progress' ? 'inProgress' : 'new']}`}
@@ -130,14 +146,14 @@ export default function MasterHome() {
                   <div>
                     {fill(t.clientPays, {
                       amount: formatCurrency(
-                        (activeJob.workCost || 0) + expensesFor(activeJob.id)
+                        (activeJob.workCost || 0) + activeExpenses
                       ),
                     })}
                   </div>
-                  {expensesFor(activeJob.id) > 0 && (
+                  {activeExpenses > 0 && (
                     <div>
                       {fill(t.materialsReimbursed, {
-                        amount: formatCurrency(expensesFor(activeJob.id)),
+                        amount: formatCurrency(activeExpenses),
                       })}
                     </div>
                   )}
