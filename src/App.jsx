@@ -3,6 +3,7 @@ import { AppProvider } from './context/AppContext'
 import { LanguageProvider } from './context/LanguageContext'
 import { ToastProvider } from './context/ToastContext'
 import MasterSelection from './screens/MasterSelection'
+import MasterHome from './screens/MasterHome'
 import JobList from './screens/JobList'
 import JobDetail from './screens/JobDetail'
 import Photos from './screens/Photos'
@@ -22,6 +23,7 @@ function App() {
           <Routes>
             <Route path="/" element={<MasterSelection />} />
             <Route element={<Layout />}>
+              <Route path="/home" element={<MasterHome />} />
               <Route path="/jobs" element={<JobList />} />
               <Route path="/jobs/:jobId" element={<JobDetail />} />
               <Route path="/jobs/:jobId/photos" element={<Photos />} />

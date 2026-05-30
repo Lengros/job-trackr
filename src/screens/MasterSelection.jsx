@@ -11,7 +11,9 @@ export default function MasterSelection() {
 
   const handleSelect = (masterId) => {
     dispatch({ type: 'SELECT_MASTER', payload: masterId })
-    navigate('/jobs')
+    // Demo role switch: foreman gets the office list, master gets the field home.
+    const master = state.masters.find((m) => m.id === masterId)
+    navigate(master?.role === 'foreman' ? '/jobs' : '/home')
   }
 
   return (

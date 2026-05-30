@@ -13,6 +13,24 @@
     "jobs": "Zlecenia",
     "profile": "Profil"
   },
+  "home": {
+    "labelActive": "W robocie",
+    "labelNext": "Następne",
+    "yourCut": "Twoje",
+    "clientPays": "Klient płaci {amount}",
+    "materialsReimbursed": "materiały {amount} · zwrot",
+    "start": "Zacznij robotę",
+    "reportDone": "Zgłoś gotowe",
+    "quickPhoto": "Zdjęcie",
+    "quickMaterial": "Materiał",
+    "restOfDay": "Reszta na dziś",
+    "dayEarnings": "Zarobisz dziś",
+    "daySummary": "{open} otwarte · {done} zrobione",
+    "allDone": "Na dziś wszystko zrobione",
+    "allDoneSubtitle": "Dobra robota — nic nie zostało w kolejce.",
+    "noJobs": "Brak przydzielonych zleceń",
+    "noJobsSubtitle": "Nic jeszcze do Ciebie nie przypisano."
+  },
   "status": {
     "new": "Nowe",
     "inProgress": "W trakcie",

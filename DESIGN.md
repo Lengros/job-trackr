@@ -160,7 +160,32 @@ No thin/regular icons for interactive controls — they must read in a glance.
 - **Files touched in the 2.0 restyle:** `src/styles/index.css` (tokens, type, inputs), `src/main.jsx` (IconContext), `src/components/Header.jsx` (back-arrow bold), `src/data/fixtures.js` (avatar colors → graphite), `JobList / JobDetail / Expenses / JobSummary / MasterSelection` module CSS (status blocks, money, avatars).
 - **Architecture & flows were not changed** — 2.0 was a re-skin, not a rebuild. The information architecture from the original guide stands.
 
-## 9. Open / future
+## 9. Role-based experiences & Master Home
+
+Two experiences, **one design language** (Worksite tokens — not forked). What differs is *what's in
+the center of the screen*, driven by `master.role` in `src/data/fixtures.js`:
+
+| Role | Entry route | Home screen | Mental model |
+|---|---|---|---|
+| `foreman` (office) | `/jobs` | job list (overview) | dispatcher: who's where, what's closed |
+| `master` (field worker) | `/home` | `MasterHome` — one active job | "where am I going, what's the job, how much is mine" |
+
+Routing: `MasterSelection` sends foreman → `/jobs`, master → `/home`; `BottomTabBar`'s work tab is
+role-aware. The master-selection screen is a **demo-only** role switcher (prod has one real user and
+no step 0).
+
+**Master Home anatomy** (`src/screens/MasterHome.jsx`):
+- **Hero** = the single active job (in-progress; else earliest new). Solid status block, big tappable
+  address (→ maps), one-line scope, call row, primary CTA (`Start` / `Report done`), and two-tap quick
+  actions (Photo, Material) that deep-link into existing screens.
+- **Money model** — `Your cut = workCost` (labor fee) is the hero number. Materials are pass-through:
+  `Client pays = workCost + Σexpenses`, shown smaller as context (`materials … · reimbursed`). If the
+  product later marks up materials, the cut formula changes — that's the one product assumption baked in.
+- **Rest of today** = secondary thin rows of the worker's other open jobs.
+- **Day strip** (dark) = `{open} open · {done} done` + `You earn today {Σ open workCost}` — the motivating number.
+- Empty states: all-done vs nothing-assigned.
+
+## 10. Open / future
 
 - Display face could go harder-condensed (Saira/Oswald) for an even more "workwear" feel — current Archivo is the safe industrial default.
 - Per-master avatar differentiation is currently subtle (graphite scale). Revisit if the master roster grows.
