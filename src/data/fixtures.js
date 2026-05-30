@@ -35,30 +35,32 @@ function withSeededProblemPhoto() {
   }
 }
 
+// Worksite palette: avatars use the graphite ink scale (subtle per-master
+// variation, all in-family); the initial renders in hi-vis orange via CSS.
 export const masters = [
   {
     id: 1,
     name: 'Ivan',
     specialization: 'Plumber',
-    avatarColor: '#2563EB',
+    avatarColor: '#232830',
   },
   {
     id: 2,
     name: 'Mike',
     specialization: 'Electrician',
-    avatarColor: '#F59E0B',
+    avatarColor: '#333A45',
   },
   {
     id: 3,
     name: 'James',
     specialization: 'General Builder',
-    avatarColor: '#16A34A',
+    avatarColor: '#171A1F',
   },
   {
     id: 4,
     name: 'Alex',
     specialization: 'Plumber',
-    avatarColor: '#8B5CF6',
+    avatarColor: '#4A525E',
   },
 ]
 

@@ -126,7 +126,7 @@ export default function Header() {
             onClick={() => navigate(backTo)}
             aria-label={strings.nav.goBack}
           >
-            <ArrowLeft size={24} weight="regular" />
+            <ArrowLeft size={24} weight="bold" />
           </button>
         )}
         <h1 className={styles.title}>{displayTitle}</h1>

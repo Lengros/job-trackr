@@ -206,53 +206,36 @@
   margin-top: var(--space-1);
 }
 
-/* Status badge (pill) with dot */
+/* Status badge — SOLID color block, glanceable at arm's length */
 .statusBadge {
   display: inline-flex;
   align-items: center;
   height: 26px;
-  padding: 4px 10px;
-  border-radius: 13px;
+  padding: 4px 12px;
+  border-radius: var(--radius-sm);
+  font-family: var(--font-display);
   font-size: var(--font-size-caption);
-  font-weight: var(--font-weight-label);
+  font-weight: 800;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--surface-0);
   white-space: nowrap;
 }
 
 .statusBadge::before {
-  content: '';
-  display: inline-block;
-  width: 6px;
-  height: 6px;
-  border-radius: 50%;
-  margin-right: 5px;
-  flex-shrink: 0;
+  content: none;
 }
 
 .statusNew {
-  background-color: var(--brand-200);
-  color: var(--brand-800);
-}
-
-.statusNew::before {
-  background-color: var(--brand-700);
+  background-color: var(--status-new);
 }
 
 .statusInProgress {
-  background-color: var(--warning-bg);
-  color: var(--warning-text);
-}
-
-.statusInProgress::before {
-  background-color: var(--warning);
+  background-color: var(--status-in-progress);
 }
 
 .statusCompleted {
-  background-color: var(--success-bg);
-  color: var(--success);
-}
-
-.statusCompleted::before {
-  background-color: var(--success);
+  background-color: var(--status-done);
 }
 
 .cardBottomRight {
